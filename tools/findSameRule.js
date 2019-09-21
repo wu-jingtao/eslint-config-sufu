@@ -7,7 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 if (process.argv.length !== 4) {
-    console.error('参数错误。npm run findSameRule filePath_A filePath_B');
+    console.error('参数错误！正确的格式：npm run findSameRule filePath_A filePath_B');
     process.exit(1);
 }
 
