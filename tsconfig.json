@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2018",
+        "preserveConstEnums": false,
+        "experimentalDecorators": false,
+        "noEmitOnError": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "forceConsistentCasingInFileNames": true,
+        "declaration": false,
+        "removeComments": true,
+        "jsx": "react",
+        "lib": ["esnext", "dom", "dom.iterable"]
+    },
+    "exclude": ["node_modules", "bin"]
+}
