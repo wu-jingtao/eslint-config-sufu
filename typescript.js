@@ -26,8 +26,6 @@ module.exports = {
         'no-prototype-builtins': 'off',
 
         //最佳实践
-        'accessor-pairs': ['error', { setWithoutGet: false, getWithoutSet: true, enforceForClassMembers: true }],
-        complexity: ['warn', { max: 4 }],
         eqeqeq: 'error',
         'max-classes-per-file': 'error',
         'no-caller': 'error',
@@ -65,7 +63,6 @@ module.exports = {
         'no-useless-rename': 'error',
         'no-var': 'off',
         'object-shorthand': 'warn',
-        'prefer-arrow-callback': 'warn',
         'prefer-const': 'warn',
         'sort-imports': 'warn',
         'symbol-description': 'error',

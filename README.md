@@ -6,6 +6,8 @@
 
 #### 1. 安装
 
+> 只需要安装`eslint-config-sufu`即可，里面包含了`eslint`等依赖
+
 ```bash
 npm i -D eslint-config-sufu
 ```
@@ -54,7 +56,7 @@ module.exports = {
 
 安装`prettier`和`eslint`插件，添加以下配置
 
-```json
+```js
 {
     "files.autoSave": "onFocusChange", //自动保存
     "files.eol": "\n", //LF换行符
