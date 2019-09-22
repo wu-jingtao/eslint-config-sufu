@@ -46,9 +46,11 @@ module.exports = {
 
 #### 3. 在 `package.json` 中添加以下 script
 
+> 这里只对`src`和`test`文件夹进行了检查，实际使用时可以修改
+
 ```json
 {
-    "lint": "eslint --max-warnings 0 **/*"
+    "lint": "eslint --max-warnings 0 src/** test/**"
 }
 ```
 
