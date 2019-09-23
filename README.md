@@ -6,7 +6,7 @@
 
 #### 1. 安装
 
-> 只需要安装`eslint-config-sufu`即可，里面包含了`eslint`等依赖
+> 只需要安装`eslint-config-sufu`即可，里面包含了`eslint`，`prettier`等依赖
 
 ```bash
 npm i -D eslint-config-sufu
@@ -14,25 +14,16 @@ npm i -D eslint-config-sufu
 
 #### 2. 创建以下文件
 
-##### `.eslintignore`
-
-```
-*
-!src
-!src/**/*.ts
-!src/**/*.tsx
-!test
-!test/**/*.ts
-!test/**/*.tsx
-```
-
 ##### `.eslintrc.json`
 
-```
+```js
 {
     // 二选一，如果要用到React则选下面那个
     //"extends": "sufu",
     //"extends": "sufu/react",
+    "rules": {
+        //自定义规则
+    }
 }
 ```
 
@@ -40,7 +31,8 @@ npm i -D eslint-config-sufu
 
 ```js
 module.exports = {
-    ...require('eslint-config-sufu/prettier')
+    ...require('eslint-config-sufu/prettier'),
+    //自定义规则
 };
 ```
 
@@ -50,7 +42,7 @@ module.exports = {
 
 ```json
 {
-    "lint": "eslint --max-warnings 0 src/** test/**"
+    "lint": "eslint --max-warnings 0 src/**/*.ts src/**/*.tsx test/**/*.ts test/**/*.tsx"
 }
 ```
 
@@ -63,7 +55,12 @@ module.exports = {
     "files.autoSave": "onFocusChange", //自动保存
     "files.eol": "\n", //LF换行符
     "editor.defaultFormatter": "esbenp.prettier-vscode", //将prettier作为默认的代码格式化工具
-    "editor.formatOnSave": true, //保存时自动格式化diamante
+    "editor.formatOnSave": true, //保存时自动格式化代码
     "eslint.validate": ["typescript", "typescriptreact"] //eslint只检查typescript
+    "prettier.printWidth": 120, //prettier默认样式
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.jsxBracketSameLine": true,
+    "prettier.endOfLine": "lf",
 }
 ```

@@ -1,6 +1,6 @@
 .github
+.vscode
 tools
-.eslintignore
 .eslintrc.json
 .gitattributes
 .prettierrc.js
