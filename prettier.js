@@ -2,7 +2,7 @@
  * Prettier 样式规则
  */
 module.exports = {
-    printWidth: 120,
+    printWidth: 300,
     tabWidth: 4,
     singleQuote: true,
     jsxBracketSameLine: true,

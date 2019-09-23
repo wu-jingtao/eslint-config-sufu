@@ -31,7 +31,7 @@ npm i -D eslint-config-sufu
 
 ```js
 module.exports = {
-    ...require('eslint-config-sufu/prettier'),
+    ...require('eslint-config-sufu/prettier')
     //自定义规则
 };
 ```
@@ -57,7 +57,7 @@ module.exports = {
     "editor.defaultFormatter": "esbenp.prettier-vscode", //将prettier作为默认的代码格式化工具
     "editor.formatOnSave": true, //保存时自动格式化代码
     "eslint.validate": ["typescript", "typescriptreact"] //eslint只检查typescript
-    "prettier.printWidth": 120, //prettier默认样式
+    "prettier.printWidth": 300, //prettier默认样式
     "prettier.tabWidth": 4,
     "prettier.singleQuote": true,
     "prettier.jsxBracketSameLine": true,
