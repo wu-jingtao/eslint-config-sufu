@@ -15,8 +15,6 @@ module.exports = {
         'prettier/@typescript-eslint'
     ],
     rules: {
-        'prettier/prettier': 'warn',
-
         //潜在错误分析
         'for-direction': 'off',
         'no-debugger': 'warn',

@@ -22,6 +22,7 @@ npm i -D eslint-config-sufu
     //"extends": "sufu",
     //"extends": "sufu/react",
     "rules": {
+        'prettier/prettier': 'warn', //开启样式检查
         //自定义规则
     }
 }
