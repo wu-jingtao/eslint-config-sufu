@@ -15,6 +15,8 @@ module.exports = {
         'prettier/@typescript-eslint'
     ],
     rules: {
+        "prettier/prettier": "off",
+
         //潜在错误分析
         'for-direction': 'off',
         'no-debugger': 'warn',
@@ -105,7 +107,7 @@ module.exports = {
         ],
         '@typescript-eslint/no-empty-function': ['warn', { allow: ['arrowFunctions'] }],
         '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-floating-promises': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-parameter-properties': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'warn',
