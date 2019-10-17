@@ -27,7 +27,6 @@ module.exports = {
 
         //最佳实践
         eqeqeq: 'error',
-        'max-classes-per-file': 'error',
         'no-caller': 'error',
         'no-extra-bind': 'warn',
         'no-extra-label': 'warn',
