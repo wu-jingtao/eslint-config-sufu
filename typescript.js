@@ -18,7 +18,6 @@ module.exports = {
         'no-constant-condition': ['error', { checkLoops: false }],
         'no-debugger': 'warn',
         'no-empty': ['warn', { allowEmptyCatch: true }],
-        'no-extra-parens': ['warn', 'all', { ignoreJSX: 'multi-line' }],
         'no-import-assign': 'warn',
         'no-inner-declarations': 'off',
         'no-irregular-whitespace': ['warn', { skipStrings: false }],
@@ -62,7 +61,6 @@ module.exports = {
 
         //变量
         'no-label-var': 'error',
-        'no-undefined': "error",
 
         //ES6
         'arrow-body-style': 'warn',
