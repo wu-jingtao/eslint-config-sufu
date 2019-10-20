@@ -1,6 +1,6 @@
 {
     "name": "eslint-config-sufu",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "description": "一套我自己觉得用着舒服的 typescript eslint 规则",
     "main": "./typescript.js",
     "scripts": {
@@ -9,8 +9,6 @@
     "keywords": [
         "eslint",
         "eslintconfig",
-        "prettier",
-        "prettierconfig",
         "sufu"
     ],
     "author": "wujingtao",
@@ -24,19 +22,16 @@
     },
     "homepage": "https://github.com/mx601595686/eslint-config-sufu#readme",
     "devDependencies": {
-        "@types/node": "^12.7.5",
-        "@types/react": "^16.9.2"
+        "@types/node": "^12.11.1",
+        "@types/react": "^16.9.9"
     },
     "peerDependencies": {
-        "typescript": "^3.6.3"
+        "typescript": "^3.6.4"
     },
     "dependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.3.0",
-        "@typescript-eslint/parser": "^2.3.0",
-        "eslint": "^6.4.0",
-        "eslint-config-prettier": "^6.3.0",
-        "eslint-plugin-prettier": "^3.1.1",
-        "eslint-plugin-react": "^7.14.3",
-        "prettier": "^1.18.2"
+        "@typescript-eslint/eslint-plugin": "^2.4.0",
+        "@typescript-eslint/parser": "^2.4.0",
+        "eslint": "^6.5.1",
+        "eslint-plugin-react": "^7.16.0"
     }
 }

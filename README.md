@@ -6,7 +6,7 @@
 
 #### 1. 安装
 
-> 只需要安装`eslint-config-sufu`即可，里面包含了`eslint`，`prettier`等依赖
+> 只需要安装`eslint-config-sufu`即可，里面包含了`eslint`，`typescript-eslint`等依赖
 
 ```bash
 npm i -D eslint-config-sufu
@@ -22,19 +22,9 @@ npm i -D eslint-config-sufu
     //"extends": "sufu",
     //"extends": "sufu/react",
     "rules": {
-        'prettier/prettier': 'warn', //开启样式检查
         //自定义规则
     }
 }
-```
-
-##### `.prettierrc.js`
-
-```js
-module.exports = {
-    ...require('eslint-config-sufu/prettier')
-    //自定义规则
-};
 ```
 
 #### 3. 在 `package.json` 中添加以下 script
@@ -44,24 +34,5 @@ module.exports = {
 ```json
 {
     "lint": "eslint --max-warnings 0 src/**/*.ts src/**/*.tsx test/**/*.ts test/**/*.tsx"
-}
-```
-
-### VSCode 配置
-
-安装`prettier`和`eslint`插件，添加以下配置
-
-```js
-{
-    "files.autoSave": "onFocusChange", //自动保存
-    "files.eol": "\n", //LF换行符
-    "editor.defaultFormatter": "esbenp.prettier-vscode", //将prettier作为默认的代码格式化工具
-    "editor.formatOnSave": true, //保存时自动格式化代码
-    "eslint.validate": ["typescript", "typescriptreact"] //eslint只检查typescript
-    "prettier.printWidth": 300, //prettier默认样式
-    "prettier.tabWidth": 4,
-    "prettier.singleQuote": true,
-    "prettier.jsxBracketSameLine": true,
-    "prettier.endOfLine": "lf",
 }
 ```

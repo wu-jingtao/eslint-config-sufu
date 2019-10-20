@@ -1,7 +1,5 @@
 .github
-.vscode
 tools
 .eslintrc.json
 .gitattributes
-.prettierrc.js
 tsconfig.json
