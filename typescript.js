@@ -128,26 +128,33 @@ module.exports = {
         '@typescript-eslint/member-naming': ['warn', { private: '^_', protected: '^_', public: '^[^_]' }],
         '@typescript-eslint/member-ordering': ['warn', {
             default: [
-                // Fields
                 'private-static-field',
                 'protected-static-field',
                 'public-static-field',
+
+                'private-static-method',
+                'protected-static-method',
+                'public-static-method',
+
+                'private-abstract-field',
+                'protected-abstract-field',
+                'public-abstract-field',
+
+                'private-abstract-method',
+                'protected-abstract-method',
+                'public-abstract-method',
+
                 'private-instance-field',
                 'protected-instance-field',
                 'public-instance-field',
 
-                // Constructors
                 'private-constructor',
                 'protected-constructor',
                 'public-constructor',
 
-                // Methods
-                'private-static-method',
-                'protected-static-method',
-                'public-static-method',
                 'private-instance-method',
                 'protected-instance-method',
-                'public-instance-method'
+                'public-instance-method',
             ]
         }],
         '@typescript-eslint/no-empty-function': ['warn', { allow: ['arrowFunctions'] }],
