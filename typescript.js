@@ -44,7 +44,6 @@ module.exports = {
         'no-new-wrappers': 'error',
         'no-octal': 'off',
         'no-proto': 'error',
-        'no-return-assign': ['error', 'always'],
         'no-return-await': 'error',
         'no-self-compare': 'error',
         'no-throw-literal': 'error',
@@ -171,7 +170,6 @@ module.exports = {
         '@typescript-eslint/prefer-function-type': 'warn',
         '@typescript-eslint/prefer-readonly': 'warn',
         '@typescript-eslint/prefer-regexp-exec': 'off',
-        '@typescript-eslint/require-await': 'off',
-        '@typescript-eslint/unified-signatures': 'warn'
+        '@typescript-eslint/require-await': 'off'
     }
 };
