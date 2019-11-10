@@ -39,7 +39,6 @@ module.exports = {
         'no-implied-eval': 'error',
         'no-iterator': 'error',
         'no-lone-blocks': 'warn',
-        'no-loop-func': 'error',
         'no-multi-spaces': ['warn', { ignoreEOLComments: true, exceptions: { Property: false } }],
         'no-new-wrappers': 'error',
         'no-octal': 'off',
