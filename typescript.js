@@ -101,7 +101,7 @@ module.exports = {
         'no-whitespace-before-property': 'warn',
         'object-curly-spacing': ['warn', 'always'],
         'operator-linebreak': ['warn', 'after'],
-        'quote-props': ['warn', 'as-needed', { keywords: true, numbers: true }],
+        'quote-props': ['warn', 'as-needed'],
         'quotes': ['warn', 'single', { avoidEscape: true }],
         'semi': ['warn', 'always', { omitLastInOneLineBlock: true }],
         'semi-spacing': 'warn',
