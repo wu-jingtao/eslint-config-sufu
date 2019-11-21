@@ -154,6 +154,7 @@ module.exports = {
                 'public-instance-method',
             ]
         }],
+        '@typescript-eslint/no-dynamic-delete': 'warn',
         '@typescript-eslint/no-empty-function': ['warn', { allow: ['arrowFunctions'] }],
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-floating-promises': 'warn',
