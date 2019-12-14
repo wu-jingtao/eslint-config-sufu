@@ -145,6 +145,8 @@ module.exports = {
                 'protected-abstract-method',
                 'public-abstract-method',
 
+                'signature',
+                
                 'private-instance-field',
                 'protected-instance-field',
                 'public-instance-field',
@@ -159,8 +161,9 @@ module.exports = {
             ]
         }],
         '@typescript-eslint/no-dynamic-delete': 'warn',
-        '@typescript-eslint/no-empty-function': ['warn', { allow: ['arrowFunctions'] }],
+        '@typescript-eslint/no-empty-function': ['warn', { allow: ['arrowFunctions', 'protected-constructors', 'private-constructors'] }],
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-extra-non-null-assertion': 'warn',
         '@typescript-eslint/no-floating-promises': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-parameter-properties': 'error',
@@ -171,6 +174,7 @@ module.exports = {
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/prefer-for-of': 'warn',
         '@typescript-eslint/prefer-function-type': 'warn',
+        '@typescript-eslint/prefer-optional-chain': 'warn',
         '@typescript-eslint/prefer-readonly': 'warn',
         '@typescript-eslint/prefer-regexp-exec': 'off',
         '@typescript-eslint/require-await': 'off'
