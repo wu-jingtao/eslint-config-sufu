@@ -49,7 +49,6 @@ module.exports = {
         'no-proto': 'error',
         'no-return-await': 'error',
         'no-self-compare': 'error',
-        'no-throw-literal': 'error',
         'no-unmodified-loop-condition': 'error',
         'no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }],
         'no-useless-call': 'warn',
@@ -146,7 +145,7 @@ module.exports = {
                 'public-abstract-method',
 
                 'signature',
-                
+
                 'private-instance-field',
                 'protected-instance-field',
                 'public-instance-field',
@@ -168,6 +167,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-parameter-properties': 'error',
         '@typescript-eslint/no-this-alias': ['warn', { allowedNames: ['_this'] }],
+        '@typescript-eslint/no-throw-literal': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'warn',
         '@typescript-eslint/no-unused-vars': ['warn', { args: 'after-used', caughtErrors: 'all' }],
         '@typescript-eslint/no-use-before-define': 'off',
