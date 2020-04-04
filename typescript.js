@@ -120,6 +120,7 @@ module.exports = {
         //typescript
         '@typescript-eslint/array-type': 'warn',
         '@typescript-eslint/await-thenable': 'off',
+        '@typescript-eslint/ban-ts-comment': 'warn',
         '@typescript-eslint/camelcase': 'off',
         '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true, allowTypedFunctionExpressions: true, allowHigherOrderFunctions: true }],
         '@typescript-eslint/explicit-member-accessibility': ['warn', { accessibility: 'no-public' }],
@@ -168,6 +169,7 @@ module.exports = {
         '@typescript-eslint/no-parameter-properties': 'error',
         '@typescript-eslint/no-this-alias': ['warn', { allowedNames: ['_this'] }],
         '@typescript-eslint/no-throw-literal': 'error',
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
         '@typescript-eslint/no-unnecessary-type-arguments': 'warn',
         '@typescript-eslint/no-unused-vars': ['warn', { args: 'after-used', caughtErrors: 'all' }],
         '@typescript-eslint/no-use-before-define': 'off',

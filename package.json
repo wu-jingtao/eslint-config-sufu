@@ -1,6 +1,6 @@
 {
     "name": "eslint-config-sufu",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "一套我自己觉得用着舒服的 typescript eslint 规则",
     "main": "./typescript.js",
     "scripts": {
@@ -22,16 +22,16 @@
     },
     "homepage": "https://github.com/mx601595686/eslint-config-sufu#readme",
     "devDependencies": {
-        "@types/node": "^13.1.0",
-        "@types/react": "^16.9.17"
+        "@types/node": "^13.11.0",
+        "@types/react": "^16.9.32"
     },
     "peerDependencies": {
-        "typescript": "^3.7.4"
+        "typescript": "^3.8.3"
     },
     "dependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.13.0",
-        "@typescript-eslint/parser": "^2.13.0",
+        "@typescript-eslint/eslint-plugin": "^2.26.0",
+        "@typescript-eslint/parser": "^2.26.0",
         "eslint": "^6.8.0",
-        "eslint-plugin-react": "^7.17.0"
+        "eslint-plugin-react": "^7.19.0"
     }
 }
