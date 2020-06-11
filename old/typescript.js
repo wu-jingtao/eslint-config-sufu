@@ -4,6 +4,7 @@
 module.exports = {
     root: true,
     noInlineConfig: true,
+    reportUnusedDisableDirectives:true,
     parser: '@typescript-eslint/parser',
     parserOptions: { project: './tsconfig.json' },
     plugins: ['@typescript-eslint'],
