@@ -1,11 +1,8 @@
 {
     "name": "eslint-config-sufu",
-    "version": "1.0.1",
-    "description": "一套我自己觉得用着舒服的 typescript eslint 规则",
-    "main": "./typescript.js",
-    "scripts": {
-        "findSameRule": "node ./tools/findSameRule"
-    },
+    "version": "2.0.0",
+    "description": "一套我自己觉得用着舒服的 eslint 规则",
+    "main": "./javascript.js",
     "keywords": [
         "eslint",
         "eslintconfig",
@@ -22,16 +19,12 @@
     },
     "homepage": "https://github.com/mx601595686/eslint-config-sufu#readme",
     "devDependencies": {
-        "@types/node": "^13.11.0",
-        "@types/react": "^16.9.32"
-    },
-    "peerDependencies": {
-        "typescript": "^3.8.3"
-    },
-    "dependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.26.0",
-        "@typescript-eslint/parser": "^2.26.0",
-        "eslint": "^6.8.0",
-        "eslint-plugin-react": "^7.19.0"
+        "@types/node": "^14.0.13",
+        "@types/react": "^16.9.36",
+        "typescript": "^3.9.5",
+        "@typescript-eslint/eslint-plugin": "^3.2.0",
+        "@typescript-eslint/parser": "^3.2.0",
+        "eslint": "^7.2.0",
+        "eslint-plugin-react": "^7.20.0"
     }
 }

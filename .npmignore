@@ -1,5 +1,4 @@
 .github
-tools
 .eslintrc.json
 .gitattributes
 tsconfig.json
