@@ -5,6 +5,7 @@
 
 /**
  * 潜在错误
+ * 注意：该范围下的规则的错误等级需全部设置为 error，如果是在调试时会用到的可以设置成 warn
  */
 const possible_errors = {
     /**
@@ -189,7 +190,7 @@ const possible_errors = {
 
 /**
  * 最佳实践
- * 注意：该范围下的规则的错误等级需全部设置为 error，如果是在调试时会用到的可以设置成 warn
+ * 注意：该范围下的规则的错误等级需全部设置为 error
  */
 const best_practices = {
     /**
@@ -202,9 +203,8 @@ const best_practices = {
     'array-callback-return': 'error',
     /**
      * 将 var 定义的变量视为块作用域，禁止在块外使用
-     * @reason 已经禁止使用 var 了
      */
-    'block-scoped-var': 'off',
+    'block-scoped-var': 'error',
     /**
      * 在类的非静态方法中，必须存在对 this 的引用
      */
@@ -235,7 +235,7 @@ const best_practices = {
     /**
     * 有默认值的参数必须放在函数参数的末尾
     */
-    'default-param-last': 'off',
+    'default-param-last': 'error',
     /**
      * 规定 `.` 在成员表达式中的位置
      * @argument property 放在属性名之后
@@ -300,9 +300,8 @@ const best_practices = {
     'no-empty-pattern': 'error',
     /**
      * 禁止使用 foo == null，必须使用 foo === null
-     * @reason eqeqeq 规则已经限制了使用 ==
      */
-    'no-eq-null': 'off',
+    'no-eq-null': 'error',
     /**
      * 禁止使用 eval
      */
@@ -318,9 +317,8 @@ const best_practices = {
     'no-extra-bind': 'error',
     /**
      * 禁止出现没必要的 label
-     * @reason 已经禁止使用 label 了
      */
-    'no-extra-label': 'off',
+    'no-extra-label': 'error',
     /**
      * switch 的 case 内必须有 break, return 或 throw，空的 case 除外
      */
@@ -367,9 +365,8 @@ const best_practices = {
     'no-lone-blocks': 'error',
     /**
      * 禁止在循环内的函数内部出现循环体条件语句中定义的变量
-     * @reason 使用 let 就已经解决了这个问题了
      */
-    'no-loop-func': 'off',
+    'no-loop-func': 'error',
     /**
      * 禁止使用 magic numbers
      */
@@ -382,7 +379,7 @@ const best_practices = {
     'no-multi-spaces': ['error', { ignoreEOLComments: true, exceptions: { Property: false } }],
     /**
      * 禁止使用 \ 来换行字符串
-     * @reason 拼接SQL时经常会用到，MySQL 的字段标记符 ` 会与模板字符串的相冲突，经常使用 \ 来转义会很麻烦
+     * @reason 拼接SQL时经常会用到，MySQL 的字段标记符 ` 会与模板字符串的相冲突，经常使用 \` 转义会很麻烦
      */
     'no-multi-str': 'off',
     /**
@@ -413,9 +410,8 @@ const best_practices = {
     'no-proto': 'error',
     /**
      * 禁止重复定义变量
-     * @reason 禁用 var 之后，编译阶段就会报错了
      */
-    'no-redeclare': 'off',
+    'no-redeclare': 'error',
     /**
      * 禁止使用指定的对象属性
      */
@@ -469,9 +465,8 @@ const best_practices = {
     'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }],
     /**
      * 禁止出现没用到的 label
-     * @reason 已经禁止使用 label 了
      */
-    'no-unused-labels': 'off',
+    'no-unused-labels': 'error',
     /**
      * 禁止出现没必要的 call 或 apply
      */
@@ -533,7 +528,7 @@ const best_practices = {
     'require-unicode-regexp': 'off',
     /**
      * var 必须在作用域的最前面
-     * @reason 禁用 var 之后，编译阶段就会报错了
+     * @reason 这个要求太严格了
      */
     'vars-on-top': 'off',
     /**
@@ -543,7 +538,191 @@ const best_practices = {
     /**
      * 必须使用 if (foo === 5) 而不是 if (5 === foo)
      */
-    'yoda': 'error'
+    'yoda': 'error',
+    /**
+      * 禁止使用 'strict';
+      */
+    'strict': ['error', 'never'],
+    /**
+     * 变量必须在定义的时候赋值
+     */
+    'init-declarations': 'error',
+    /**
+     * 禁止对一个变量使用 delete
+     */
+    'no-delete-var': 'error',
+    /**
+     * 禁止 label 名称与已定义的变量重复
+     */
+    'no-label-var': 'error',
+    /**
+     * 禁止使用指定的全局变量
+     */
+    'no-restricted-globals': 'off',
+    /**
+     * 禁止变量名与上层作用域内的已定义的变量重复
+     * @reason 很多时候函数的形参和传参是同名的
+     */
+    'no-shadow': 'off',
+    /**
+     * 禁止使用保留字作为变量名
+     */
+    'no-shadow-restricted-names': 'error',
+    /**
+     * 禁止使用未定义的变量
+     * @reason 这个需要配置 env 或 globals。
+     */
+    'no-undef': 'off',
+    /**
+     * 禁止将 undefined 赋值给变量
+     * @reason 有时为了代码工整，需要给变量赋值 undefined
+     */
+    'no-undef-init': 'off',
+    /**
+     * 禁止使用 undefined
+     */
+    'no-undefined': 'off',
+    /**
+     * 已定义的变量必须使用
+     */
+    'no-unused-vars': ['error', { args: 'after-used', caughtErrors: 'all' }],
+    /**
+     * 变量必须先定义后使用
+     */
+    'no-use-before-define': 'error',
+    /**
+     * 箭头方法如果只包含一条 return 表达式的时候则需要省略大括号和 return 关键字
+     */
+    'arrow-body-style': 'error',
+    /**
+     * 当箭头方法只包含一个参数的时候则需要省略括号
+     */
+    'arrow-parens': ['error', 'as-needed'],
+    /**
+     * 在箭头方法 => 的前后需要有空格
+     */
+    'arrow-spacing': 'error',
+    /**
+     * 派生类 constructor 中必须有 super
+     */
+    'constructor-super': 'error',
+    /**
+     * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
+     */
+    'generator-star-spacing': 'error',
+    /**
+     * 禁止对已定义的 class 重新赋值
+     */
+    'no-class-assign': 'error',
+    /**
+     * 要求 => 符号的后面必须要有括号包裹
+     */
+    'no-confusing-arrow': 'off',
+    /**
+     * 禁止对使用 const 定义的常量重新赋值
+     */
+    'no-const-assign': 'error',
+    /**
+     * 禁止重复定义类的成员
+     */
+    'no-dupe-class-members': 'error',
+    /**
+     * 禁止重复导入模块
+     * @argument includeExports 不允许 import 后又 export 出去，使用 export ... from 代替
+     */
+    'no-duplicate-imports': ['error', { includeExports: true }],
+    /**
+     * 禁止使用 new 来生成 Symbol
+     */
+    'no-new-symbol': 'error',
+    /**
+     * 禁止导出指定的变量名
+     */
+    'no-restricted-exports': 'off',
+    /**
+     * 禁止导入指定的模块
+     */
+    'no-restricted-imports': 'off',
+    /**
+     * 禁止在 super 被调用之前使用 this 或 super
+     */
+    'no-this-before-super': 'error',
+    /**
+     * 禁止出现没必要的计算键名
+     * @argument enforceForClassMembers 对类成员也要求
+     */
+    'no-useless-computed-key': ['error', { enforceForClassMembers: true }],
+    /**
+     * 禁止出现没必要的 constructor
+     */
+    'no-useless-constructor': 'error',
+    /**
+     * 禁止解构赋值时出现同样名字的的重命名，比如 let { foo: foo } = bar;
+     */
+    'no-useless-rename': 'error',
+    /**
+     * 禁止使用 var
+     */
+    'no-var': 'error',
+    /**
+     * 是否必须使用 a = {b} 而不是 a = {b: b}
+     * @argument consistent-as-needed 视情况而定，如果用简写的多久用简写，反之用旧写法，但如果可能的话尽量用简写
+     */
+    'object-shorthand': ['error', 'consistent-as-needed'],
+    /**
+     * 倾向于使用箭头方法而不是 function
+     */
+    'prefer-arrow-callback': 'error',
+    /**
+     * 申明后不再被修改的变量必须使用 const 来申明
+     */
+    'prefer-const': 'error',
+    /**
+     * 必须使用解构表达式赋值
+     * @reason 这个在某些情况下反而会导致代码可读性下降
+     */
+    'prefer-destructuring': 'off',
+    /**
+     * 必须使用数字字面量来生成其他进制的数字而不是使用 parseInt
+     * 如使用 0b11111011 而不是 parseInt('11111011', 2)
+     */
+    'prefer-numeric-literals': 'error',
+    /**
+     * 必须使用 ...args 而不是 arguments
+     */
+    'prefer-rest-params': 'error',
+    /**
+     * 必须使用 ... 而不是 apply，比如 foo(...args)
+     */
+    'prefer-spread': 'error',
+    /**
+     * 必须使用模版字符串而不是字符串连接
+     */
+    'prefer-template': 'off',
+    /**
+     * generator 函数内必须有 yield
+     */
+    'require-yield': 'error',
+    /**
+     * ... 运算符与标识符之间不允许有空格
+     */
+    'rest-spread-spacing': 'error',
+    /**
+     * 将 import 语句按照这种风格排序 none, all, multiple, single
+     */
+    'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true, ignoreMemberSort: true }],
+    /**
+     * 创建 Symbol 时必须传入参数
+     */
+    'symbol-description': 'error',
+    /**
+     * 模板字符串中的花括号前后不允许存在空格
+     */
+    'template-curly-spacing': 'error',
+    /**
+     * yield 与 * 号之间必须有空格
+     */
+    'yield-star-spacing': 'error'
 };
 
 /**
