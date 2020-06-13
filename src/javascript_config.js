@@ -253,7 +253,7 @@ const best_practices = {
      * setter 和 getter 必须写在一起
      * @argument getBeforeSet getter 必须放在 setter 之前
      */
-    'grouped-accessor-pairs': ["error", "getBeforeSet"],
+    'grouped-accessor-pairs': ['error', 'getBeforeSet'],
     /**
      * for in 内部必须有 hasOwnProperty
      */
@@ -418,13 +418,13 @@ const best_practices = {
     'no-restricted-properties': ['error',
         {
             // 禁用 ES5 时代使用 prototype 生成类的方法，改用 class 代替
-            "property": "prototype",
-            "message": "Directly manipulate prototype is an outdated coding style, Please use a class instead."
+            'property': 'prototype',
+            'message': 'Directly manipulate prototype is an outdated coding style, Please use a class instead.'
         },
         { // todo 找找还有哪些 es5 时代的属性需要被禁用
-            "object": "disallowedObjectName",
-            "property": "anotherDisallowedPropertyName",
-            "message": "Please use allowedObjectName.allowedPropertyName."
+            'object': 'disallowedObjectName',
+            'property': 'anotherDisallowedPropertyName',
+            'message': 'Please use allowedObjectName.allowedPropertyName.'
         }
     ],
     /**
@@ -722,7 +722,94 @@ const best_practices = {
     /**
      * yield 与 * 号之间必须有空格
      */
-    'yield-star-spacing': 'error'
+    'yield-star-spacing': 'error',
+    /**
+     * 如果一个方法表达式赋值给了一个变量，如果这个方法有名字，则要求方法名必须与变量名相同
+     */
+    'func-name-matching': 'error',
+    /**
+     * 如果JS引擎无法推断出方法表达式的方法名，则必须指定方法名
+     */
+    'func-names': ['error', 'as-needed'],
+    /**
+     * 禁用的标识符名称
+     */
+    'id-blacklist': 'off',
+    /**
+     * 不允许使用 new Array()
+     */
+    'no-array-constructor': 'error',
+    /**
+     * 不允许使用位运算符
+     */
+    'no-bitwise': 'off',
+    /**
+     * 不允许使用 continue
+     */
+    'no-continue': 'off',
+    /**
+     * 不允许在 else 块里面嵌套只有一个分支的 if 语句，这个因使用 else if 代替
+     */
+    'no-lonely-if': 'error',
+    /**
+     * 不允许混用运算符，因为优先级的问题很容易误解。对混用运算符的地方必须加上括号
+     * @reason 这个会与 no-extra-parens 规则相冲突
+     */
+    'no-mixed-operators': 'off',
+    /**
+     * 不允许链式赋值表达式
+     */
+    'no-multi-assign': 'off',
+    /**
+     * 不允许使用 if(!条件)
+     */
+    'no-negated-condition': 'off',
+    /**
+     * 不允许三元表达式嵌套
+     */
+    'no-nested-ternary': 'off',
+    /**
+     * 不允许使用 new Object() 创建对象，使用对象字面量代替
+     */
+    'no-new-object': 'error',
+    /**
+     * 不允许使用 ++ -- 运算符
+     */
+    'no-plusplus': 'off',
+    /**
+     * 语法限制
+     */
+    'no-restricted-syntax': [
+        'error',
+        { // todo 收集规则
+            'selector': 'FunctionExpression',
+            'message': 'Function expressions are not allowed.'
+        },
+        {
+            'selector': 'CallExpression[callee.name="setTimeout"][arguments.length!=2]',
+            'message': 'setTimeout must always be invoked with two arguments.'
+        }
+    ],
+    /**
+     * 不允许使用三元表达式
+     */
+    'no-ternary': 'off',
+    /**
+     * 不允许出现没有必要的三元表达式
+     */
+    'no-unneeded-ternary': 'error',
+    /**
+     * 在一个作用域范围内的所有变量只能使用一个 var let const 声明
+     */
+    'one-var': 'off',
+    /**
+     * 指数运算使用 ** 而不是 Math.pow
+     */
+    'prefer-exponentiation-operator': 'error',
+    /**
+     * 对象融合，尽量使用 ... 而不是 Object.assign
+     */
+    'prefer-object-spread': 'error',
 };
 
 /**
@@ -730,7 +817,307 @@ const best_practices = {
  * 注意：该范围下的规则的错误等级需全部设置为 warn
  */
 const style_restricts = {
-
+    /**
+     * 数组两个方括号前后是否必须有换行
+     * @argument consistent 风格保持一致，要么都有，要么都没有
+     */
+    'array-bracket-newline': ['warn', 'consistent'],
+    /**
+     * 数组两个方括号前后不允许有空格
+     */
+    'array-bracket-spacing': 'warn',
+    /**
+     * 数组元素之间必须有换行
+     * @reason 可以按照实际需求更加自由的排列
+     */
+    'array-element-newline': 'off',
+    /**
+     * 代码块的大括号前后必须有空格
+     */
+    'block-spacing': 'warn',
+    /**
+     * 规范大括号在 if else try cache 等关键字之间放置的位置
+     */
+    'brace-style': ['warn', '1tbs', { allowSingleLine: true }],
+    /**
+     * 必须使用驼峰命名法
+     * @reason 要求太严格了，无法保证使用的第三发库都按照这一标准执行
+     */
+    'camelcase': 'off',
+    /**
+     * 注释的首字母必须大写
+     */
+    'capitalized-comments': 'off',
+    /**
+     * 不允许数组或对象的最后出现多于的逗号
+     */
+    'comma-dangle': 'warn',
+    /**
+     * 规定逗号运算符前面不允许出现空格，后面必须有空格
+     */
+    'comma-spacing': 'warn',
+    /**
+     * 当需要在逗号运算符附近换行的时候，逗号运算符必须位于旧行的末尾
+     */
+    'comma-style': 'warn',
+    /**
+     * 在计算属性的前后不允许存在空格
+     */
+    'computed-property-spacing': 'warn',
+    /**
+     * 在 jquery 中经常会出现 this 的匿名例如 _this me，要求这些匿名保持统一
+     */
+    'consistent-this': 'off',
+    /**
+     * 文件的末尾必须有一个空行
+     */
+    'eol-last': 'off',
+    /**
+     * 在方法调用时方法名与圆括号之间不能有空格
+     */
+    'func-call-spacing': 'warn',
+    /**
+     * 规范方法声明的风格，强制使用表达式风格而不是声明式风格
+     */
+    'func-style': 'off',
+    /**
+     * 方法调用的参数前后必须有换行
+     */
+    'function-call-argument-newline': 'off',
+    /**
+     * 方法参数之间必须有换行
+     */
+    'function-paren-newline': 'off',
+    /**
+     * 标识符长度限制
+     */
+    'id-length': 'off',
+    /**
+     * 用正则表达式限制标识符命名规则
+     */
+    'id-match': 'off',
+    /**
+     * 强制隐式返回箭头方法必须换行
+     */
+    'implicit-arrow-linebreak': 'off',
+    /**
+     * 要求使用4个空格作为缩进
+     */
+    'indent': ['warn', 4, { SwitchCase: 1, ignoreComments: true }],
+    /**
+     * 要求冒号前面不能有空格，后面必须有空格
+     */
+    'key-spacing': 'warn',
+    /**
+     * 要求关键字前后都必须有空格
+     */
+    'keyword-spacing': 'warn',
+    /**
+     * 要求单行注释必须放在表达式的上一行而不是末尾
+     */
+    'line-comment-position': 'off',
+    /**
+     * 必须使用 LF 风格的换行而不是 CRLF 风格
+     * @reason 这个创建一个 .gitattributes 文件就可以解决
+     */
+    'linebreak-style': 'off',
+    /**
+     * 块注释的前面必须换行
+     */
+    'lines-around-comment': 'warn',
+    /**
+     * 类成员之间必须换行，单行除外
+     */
+    'lines-between-class-members': 'warn',
+    /**
+     * 代码块嵌套最深不可超过4层
+     */
+    'max-depth': 'off',
+    /**
+     * 每行的最大长度不可以超过80
+     */
+    'max-len': 'off',
+    /**
+     * 每个文件最多不可以超过300行
+     */
+    'max-lines': 'off',
+    /**
+     * 每个方法最多不可以超过50行
+     */
+    'max-lines-per-function': 'off',
+    /**
+     * 回调函数嵌套做多不可超过10层
+     */
+    'max-nested-callbacks': 'off',
+    /**
+     * 方法不可以超过10个参数
+     */
+    'max-params': ['warn', { max: 10 }],
+    /**
+     * 每个方法最多不可以超过10条表达式。
+     * @tip 最好使用 max-lines-per-function 规则代替
+     */
+    'max-statements': 'off',
+    /**
+     * 每行不可以超过1条表达式
+     */
+    'max-statements-per-line': 'off',
+    /**
+     * 块注释每行前面必须要有 * 号，而且要对其
+     */
+    'multiline-comment-style': 'warn',
+    /**
+     * 三元表达式 ? : 之间必须换行
+     */
+    'multiline-ternary': 'off',
+    /**
+     * 要求 new 后面的方法名都必须首字母大写，所有首字母大写的方法名都必须使用 new 调用
+     */
+    'new-cap': 'warn',
+    /**
+     * 要求当构造函数的参数为0时，在 new 的时候也不能省略圆括号
+     */
+    'new-parens': 'warn',
+    /**
+     * 要求链式方法的每个调用必须换行
+     */
+    'newline-per-chained-call': 'off',
+    /**
+     * 不允许在代码末尾放置单行注释
+     */
+    'no-inline-comments': 'off',
+    /**
+     * 不允许混用 tab 和空格作为缩进
+     */
+    'no-mixed-spaces-and-tabs': 'warn',
+    /**
+     * 最多不允许超过两个空行
+     * @argument maxBOF 文件开头不能有空行
+     * @argument maxEOF 文件结尾可有一个空行
+     */
+    'no-multiple-empty-lines': ['warn', { maxEOF: 1, maxBOF: 0 }],
+    /**
+     * 不允许使用 tab
+     */
+    'no-tabs': 'warn',
+    /**
+     * 不允许行末尾有空格
+     * @reason 这个对代码质量没有任何影响
+     */
+    'no-trailing-spaces': 'off',
+    /**
+     * 不允许在 this、super 后面出现带下划线的属性
+     * @reason 要求太严格了，对正常的代码编写会造成很大影响
+     */
+    'no-underscore-dangle': 'off',
+    /**
+     * 不允许属性名与对象之间出现空格
+     */
+    'no-whitespace-before-property': 'warn',
+    /**
+     * 对于没有大括号的 if, else, while, do-while, for 是否要求分支语句和他们放在同一行
+     */
+    'nonblock-statement-body-position': 'off',
+    /**
+     * 如果对象字面量的大括号之间有换行，则两个大括号前后也要换行，反之则在大括号之间不允许存在换行
+     */
+    'object-curly-newline': 'warn',
+    /**
+     * 要求对象大括号前后有空格
+     */
+    'object-curly-spacing': ['warn', 'always'],
+    /**
+     * 要求对象字面量里的属性，要么有换行要么不换行
+     */
+    'object-property-newline': ['warn', { allowAllPropertiesOnSameLine: true }],
+    /**
+     * 一个 var let const 声明多个变量，其中被赋值的变量必须换行
+     */
+    'one-var-declaration-per-line': 'off',
+    /**
+     * 对于能使用 += -= *= 等运算符的地方尽量使用这些运算符
+     */
+    'operator-assignment': 'off',
+    /**
+     * 当运算符附近需要换行时，运算符需放在就行的末尾
+     */
+    'operator-linebreak': ['warn', 'after'],
+    /**
+     * 代码块的开头和结尾需要有空行
+     */
+    'padded-blocks': 'off',
+    /**
+     * 要求表达式与表达式之间要有空行
+     */
+    'padding-line-between-statements': 'off',
+    /**
+     * 对象字面量中的属性名，能不加引号就不加引号，如果不得不加那其他的也必须加上
+     */
+    'quote-props': ['warn', 'consistent-as-needed'],
+    /**
+     * 尽量单引号而不是双引号
+     */
+    'quotes': ['warn', 'single', { avoidEscape: true }],
+    /**
+     * 所有表达式后面都必有分号
+     */
+    'semi': ['warn', 'always', { omitLastInOneLineBlock: true }],
+    /**
+     * 分号的前面不能有空格，分号的后面如果还有表达式那么必须有空格
+     */
+    'semi-spacing': 'warn',
+    /**
+     * 分号必须位于每行的末尾
+     */
+    'semi-style': 'warn',
+    /**
+     * 对象字面量中属性名需按照字母表顺序排列
+     */
+    'sort-keys': 'off',
+    /**
+     * 同一个代码块内声明的变量需按照字母表顺序排列
+     */
+    'sort-vars': 'off',
+    /**
+     * 代码块左大括号前面必须有空格
+     */
+    'space-before-blocks': 'warn',
+    /**
+     * 方法参数括号前后是否允许有空格
+     */
+    'space-before-function-paren': ['error', { anonymous: 'always', named: 'never', asyncArrow: 'always' }],
+    /**
+     * 圆括号前后不允许有空格
+     */
+    'space-in-parens': 'warn',
+    /**
+     * 运算符前后必须要有空格
+     */
+    'space-infix-ops': 'warn',
+    /**
+     * 一元运算符前后必须要有空格
+     */
+    'space-unary-ops': 'warn',
+    /**
+     * 注释的第一个字符前面必须有空格
+     */
+    'spaced-comment': 'warn',
+    /**
+     * switch 语句的冒号前面不能有空格，后面必须有空格
+     */
+    'switch-colon-spacing': 'warn',
+    /**
+     * 模板字符串 tag 与字符串之间不能有空格
+     */
+    'template-tag-spacing': 'warn',
+    /**
+     * unicode 必须使用大端编码模式
+     */
+    'unicode-bom': 'off',
+    /**
+     * 正则表达式字面量必须用括号包裹起来
+     */
+    'wrap-regex': 'off'
 };
 
 module.exports = {

@@ -1,3 +1,11 @@
+
+const style_restricts = {
+    /**
+     * JSX 标签里面特性的值必须使用双引号包裹
+     */
+    'jsx-quotes':'warn'
+};
+
 /**
  * 这里存放一些关于 React 的配置
  */
