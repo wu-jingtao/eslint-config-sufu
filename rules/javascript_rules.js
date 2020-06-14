@@ -31,7 +31,7 @@ const possible_errors = {
      */
     'no-compare-neg-zero': 'error',
     /**
-     * 禁止在测试表达式中使用赋值语句，除非这个赋值语句被括号包起来了
+     * 禁止在条件测试表达式中使用赋值语句，除非这个赋值语句被括号包起来了
      */
     'no-cond-assign': 'error',
     /**
@@ -40,9 +40,10 @@ const possible_errors = {
      */
     'no-console': 'off',
     /**
-     * 禁止将常量作为分支条件判断中的测试表达式，但允许作为循环条件判断中的测试表达式
+     * 禁止将常量作为分支条件判断中的测试表达式
+     * @argument checkLoops 允许作为循环条件判断中的测试表达式
      */
-    'no-constant-condition': 'error',
+    'no-constant-condition': ['error', { checkLoops: false }],
     /**
      * 禁止在正则表达式中出现 Ctrl 键的 ASCII 表示，即禁止使用 /\x1f/
      */
@@ -85,14 +86,6 @@ const possible_errors = {
      */
     'no-extra-boolean-cast': 'error',
     /**
-     * 不允许存在多于的括号
-     */
-    'no-extra-parens': 'error',
-    /**
-     * 不允许存在多于的分号
-     */
-    'no-extra-semi': 'error',
-    /**
      * 禁止将一个函数声明重新赋值
      */
     'no-func-assign': 'error',
@@ -102,19 +95,20 @@ const possible_errors = {
     'no-import-assign': 'error',
     /**
      * 禁止在 if 代码块内出现函数声明
+     * @argument both var 变量声明也不许出现
      */
-    'no-inner-declarations': 'error',
+    'no-inner-declarations': ['error', 'both'],
     /**
      * 禁止在 RegExp 构造函数中出现非法的正则表达式
      */
     'no-invalid-regexp': 'error',
     /**
      * 禁止使用特殊空白符（比如全角空格）
-     * @argument skipStrings 是否不检查字符串
+     * @argument skipStrings 不检查字符串
      */
     'no-irregular-whitespace': ['error', { skipStrings: false }],
     /**
-     * 禁止输入的数字字面量超出JS可接受的最大精度
+     * 禁止输入的数字字面量超出JavaScript可接受的最大精度
      */
     'no-loss-of-precision': 'error',
     /**
@@ -140,7 +134,7 @@ const possible_errors = {
      */
     'no-setter-return': 'error',
     /**
-     * 禁止在数组中出现连续的逗号
+     * 禁止在数组中出现连续的逗号（禁止生产稀疏数组）
      */
     'no-sparse-arrays': 'error',
     /**
@@ -211,19 +205,14 @@ const best_practices = {
     'class-methods-use-this': 'off',
     /**
      * 禁止函数的循环复杂度超过 20
-     * @reason https://en.wikipedia.org/wiki/Cyclomatic_complexity
+     * @reason 通过 max-lines-per-function 规则限制方法的行数更加直接
      */
-    'complexity': 'error',
+    'complexity': 'off',
     /**
      * 禁止函数在不同分支返回不同类型的值
      * @reason 缺少 TypeScript 的支持，类型判断是不准确的
      */
     'consistent-return': 'off',
-    /**
-     * 是否允许当 if, else, for, while, do 只包含一条语句的时候省略大括号
-     * @argument multi-or-nest 多行或者嵌套时不需带上大括号
-     */
-    'curly': ['error', 'multi-or-nest'],
     /**
      * switch 语句必须有 default
      */
@@ -237,23 +226,9 @@ const best_practices = {
     */
     'default-param-last': 'error',
     /**
-     * 规定 `.` 在成员表达式中的位置
-     * @argument property 放在属性名之后
-     */
-    'dot-location': ['error', 'property'],
-    /**
-     * 禁止使用 foo['bar']，必须写成 foo.bar
-     */
-    'dot-notation': 'error',
-    /**
      * 必须使用 === 或 !==，禁止使用 == 或 !=
      */
     'eqeqeq': 'error',
-    /**
-     * setter 和 getter 必须写在一起
-     * @argument getBeforeSet getter 必须放在 setter 之前
-     */
-    'grouped-accessor-pairs': ['error', 'getBeforeSet'],
     /**
      * for in 内部必须有 hasOwnProperty
      */
@@ -291,9 +266,9 @@ const best_practices = {
     'no-else-return': 'off',
     /**
      * 不允许有空函数
-     * @reason 有时需要将一个空函数设置为某个项的默认值
+     * @argument allow.arrowFunctions 箭头方法例外
      */
-    'no-empty-function': 'off',
+    'no-empty-function': ['error', { allow: ['arrowFunctions'] }],
     /**
      * 禁止解构赋值中出现空 {} 或 []
      */
@@ -360,11 +335,11 @@ const best_practices = {
      */
     'no-labels': 'error',
     /**
-     * 禁止使用没必要的 {} 作为代码块
+     * 禁止使用没必要的 { } 代码块
      */
     'no-lone-blocks': 'error',
     /**
-     * 禁止在循环内的函数内部出现循环体条件语句中定义的变量
+     * 禁止在循环内的闭包函数中出现循环体条件语句中使用 var 定义的变量
      */
     'no-loop-func': 'error',
     /**
@@ -372,7 +347,7 @@ const best_practices = {
      */
     'no-magic-numbers': 'off',
     /**
-     * 禁止在每行除开头以外的地方使用多空格缩进
+     * 禁止出现没有意义的多于缩进
      * @argument ignoreEOLComments 是否忽略结尾注释
      * @argument exceptions.Property 是否忽略键值对
      */
@@ -398,6 +373,7 @@ const best_practices = {
     'no-new-wrappers': 'error',
     /**
      * 禁止使用 0 开头的数字表示八进制数
+     * @reason 这个现在已经是属于一种语法错误了
      */
     'no-octal': 'error',
     /**
@@ -424,16 +400,12 @@ const best_practices = {
         {
             // 禁用 ES5 时代使用 prototype 生成类的方法，改用 class 代替
             'property': 'prototype',
-            'message': 'Directly manipulate prototype is an outdated coding style, Please use a class instead.'
-        },
-        { // todo 找找还有哪些 es5 时代的属性需要被禁用
-            'object': 'disallowedObjectName',
-            'property': 'anotherDisallowedPropertyName',
-            'message': 'Please use allowedObjectName.allowedPropertyName.'
+            'message': 'Directly manipulate prototype is an outdated coding style, Please use class instead.'
         }
     ],
     /**
      * 禁止在 return 语句里赋值
+     * @argument always 被括号包裹了的也不允许
      */
     'no-return-assign': ['error', 'always'],
     /**
@@ -463,11 +435,11 @@ const best_practices = {
     /**
      * 循环内必须对循环条件中的变量有修改
      */
-    'no-unmodified-loop-condition': 'error',
+    'no-unmodified-loop-condition': 'off',
     /**
      * 禁止无用的表达式
      */
-    'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }],
+    'no-unused-expressions': 'error',
     /**
      * 禁止出现没用到的 label
      */
@@ -537,21 +509,13 @@ const best_practices = {
      */
     'vars-on-top': 'off',
     /**
-     * 立即执行函数必须使用括号包裹起来
-     */
-    'wrap-iife': ['error', 'inside'],
-    /**
-     * 必须使用 if (foo === 5) 而不是 if (5 === foo)
-     */
-    'yoda': 'error',
-    /**
       * 禁止使用 'strict';
       */
     'strict': ['error', 'never'],
     /**
      * 变量必须在定义的时候赋值
      */
-    'init-declarations': 'error',
+    'init-declarations': 'off',
     /**
      * 禁止对一个变量使用 delete
      */
@@ -589,40 +553,21 @@ const best_practices = {
     'no-undefined': 'off',
     /**
      * 已定义的变量必须使用
+     * @argument caughtErrors catch(e) 错误对象 e 也必须使用，否则必须省略
      */
-    'no-unused-vars': ['error', { args: 'after-used', caughtErrors: 'all' }],
+    'no-unused-vars': ['error', { caughtErrors: 'all' }],
     /**
      * 变量必须先定义后使用
      */
     'no-use-before-define': 'error',
     /**
-     * 箭头方法如果只包含一条 return 表达式的时候则需要省略大括号和 return 关键字
-     */
-    'arrow-body-style': 'error',
-    /**
-     * 当箭头方法只包含一个参数的时候则需要省略括号
-     */
-    'arrow-parens': ['error', 'as-needed'],
-    /**
-     * 在箭头方法 => 的前后需要有空格
-     */
-    'arrow-spacing': 'error',
-    /**
      * 派生类 constructor 中必须有 super
      */
     'constructor-super': 'error',
     /**
-     * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
-     */
-    'generator-star-spacing': 'error',
-    /**
      * 禁止对已定义的 class 重新赋值
      */
     'no-class-assign': 'error',
-    /**
-     * 要求 => 符号的后面必须要有括号包裹
-     */
-    'no-confusing-arrow': 'off',
     /**
      * 禁止对使用 const 定义的常量重新赋值
      */
@@ -671,7 +616,7 @@ const best_practices = {
     'no-var': 'error',
     /**
      * 是否必须使用 a = {b} 而不是 a = {b: b}
-     * @argument consistent-as-needed 视情况而定，如果用简写的多久用简写，反之用旧写法，但如果可能的话尽量用简写
+     * @argument consistent-as-needed 视情况而定，如果用简写的多就用简写，反之用旧写法，但如果可能的话尽量用简写
      */
     'object-shorthand': ['error', 'consistent-as-needed'],
     /**
@@ -709,31 +654,15 @@ const best_practices = {
      */
     'require-yield': 'error',
     /**
-     * ... 运算符与标识符之间不允许有空格
-     */
-    'rest-spread-spacing': 'error',
-    /**
-     * 将 import 语句按照这种风格排序 none, all, multiple, single
-     */
-    'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true, ignoreMemberSort: true }],
-    /**
      * 创建 Symbol 时必须传入参数
      */
     'symbol-description': 'error',
-    /**
-     * 模板字符串中的花括号前后不允许存在空格
-     */
-    'template-curly-spacing': 'error',
-    /**
-     * yield 与 * 号之间必须有空格
-     */
-    'yield-star-spacing': 'error',
     /**
      * 如果一个方法表达式赋值给了一个变量，如果这个方法有名字，则要求方法名必须与变量名相同
      */
     'func-name-matching': 'error',
     /**
-     * 如果JS引擎无法推断出方法表达式的方法名，则必须指定方法名
+     * 如果JS引擎无法推断出方法声明表达式的方法名，则必须指定方法名
      */
     'func-names': ['error', 'as-needed'],
     /**
@@ -786,13 +715,16 @@ const best_practices = {
      */
     'no-restricted-syntax': [
         'error',
-        { // todo 收集规则
-            'selector': 'FunctionExpression',
-            'message': 'Function expressions are not allowed.'
+        {   // 禁用 for in
+            'selector': 'ForInStatement',
+            'message': 'ForInStatement are not allowed, Use ForOfStatement instead.'
+        },
+        {   // 禁用 yield 关键字。生成器函数现已被 async 函数取代了
+            'selector': 'YieldExpression'
         },
         {
-            'selector': 'CallExpression[callee.name="setTimeout"][arguments.length!=2]',
-            'message': 'setTimeout must always be invoked with two arguments.'
+            // 禁用 delete 关键字
+            'selector': 'UnaryExpression[operator="delete"]'
         }
     ],
     /**
@@ -822,6 +754,82 @@ const best_practices = {
  * 注意：该范围下的规则的错误等级需全部设置为 warn
  */
 const style_restricts = {
+    /**
+     * 不允许存在多于的括号
+     */
+    'no-extra-parens': 'warn',
+    /**
+     * 不允许存在多于的分号
+     */
+    'no-extra-semi': 'warn',
+    /**
+     * 是否允许当 if, else, for, while, do 只包含一条语句的时候省略大括号
+     * @argument multi-or-nest 多行或者嵌套时需带上大括号
+     */
+    'curly': ['warn', 'multi-or-nest'],
+    /**
+     * 规定 `.` 在成员表达式中的位置
+     * @argument property 放在属性名之后
+     */
+    'dot-location': ['warn', 'property'],
+    /**
+     * 禁止使用 foo['bar']，必须写成 foo.bar
+     */
+    'dot-notation': 'warn',
+    /**
+     * setter 和 getter 必须写在一起
+     * @argument getBeforeSet getter 必须放在 setter 之前
+     */
+    'grouped-accessor-pairs': ['warn', 'getBeforeSet'],
+    /**
+     * 立即执行函数必须使用括号包裹起来
+     * @argument inside 方法必须用括号包起来
+     */
+    'wrap-iife': ['warn', 'inside'],
+    /**
+     * 必须使用 if (foo === 5) 而不是 if (5 === foo)
+     */
+    'yoda': 'warn',
+    /**
+     * 箭头方法如果只包含一条 return 表达式的时候则需要省略大括号和 return 关键字
+     */
+    'arrow-body-style': 'warn',
+    /**
+     * 当箭头方法只包含一个参数的时候则需要省略括号
+     */
+    'arrow-parens': ['warn', 'as-needed'],
+    /**
+     * 在箭头方法 => 的前后需要有空格
+     */
+    'arrow-spacing': 'warn',
+    /**
+     * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
+     */
+    'generator-star-spacing': 'warn',
+    /**
+     * 要求 => 符号的后面必须要有括号包裹
+     * @reason 这个会与 no-extra-parens 相冲突
+     */
+    'no-confusing-arrow': 'off',
+    /**
+     * ... 运算符与标识符之间不允许有空格
+     */
+    'rest-spread-spacing': 'warn',
+    /**
+     * 将 import 语句按照这种风格排序 none, all, multiple, single
+     * @argument ignoreCase 忽略大小写
+     * @argument ignoreDeclarationSort 忽略声明排序
+     * @argument ignoreMemberSort 忽略成员排序
+     */
+    'sort-imports': ['warn', { ignoreCase: true, ignoreDeclarationSort: true, ignoreMemberSort: true }],
+    /**
+     * 模板字符串中的花括号前后不允许存在空格
+     */
+    'template-curly-spacing': 'warn',
+    /**
+     * yield 与 * 号之间必须有空格
+     */
+    'yield-star-spacing': 'warn',
     /**
      * 数组两个方括号前后是否必须有换行
      * @argument consistent 风格保持一致，要么都有，要么都没有
@@ -927,7 +935,7 @@ const style_restricts = {
      */
     'linebreak-style': 'off',
     /**
-     * 块注释的前面必须换行
+     * 块注释的前面必须有空行
      */
     'lines-around-comment': 'warn',
     /**
@@ -935,29 +943,29 @@ const style_restricts = {
      */
     'lines-between-class-members': 'warn',
     /**
-     * 代码块嵌套最深不可超过4层
+     * 代码块嵌套最深不可超过6层
      */
-    'max-depth': 'off',
+    'max-depth': ['warn', { max: 6 }],
     /**
-     * 每行的最大长度不可以超过80
+     * 每行的最大长度不可以超过160
      */
-    'max-len': 'off',
+    'max-len': ['warn', { code: 160 }],
     /**
      * 每个文件最多不可以超过300行
      */
     'max-lines': 'off',
     /**
-     * 每个方法最多不可以超过50行
+     * 每个方法最多不可以超过300行
      */
-    'max-lines-per-function': 'off',
+    'max-lines-per-function': ['warn', { max: 300 }],
     /**
      * 回调函数嵌套做多不可超过10层
      */
-    'max-nested-callbacks': 'off',
+    'max-nested-callbacks': 'warn',
     /**
-     * 方法不可以超过10个参数
+     * 方法不可以超过8个参数
      */
-    'max-params': ['warn', { max: 10 }],
+    'max-params': ['warn', { max: 8 }],
     /**
      * 每个方法最多不可以超过10条表达式。
      * @tip 最好使用 max-lines-per-function 规则代替
@@ -985,8 +993,9 @@ const style_restricts = {
     'new-parens': 'warn',
     /**
      * 要求链式方法的每个调用必须换行
+     * @argument ignoreChainWithDepth 5个一下忽略
      */
-    'newline-per-chained-call': 'off',
+    'newline-per-chained-call': ['warn', { ignoreChainWithDepth: 5 }],
     /**
      * 不允许在代码末尾放置单行注释
      */
@@ -1090,7 +1099,7 @@ const style_restricts = {
     /**
      * 方法参数括号前后是否允许有空格
      */
-    'space-before-function-paren': ['error', { anonymous: 'always', named: 'never', asyncArrow: 'always' }],
+    'space-before-function-paren': ['warn', { anonymous: 'always', named: 'never', asyncArrow: 'always' }],
     /**
      * 圆括号前后不允许有空格
      */
