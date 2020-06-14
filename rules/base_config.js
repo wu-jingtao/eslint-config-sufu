@@ -17,4 +17,3 @@ module.exports = {
         // 这个没有必要配置，交由 typescript 或 vscode 处理
     }
 };
-

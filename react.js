@@ -1,3 +1,7 @@
 module.exports = {
-    extends: ['./src/react_config.js']
+    plugins: ['react'],
+    extends: [
+        'plugin:react/recommended',
+        './rules/react_rules.js'
+    ]
 };

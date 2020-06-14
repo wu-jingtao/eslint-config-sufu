@@ -52,10 +52,6 @@ const close_rules = {
 };
 
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    parserOptions: { project: './tsconfig.json' },
-    plugins: ['@typescript-eslint'],
-    extends: ['./javascript_config.js'],
     rules: {
         ...close_rules
     }
