@@ -11,6 +11,7 @@ const style_restricts = {
  */
 module.exports = {
     rules: {
+        ...style_restricts,
         'react/jsx-no-target-blank': 'off',
         'react/jsx-no-undef': 'off',
         'react/prop-types': 'off',

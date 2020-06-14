@@ -8,7 +8,7 @@
 /**
  * 关闭某些规则，将这些规则的检查交给 typescript 来做
  */
-const close_rules = {
+const closed_rules = {
     /**
      * 禁止在函数参数中出现重复名称的参数
      */
@@ -53,6 +53,6 @@ const close_rules = {
 
 module.exports = {
     rules: {
-        ...close_rules
+        ...closed_rules
     }
 };
