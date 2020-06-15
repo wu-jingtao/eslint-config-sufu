@@ -134,7 +134,7 @@ const possible_errors = {
      */
     'no-setter-return': 'error',
     /**
-     * 禁止在数组中出现连续的逗号（禁止生产稀疏数组）
+     * 禁止在数组中出现连续的逗号（禁止生成稀疏数组）
      */
     'no-sparse-arrays': 'error',
     /**
@@ -150,7 +150,7 @@ const possible_errors = {
     /**
      * 禁止在 return, throw, break 或 continue 之后还有代码
      */
-    'no-unreachable': 'error',
+    'no-unreachable': 'warn',
     /**
      * 禁止在 finally 中出现 return, throw, break 或 continue
      * @reason finally 中的语句会在 try 之前执行
@@ -346,12 +346,6 @@ const best_practices = {
      * 禁止使用 magic numbers
      */
     'no-magic-numbers': 'off',
-    /**
-     * 禁止出现没有意义的多于缩进
-     * @argument ignoreEOLComments 是否忽略结尾注释
-     * @argument exceptions.Property 是否忽略键值对
-     */
-    'no-multi-spaces': ['error', { ignoreEOLComments: true, exceptions: { Property: false } }],
     /**
      * 禁止使用 \ 来换行字符串
      * @reason 拼接SQL时经常会用到，MySQL 的字段标记符 ` 会与模板字符串的相冲突，经常使用 \` 转义会很麻烦
@@ -746,7 +740,7 @@ const best_practices = {
     /**
      * 对象融合，尽量使用 ... 而不是 Object.assign
      */
-    'prefer-object-spread': 'error',
+    'prefer-object-spread': 'error'
 };
 
 /**
@@ -754,6 +748,12 @@ const best_practices = {
  * 注意：该范围下的规则的错误等级需全部设置为 warn
  */
 const style_restricts = {
+    /**
+     * 禁止出现没有意义的多于缩进
+     * @argument ignoreEOLComments 是否忽略结尾注释
+     * @argument exceptions.Property 是否忽略键值对
+     */
+    'no-multi-spaces': ['error', { ignoreEOLComments: true, exceptions: { Property: false } }],
     /**
      * 不允许存在多于的括号
      */
@@ -902,9 +902,9 @@ const style_restricts = {
      */
     'function-paren-newline': 'off',
     /**
-     * 标识符长度限制
+     * 标识符最长20个字符
      */
-    'id-length': 'off',
+    'id-length': ['warn', { max: 20 }],
     /**
      * 用正则表达式限制标识符命名规则
      */
