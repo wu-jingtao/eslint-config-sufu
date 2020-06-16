@@ -110,9 +110,10 @@ const duplicated_rules = {
     '@typescript-eslint/comma-spacing': 'warn',
     /**
      * 有默认值的参数必须放在函数参数的末尾
+     * @reason 这个可交由 typescript 完成
      */
     'default-param-last': 'off',
-    '@typescript-eslint/default-param-last': 'error',
+    '@typescript-eslint/default-param-last': 'off',
     /**
      * 禁止使用 foo['bar']，必须写成 foo.bar
      */
@@ -158,7 +159,7 @@ const duplicated_rules = {
      * @argument allow.arrowFunctions 箭头方法例外
      */
     'no-empty-function': 'off',
-    '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions'] }],
+    '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions', 'protected-constructors', 'private-constructors'] }],
     /**
      * 禁止解构赋值中出现空 {} 或 []
      */
@@ -236,7 +237,51 @@ const duplicated_rules = {
      * 禁止 throw 字面量，必须 throw 一个 Error 对象
      */
     'no-throw-literal': 'off',
-    '@typescript-eslint/no-throw-literal': 'error'
+    '@typescript-eslint/no-throw-literal': 'error',
+    /**
+     * 限制各种变量或类型的命名规则
+     */
+    'camelcase': 'off',
+    '@typescript-eslint/naming-convention': ['error',
+        {
+            selector: 'default',
+            format: ['camelCase'],
+            leadingUnderscore: 'allow',
+            trailingUnderscore: 'forbid',
+        },
+        {
+            selector: 'variable',
+            format: ['camelCase', 'UPPER_CASE'],
+            leadingUnderscore: 'allow',
+            trailingUnderscore: 'allow',
+        },
+        {
+            selector: 'typeLike',
+            format: ['PascalCase'],
+        },
+        {
+            selector: 'memberLike',
+            modifiers: ['private', 'protected'],
+            leadingUnderscore: 'require'
+        },
+        {
+            selector: 'memberLike',
+            modifiers: ['public'],
+            leadingUnderscore: 'forbid'
+        },
+        {   // 泛型参数只能使用一个大写字母
+            selector: 'typeParameter',
+            custom: {
+                regex: '^[A-Z]$',
+                match: true
+            }
+        }
+    ],
+    /**
+     * 禁止已定义的变量未使用
+     */
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars-experimental': ['error', { ignoreArgsIfArgsAfterAreUsed: true }]
 };
 
 /**
@@ -348,12 +393,7 @@ const ts_tules = {
      */
     '@typescript-eslint/method-signature-style': ['error', 'method'],
     /**
-     * 限制各种变量或类型的命名规则
-     * @reason 通过配置 @typescript-eslint/member-naming 就够了
-     */
-    '@typescript-eslint/naming-convention': 'off',
-    /**
-     * 禁止使用 Object 对象上的 toString 方法，因为它只会返回 "[object Object]"
+     * 禁止使用 Object 对象上的 toString 方法，因为它只会返回 '[object Object]'
      */
     '@typescript-eslint/no-base-to-string': 'off',
     /**
@@ -456,136 +496,132 @@ const ts_tules = {
     /**
      * 禁止范型的类型有默认值时，将范型设置为该默认值
      */
-    '@typescript-eslint/no-unnecessary-type-arguments': 'off',
+    '@typescript-eslint/no-unnecessary-type-arguments': 'error',
     /**
      * 禁止无用的类型断言
      */
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-        /**
-         * 禁止将变量或属性的类型设置为 any
-         */
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        /**
-         * 禁止调用 any 类型的变量上的方法
-         */
-        '@typescript-eslint/no-unsafe-call': 'off',
-        /**
-         * 禁止获取 any 类型的变量中的属性
-         */
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        /**
-         * 禁止函数的返回值的类型是 any
-         */
-        '@typescript-eslint/no-unsafe-return': 'off',
-        /**
-         * 禁止已定义的变量未使用
-         */
-        '@typescript-eslint/no-unused-vars-experimental': 'off',
-        /**
-         * 禁止使用 require 来引入模块
-         * @reason no-require-imports 规则已经约束了 require
-         */
-        '@typescript-eslint/no-var-requires': 'off',
-        /**
-         * 使用 as const 替代 as 'bar'
-         * @reason as const 是新语法，不是很常见
-         */
-        '@typescript-eslint/prefer-as-const': 'error',
-        /**
-         * 使用 for 循环遍历数组时，如果索引仅用于获取成员，则必须使用 for of 循环替代 for 循环
-         */
-        '@typescript-eslint/prefer-for-of': 'error',
-        /**
-         * 使用函数类型别名替代包含函数调用声明的接口
-         */
-        '@typescript-eslint/prefer-function-type': 'error',
-        /**
-         * 使用 includes 而不是 indexOf
-         */
-        '@typescript-eslint/prefer-includes': 'error',
-        /**
-         * 禁止使用 module 来定义命名空间
-         * @reason module 已成为 js 的关键字
-         */
-        '@typescript-eslint/prefer-namespace-keyword': 'error',
-        /**
-         * 使用 ?? 替代 ||
-         */
-        '@typescript-eslint/prefer-nullish-coalescing': 'off',
-        /**
-         * 使用 optional chaining 替代 &&
-         */
-        '@typescript-eslint/prefer-optional-chain': 'error',
-        /**
-         * 私有变量如果没有在构造函数外被赋值，则必须设为 readonly
-         */
-        '@typescript-eslint/prefer-readonly': 'error',
-        /**
-         * 函数的参数必须设置为 readonly
-         */
-        '@typescript-eslint/prefer-readonly-parameter-types': 'off',
-        /**
-         * 使用 reduce 方法时，必须传入范型，而不是对第二个参数使用 as
-         */
-        '@typescript-eslint/prefer-reduce-type-parameter': 'error',
-        /**
-         * 使用 RegExp#exec 而不是 String#match
-         */
-        '@typescript-eslint/prefer-regexp-exec': 'off',
-        /**
-         * 使用 String#startsWith 而不是其他方式
-         */
-        '@typescript-eslint/prefer-string-starts-ends-with': 'error',
-        /**
-         * 当需要忽略下一行的 ts 错误时，必须使用 @ts-expect-error 而不是 @ts-ignore
-         * @reason 使用 @ts-expect-error 可以避免对不会报错的代码设置了 @ts-ignore
-         */
-        '@typescript-eslint/prefer-ts-expect-error': 'off',
-        /**
-         * async 函数的返回值必须是 Promise
-         */
-        '@typescript-eslint/promise-function-async': 'off',
-        /**
-         * 使用 sort 时必须传入比较函数
-         */
-        '@typescript-eslint/require-array-sort-compare': 'off',
-        /**
-         * 使用加号时，两者必须同为数字或同为字符串
-         */
-        '@typescript-eslint/restrict-plus-operands': 'off',
-        /**
-         * 模版字符串中的变量类型必须是字符串
-         */
-        '@typescript-eslint/restrict-template-expressions': 'off',
-        /**
-         * 条件判断必须传入布尔值
-         */
-        '@typescript-eslint/strict-boolean-expressions': 'off',
-        /**
-         * 使用联合类型作为 switch 的对象时，必须包含每一个类型的 case
-         */
-        '@typescript-eslint/switch-exhaustiveness-check': 'error',
-        /**
-         * 禁止使用三斜杠导入文件
-         * @reason 三斜杠是已废弃的语法，但在类型声明文件中还是可以使用的
-         */
-        '@typescript-eslint/triple-slash-reference': 'error',
-        /**
-         * 类型注释的冒号前面不能有空格，后面必须有空格
-         */
-        '@typescript-eslint/type-annotation-spacing': 'error',
-            /**
-         * interface 和 type 定义时必须声明成员的类型
-         */
-        '@typescript-eslint/typedef': 'off',
-        /**
-         * 方法调用时需要绑定到正确的 this 上
-         */
-        '@typescript-eslint/unbound-method': 'off',
-        /**
-         * 函数重载时，若能通过联合类型将两个函数的类型声明合为一个，则使用联合类型而不是两个函数声明
-         */
-        '@typescript-eslint/unified-signatures': 'error'
+    /**
+     * 禁止将变量或属性的类型设置为 any
+     */
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    /**
+     * 禁止调用 any 类型的变量上的方法
+     */
+    '@typescript-eslint/no-unsafe-call': 'off',
+    /**
+     * 禁止获取 any 类型的变量中的属性
+     */
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    /**
+     * 禁止函数的返回值的类型是 any
+     */
+    '@typescript-eslint/no-unsafe-return': 'off',
+    /**
+     * 禁止使用 require 来引入模块
+     * @reason no-require-imports 规则已经约束了 require
+     */
+    '@typescript-eslint/no-var-requires': 'off',
+    /**
+     * 使用 as const 替代 as 'bar'
+     * @reason as const 是新语法，不是很常见
+     */
+    '@typescript-eslint/prefer-as-const': 'error',
+    /**
+     * 使用 for 循环遍历数组时，如果索引仅用于获取成员，则必须使用 for of 循环替代 for 循环
+     */
+    '@typescript-eslint/prefer-for-of': 'error',
+    /**
+     * 使用函数类型别名替代包含函数调用声明的接口
+     */
+    '@typescript-eslint/prefer-function-type': 'error',
+    /**
+     * 使用 includes 而不是 indexOf
+     */
+    '@typescript-eslint/prefer-includes': 'error',
+    /**
+     * 禁止使用 module 来定义命名空间
+     * @reason module 已成为 js 的关键字
+     */
+    '@typescript-eslint/prefer-namespace-keyword': 'error',
+    /**
+     * 使用 ?? 替代 ||
+     */
+    '@typescript-eslint/prefer-nullish-coalescing': 'off',
+    /**
+     * 使用 optional chaining 替代 &&
+     */
+    '@typescript-eslint/prefer-optional-chain': 'error',
+    /**
+     * 私有变量如果没有在构造函数外被赋值，则必须设为 readonly
+     */
+    '@typescript-eslint/prefer-readonly': 'error',
+    /**
+     * 函数的参数必须设置为 readonly
+     */
+    '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+    /**
+     * 使用 reduce 方法时，必须传入范型，而不是对第二个参数使用 as
+     */
+    '@typescript-eslint/prefer-reduce-type-parameter': 'error',
+    /**
+     * 使用 RegExp#exec 而不是 String#match
+     */
+    '@typescript-eslint/prefer-regexp-exec': 'off',
+    /**
+     * 使用 String#startsWith 而不是其他方式
+     */
+    '@typescript-eslint/prefer-string-starts-ends-with': 'error',
+    /**
+     * 当需要忽略下一行的 ts 错误时，必须使用 @ts-expect-error 而不是 @ts-ignore
+     * @reason 使用 @ts-expect-error 可以避免对不会报错的代码设置了 @ts-ignore
+     */
+    '@typescript-eslint/prefer-ts-expect-error': 'error',
+    /**
+     * async 函数的返回值必须是 Promise
+     */
+    '@typescript-eslint/promise-function-async': 'off',
+    /**
+     * 使用 sort 时必须传入比较函数
+     */
+    '@typescript-eslint/require-array-sort-compare': 'off',
+    /**
+     * 使用加号时，两者必须同为数字或同为字符串
+     */
+    '@typescript-eslint/restrict-plus-operands': 'off',
+    /**
+     * 模版字符串中的变量类型必须是字符串
+     */
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    /**
+     * 条件判断必须传入布尔值
+     */
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    /**
+     * 使用联合类型作为 switch 的对象时，必须包含每一个类型的 case
+     */
+    '@typescript-eslint/switch-exhaustiveness-check': 'error',
+    /**
+     * 禁止使用三斜杠导入文件
+     * @reason 三斜杠是已废弃的语法，但在类型声明文件中还是可以使用的
+     */
+    '@typescript-eslint/triple-slash-reference': 'error',
+    /**
+     * 类型注释的冒号前面不能有空格，后面必须有空格
+     */
+    '@typescript-eslint/type-annotation-spacing': 'error',
+    /**
+     * interface 和 type 定义时必须声明成员的类型
+     */
+    '@typescript-eslint/typedef': 'off',
+    /**
+     * 方法调用时需要绑定到正确的 this 上
+     */
+    '@typescript-eslint/unbound-method': 'off',
+    /**
+     * 函数重载时，若能通过联合类型将两个函数的类型声明合为一个，则使用联合类型而不是两个函数声明
+     */
+    '@typescript-eslint/unified-signatures': 'error'
 };
 
 module.exports = {
