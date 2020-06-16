@@ -197,8 +197,9 @@ const best_practices = {
     'array-callback-return': 'error',
     /**
      * 将 var 定义的变量视为块作用域，禁止在块外使用
+     * @reason 已禁用 var
      */
-    'block-scoped-var': 'error',
+    'block-scoped-var': 'off',
     /**
      * 在类的非静态方法中，必须存在对 this 的引用
      */
@@ -292,8 +293,9 @@ const best_practices = {
     'no-extra-bind': 'error',
     /**
      * 禁止出现没必要的 label
+     * @reason 已禁用 label
      */
-    'no-extra-label': 'error',
+    'no-extra-label': 'off',
     /**
      * switch 的 case 内必须有 break, return 或 throw，空的 case 除外
      */
@@ -385,8 +387,9 @@ const best_practices = {
     'no-proto': 'error',
     /**
      * 禁止重复定义变量
+     * @reason 已禁用 var
      */
-    'no-redeclare': 'error',
+    'no-redeclare': 'off',
     /**
      * 禁止使用指定的对象属性
      */
@@ -436,8 +439,9 @@ const best_practices = {
     'no-unused-expressions': 'error',
     /**
      * 禁止出现没用到的 label
+     * @reason 已禁用 label
      */
-    'no-unused-labels': 'error',
+    'no-unused-labels': 'off',
     /**
      * 禁止出现没必要的 call 或 apply
      */
@@ -512,12 +516,14 @@ const best_practices = {
     'init-declarations': 'off',
     /**
      * 禁止对一个变量使用 delete
+     * @reason 已禁用 delete
      */
-    'no-delete-var': 'error',
+    'no-delete-var': 'off',
     /**
      * 禁止 label 名称与已定义的变量重复
+     * @reason 已禁用 label
      */
-    'no-label-var': 'error',
+    'no-label-var': 'off',
     /**
      * 禁止使用指定的全局变量
      */
@@ -645,8 +651,9 @@ const best_practices = {
     'prefer-template': 'off',
     /**
      * generator 函数内必须有 yield
+     * @reason 已禁用 yield
      */
-    'require-yield': 'error',
+    'require-yield': 'off',
     /**
      * 创建 Symbol 时必须传入参数
      */
@@ -804,8 +811,9 @@ const style_restricts = {
     'arrow-spacing': 'warn',
     /**
      * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
+     * @reason 已禁用 yield
      */
-    'generator-star-spacing': 'warn',
+    'generator-star-spacing': 'off',
     /**
      * 要求 => 符号的后面必须要有括号包裹
      * @reason 这个会与 no-extra-parens 相冲突
@@ -828,8 +836,9 @@ const style_restricts = {
     'template-curly-spacing': 'warn',
     /**
      * yield 与 * 号之间必须有空格
+     * @reason 已禁用 yield
      */
-    'yield-star-spacing': 'warn',
+    'yield-star-spacing': 'off',
     /**
      * 数组两个方括号前后是否必须有换行
      * @argument consistent 风格保持一致，要么都有，要么都没有
