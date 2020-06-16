@@ -924,6 +924,10 @@ const style_restricts = {
      */
     'indent': ['warn', 4, { SwitchCase: 1, ignoreComments: true }],
     /**
+     * JSX 标签里面特性的值必须使用双引号包裹
+     */
+    'jsx-quotes': 'warn',
+    /**
      * 要求冒号前面不能有空格，后面必须有空格
      */
     'key-spacing': 'warn',

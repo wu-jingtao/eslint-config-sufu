@@ -2,18 +2,6 @@
  * 检查规则更新
  */
 
-/**
- * 跳过不检查的规则
- */
-const skip_checking = {
-    javascript: [
-        'jsx-quotes', // 这个被放在了 react_rules 里面
-    ],
-    typescript: [
-
-    ]
-};
-
 const _ = require('lodash');
 const requireDir = require('require-dir');
 
@@ -42,10 +30,6 @@ const custom_typescript_rules_set = {
     closed_eslint_rules: new Set(Object.keys(custom_typescript_rules).filter(item => !item.startsWith('@typescript-eslint'))),
     ts_rules: new Set(Object.keys(custom_typescript_rules).filter(item => item.startsWith('@typescript-eslint')))
 };
-
-// 例外情况
-skip_checking.javascript.forEach(item => custom_javascript_rules_set.add(item));
-skip_checking.typescript.forEach(item => custom_typescript_rules_set.ts_rules.add(item));
 
 // 开始检查
 console.log('\n\njavascript 新增的规则:');

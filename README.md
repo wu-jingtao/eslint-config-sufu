@@ -6,11 +6,9 @@
 
 #### 1. 安装
 
-> 只需要安装`eslint-config-sufu`即可，里面包含了`eslint`，`typescript-eslint`等依赖
-
-```bash
-npm i -D eslint-config-sufu
-```
+-   **javascript** ：`npm install --save-dev eslint eslint-config-sufu`
+-   如果要用到 **typescript** 还需要安装 ：`npm install --save-dev typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin`
+-   如果要用到 **React** 还需要安装：`npm install --save-dev eslint-plugin-react`
 
 #### 2. 创建以下文件
 
@@ -18,9 +16,11 @@ npm i -D eslint-config-sufu
 
 ```js
 {
-    // 二选一，如果要用到React则选下面那个
-    //"extends": "sufu",
-    //"extends": "sufu/react",
+    "extends": [
+        'sufu',
+        // 'sufu/typescript',
+        // 'sufu/react'
+    ],
     "rules": {
         //自定义规则
     }
@@ -33,6 +33,7 @@ npm i -D eslint-config-sufu
 
 ```json
 {
-    "lint": "eslint --max-warnings 0 src/**/*.ts src/**/*.tsx test/**/*.ts test/**/*.tsx"
+    "lint-js": "eslint --max-warnings 0 src/**/*.js src/**/*.jsx test/**/*.js test/**/*.jsx",
+    "lint-ts": "eslint --max-warnings 0 src/**/*.ts src/**/*.tsx test/**/*.ts test/**/*.tsx"
 }
 ```
