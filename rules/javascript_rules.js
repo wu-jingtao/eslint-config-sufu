@@ -5,22 +5,21 @@
 
 /**
  * 潜在错误
- * 注意：该范围下的规则的错误等级需全部设置为 error，如果是在调试时会用到的可以设置成 warn
  */
 const possible_errors = {
     /**
      * 禁止方向错误的 for 循环
      */
-    'for-direction': 'error',
+    'for-direction': 'warn',
     /**
      * getter 必须有 return 关键字
      */
-    'getter-return': 'error',
+    'getter-return': 'warn',
     /**
      * 禁止将 async 函数做为 new Promise 的回调函数
      * @reason 出现这种情况时，一般不需要使用 new Promise 实现异步了
      */
-    'no-async-promise-executor': 'error',
+    'no-async-promise-executor': 'warn',
     /**
      * 禁止将 await 写在循环里，因为这样就无法同时发送多个异步请求了
      * @reason 要求太严格了，有时需要在循环中写 await
@@ -29,11 +28,11 @@ const possible_errors = {
     /**
      * 禁止与负零进行比较
      */
-    'no-compare-neg-zero': 'error',
+    'no-compare-neg-zero': 'warn',
     /**
      * 禁止在条件测试表达式中使用赋值语句，除非这个赋值语句被括号包起来了
      */
-    'no-cond-assign': 'error',
+    'no-cond-assign': 'warn',
     /**
      * 禁止使用 console
      * @reason NodeJS 中经常会用到
@@ -43,11 +42,11 @@ const possible_errors = {
      * 禁止将常量作为分支条件判断中的测试表达式
      * @argument checkLoops 允许作为循环条件判断中的测试表达式
      */
-    'no-constant-condition': ['error', { checkLoops: false }],
+    'no-constant-condition': ['warn', { checkLoops: false }],
     /**
      * 禁止在正则表达式中出现 Ctrl 键的 ASCII 表示，即禁止使用 /\x1f/
      */
-    'no-control-regex': 'error',
+    'no-control-regex': 'warn',
     /**
      * 禁止使用 debugger
      */
@@ -55,88 +54,88 @@ const possible_errors = {
     /**
      * 禁止在函数参数中出现重复名称的参数
      */
-    'no-dupe-args': 'error',
+    'no-dupe-args': 'warn',
     /**
      * 禁止 if else 的条件判断中出现重复的条件
      */
-    'no-dupe-else-if': 'error',
+    'no-dupe-else-if': 'warn',
     /**
      * 禁止在对象字面量中出现重复的键名
      */
-    'no-dupe-keys': 'error',
+    'no-dupe-keys': 'warn',
     /**
      * 禁止在 switch 语句中出现重复测试表达式的 case
      */
-    'no-duplicate-case': 'error',
+    'no-duplicate-case': 'warn',
     /**
      * 禁止出现空代码块
      * @argument allowEmptyCatch 是否允许 catch 为空代码块
      */
-    'no-empty': ['error', { allowEmptyCatch: true }],
+    'no-empty': ['warn', { allowEmptyCatch: true }],
     /**
      * 禁止在正则表达式中使用空的字符集 []
      */
-    'no-empty-character-class': 'error',
+    'no-empty-character-class': 'warn',
     /**
      * 禁止将 catch 的第一个参数 error 重新赋值
      */
-    'no-ex-assign': 'error',
+    'no-ex-assign': 'warn',
     /**
      * 禁止不必要的布尔类型转换
      */
-    'no-extra-boolean-cast': 'error',
+    'no-extra-boolean-cast': 'warn',
     /**
      * 禁止将一个函数声明重新赋值
      */
-    'no-func-assign': 'error',
+    'no-func-assign': 'warn',
     /**
      * 禁止对导入的模块进行赋值
      */
-    'no-import-assign': 'error',
+    'no-import-assign': 'warn',
     /**
      * 禁止在 if 代码块内出现函数声明
      * @argument both var 变量声明也不许出现
      */
-    'no-inner-declarations': ['error', 'both'],
+    'no-inner-declarations': ['warn', 'both'],
     /**
      * 禁止在 RegExp 构造函数中出现非法的正则表达式
      */
-    'no-invalid-regexp': 'error',
+    'no-invalid-regexp': 'warn',
     /**
      * 禁止使用特殊空白符（比如全角空格）
      * @argument skipStrings 不检查字符串
      */
-    'no-irregular-whitespace': ['error', { skipStrings: false }],
+    'no-irregular-whitespace': ['warn', { skipStrings: false }],
     /**
      * 禁止输入的数字字面量超出JavaScript可接受的最大精度
      */
-    'no-loss-of-precision': 'error',
+    'no-loss-of-precision': 'warn',
     /**
      * 禁止正则表达式中使用肉眼无法区分的特殊字符
      * @reason 某些特殊字符很难看出差异，最好不要在正则中使用
      */
-    'no-misleading-character-class': 'error',
+    'no-misleading-character-class': 'warn',
     /**
      * 禁止将 Math, JSON 或 Reflect 直接作为函数调用
      */
-    'no-obj-calls': 'error',
+    'no-obj-calls': 'warn',
     /**
      * 禁止使用 hasOwnProperty, isPrototypeOf 或 propertyIsEnumerable
      * @reason 直接操作 Prototype 已经是过时的做法了，在 ES6 以后很难再用到了
      */
-    'no-prototype-builtins': 'error',
+    'no-prototype-builtins': 'warn',
     /**
      * 禁止在正则表达式中出现连续的空格
      */
-    'no-regex-spaces': 'error',
+    'no-regex-spaces': 'warn',
     /**
      * 禁止 setter 有返回值
      */
-    'no-setter-return': 'error',
+    'no-setter-return': 'warn',
     /**
      * 禁止在数组中出现连续的逗号（禁止生成稀疏数组）
      */
-    'no-sparse-arrays': 'error',
+    'no-sparse-arrays': 'warn',
     /**
      * 禁止在普通字符串中出现模版字符串里的变量形式
      * @reason 这个可能会用到，并且即使因为失误出错了也很容易被发现
@@ -146,7 +145,7 @@ const possible_errors = {
      * 禁止存在歧义的换行
      * @reason 在行尾不使用分号的情况下，某些类型的换行会产生歧义
      */
-    'no-unexpected-multiline': 'error',
+    'no-unexpected-multiline': 'warn',
     /**
      * 禁止在 return, throw, break 或 continue 之后还有代码
      */
@@ -155,16 +154,16 @@ const possible_errors = {
      * 禁止在 finally 中出现 return, throw, break 或 continue
      * @reason finally 中的语句会在 try 之前执行
      */
-    'no-unsafe-finally': 'error',
+    'no-unsafe-finally': 'warn',
     /**
      * 禁止在 in 或 instanceof 操作符的左侧变量前使用感叹号
      */
-    'no-unsafe-negation': 'error',
+    'no-unsafe-negation': 'warn',
     /**
      * 禁止正则表达式中出现无用的回溯引用
      * @reason 某些回溯引用语法上没问题，但是会永远匹配到空字符串
      */
-    'no-useless-backreference': 'error',
+    'no-useless-backreference': 'warn',
     /**
      * 禁止将 await 或 yield 的结果做为运算符的后面项
      * @reason 这样会导致不符合预期的结果
@@ -175,26 +174,25 @@ const possible_errors = {
     /**
      * 必须使用 isNaN(foo) 而不是 foo === NaN
      */
-    'use-isnan': 'error',
+    'use-isnan': 'warn',
     /**
      * typeof 表达式比较的对象必须是 'undefined', 'object', 'boolean', 'number', 'string', 'function', 'symbol', 或 'bigint'
      */
-    'valid-typeof': 'error'
+    'valid-typeof': 'warn'
 };
 
 /**
  * 最佳实践
- * 注意：该范围下的规则的错误等级需全部设置为 error
  */
 const best_practices = {
     /**
      * setter 必须有对应的 getter，getter 可以没有对应的 setter
      */
-    'accessor-pairs': 'error',
+    'accessor-pairs': 'warn',
     /**
      * 数组的方法除了 forEach 之外，回调函数必须有返回值
      */
-    'array-callback-return': 'error',
+    'array-callback-return': 'warn',
     /**
      * 将 var 定义的变量视为块作用域，禁止在块外使用
      * @reason 已禁用 var
@@ -221,19 +219,19 @@ const best_practices = {
     /**
      * switch 语句中的 default 必须在最后
      */
-    'default-case-last': 'error',
+    'default-case-last': 'warn',
     /**
     * 有默认值的参数必须放在函数参数的末尾
     */
-    'default-param-last': 'error',
+    'default-param-last': 'warn',
     /**
      * 必须使用 === 或 !==，禁止使用 == 或 !=
      */
-    'eqeqeq': 'error',
+    'eqeqeq': 'warn',
     /**
      * for in 内部必须有 hasOwnProperty
      */
-    'guard-for-in': 'error',
+    'guard-for-in': 'warn',
     /**
      * 限制一个文件中类的数量
      */
@@ -246,15 +244,15 @@ const best_practices = {
      * 禁止使用 caller 或 callee
      * @reason 它们是已废弃的语法
      */
-    'no-caller': 'error',
+    'no-caller': 'warn',
     /**
      * switch 的 case 内有变量定义的时候，必须使用大括号将 case 内变成一个代码块
      */
-    'no-case-declarations': 'error',
+    'no-case-declarations': 'warn',
     /**
      * 禁止在构造函数中返回值
      */
-    'no-constructor-return': 'error',
+    'no-constructor-return': 'warn',
     /**
      * 禁止在正则表达式中出现形似除法操作符的开头，如 let a = /=foo/
      * @reason 有代码高亮的话，在阅读这种代码时，也完全不会产生歧义或理解上的困难
@@ -269,28 +267,28 @@ const best_practices = {
      * 不允许有空函数
      * @argument allow.arrowFunctions 箭头方法例外
      */
-    'no-empty-function': ['error', { allow: ['arrowFunctions'] }],
+    'no-empty-function': ['warn', { allow: ['arrowFunctions'] }],
     /**
      * 禁止解构赋值中出现空 {} 或 []
      */
-    'no-empty-pattern': 'error',
+    'no-empty-pattern': 'warn',
     /**
      * 禁止使用 foo == null，必须使用 foo === null
      */
-    'no-eq-null': 'error',
+    'no-eq-null': 'warn',
     /**
      * 禁止使用 eval
      */
-    'no-eval': 'error',
+    'no-eval': 'warn',
     /**
      * 禁止修改原生对象
      * @reason 修改原生对象可能会与将来版本的 js 冲突
      */
-    'no-extend-native': 'error',
+    'no-extend-native': 'warn',
     /**
      * 禁止出现没必要的 bind
      */
-    'no-extra-bind': 'error',
+    'no-extra-bind': 'warn',
     /**
      * 禁止出现没必要的 label
      * @reason 已禁用 label
@@ -299,15 +297,15 @@ const best_practices = {
     /**
      * switch 的 case 内必须有 break, return 或 throw，空的 case 除外
      */
-    'no-fallthrough': 'error',
+    'no-fallthrough': 'warn',
     /**
      * 禁止小数点前后没有数字 如 .2 或 2.
      */
-    'no-floating-decimal': 'error',
+    'no-floating-decimal': 'warn',
     /**
      * 禁止对全局变量赋值
      */
-    'no-global-assign': 'error',
+    'no-global-assign': 'warn',
     /**
      * 禁止使用 ~+ 等难以理解的类型转换
      * @reason 过于严格，在进行位运算时很多都会被用到
@@ -321,29 +319,29 @@ const best_practices = {
     /**
      * 禁止在 setTimeout 或 setInterval 中传入字符串
      */
-    'no-implied-eval': 'error',
+    'no-implied-eval': 'warn',
     /**
      * 禁止在类(包括类字面量)之外的地方使用 this
      * @reason 在类以外的方法中使用 this 会造成代码难以维护
      */
-    'no-invalid-this': 'error',
+    'no-invalid-this': 'warn',
     /**
      * 禁止使用 __iterator__
      * @reason __iterator__ 是一个已废弃的属性，使用 [Symbol.iterator] 替代它
      */
-    'no-iterator': 'error',
+    'no-iterator': 'warn',
     /**
      * 禁止使用 label
      */
-    'no-labels': 'error',
+    'no-labels': 'warn',
     /**
      * 禁止使用没必要的 { } 代码块
      */
-    'no-lone-blocks': 'error',
+    'no-lone-blocks': 'warn',
     /**
      * 禁止在循环内的闭包函数中出现循环体条件语句中使用 var 定义的变量
      */
-    'no-loop-func': 'error',
+    'no-loop-func': 'warn',
     /**
      * 禁止使用 magic numbers
      */
@@ -357,34 +355,34 @@ const best_practices = {
      * 禁止直接 new 一个类而不赋值
      * @reason new 应该作为创建一个类的实例的方法，所以不能不赋值
      */
-    'no-new': 'error',
+    'no-new': 'warn',
     /**
      * 禁止使用 new Function
      * @reason 这和 eval 是等价的
      */
-    'no-new-func': 'error',
+    'no-new-func': 'warn',
     /**
      * 禁止使用 new 来生成 String, Number 或 Boolean
      */
-    'no-new-wrappers': 'error',
+    'no-new-wrappers': 'warn',
     /**
      * 禁止使用 0 开头的数字表示八进制数
      * @reason 这个现在已经是属于一种语法错误了
      */
-    'no-octal': 'error',
+    'no-octal': 'warn',
     /**
      * 禁止使用八进制的转义符
      */
-    'no-octal-escape': 'error',
+    'no-octal-escape': 'warn',
     /**
      * 禁止对函数的参数重新赋值
      */
-    'no-param-reassign': 'error',
+    'no-param-reassign': 'warn',
     /**
      * 禁止使用 __proto__
      * @reason __proto__ 是已废弃的语法
      */
-    'no-proto': 'error',
+    'no-proto': 'warn',
     /**
      * 禁止重复定义变量
      * @reason 已禁用 var
@@ -393,7 +391,7 @@ const best_practices = {
     /**
      * 禁止使用指定的对象属性
      */
-    'no-restricted-properties': ['error',
+    'no-restricted-properties': ['warn',
         {
             // 禁用 ES5 时代使用 prototype 生成类的方法，改用 class 代替
             'property': 'prototype',
@@ -404,31 +402,31 @@ const best_practices = {
      * 禁止在 return 语句里赋值
      * @argument always 被括号包裹了的也不允许
      */
-    'no-return-assign': ['error', 'always'],
+    'no-return-assign': ['warn', 'always'],
     /**
      * 禁止在 return 语句里使用 await
      */
-    'no-return-await': 'error',
+    'no-return-await': 'warn',
     /**
      * 禁止出现 location.href = 'javascript:void(0)';
      */
-    'no-script-url': 'error',
+    'no-script-url': 'warn',
     /**
      * 禁止将自己赋值给自己
      */
-    'no-self-assign': 'error',
+    'no-self-assign': 'warn',
     /**
      * 禁止将自己与自己比较
      */
-    'no-self-compare': 'error',
+    'no-self-compare': 'warn',
     /**
      * 禁止使用逗号操作符
      */
-    'no-sequences': 'error',
+    'no-sequences': 'warn',
     /**
      * 禁止 throw 字面量，必须 throw 一个 Error 对象
      */
-    'no-throw-literal': 'error',
+    'no-throw-literal': 'warn',
     /**
      * 循环内必须对循环条件中的变量有修改
      */
@@ -436,7 +434,7 @@ const best_practices = {
     /**
      * 禁止无用的表达式
      */
-    'no-unused-expressions': 'error',
+    'no-unused-expressions': 'warn',
     /**
      * 禁止出现没用到的 label
      * @reason 已禁用 label
@@ -445,27 +443,27 @@ const best_practices = {
     /**
      * 禁止出现没必要的 call 或 apply
      */
-    'no-useless-call': 'error',
+    'no-useless-call': 'warn',
     /**
      * 禁止在 catch 中仅仅只是把错误 throw 出去
      */
-    'no-useless-catch': 'error',
+    'no-useless-catch': 'warn',
     /**
      * 禁止出现没必要的字符串连接
      */
-    'no-useless-concat': 'error',
+    'no-useless-concat': 'warn',
     /**
      * 禁止出现没必要的转义
      */
-    'no-useless-escape': 'error',
+    'no-useless-escape': 'warn',
     /**
      * 禁止没必要的 return
      */
-    'no-useless-return': 'error',
+    'no-useless-return': 'warn',
     /**
      * 禁止使用 void
      */
-    'no-void': 'error',
+    'no-void': 'warn',
     /**
      * 禁止注释中出现 TODO 和 FIXME
      */
@@ -473,7 +471,7 @@ const best_practices = {
     /**
      * 禁止使用 with
      */
-    'no-with': 'error',
+    'no-with': 'warn',
     /**
      * 使用 ES2018 中的正则表达式命名组
      * @reason 正则表达式已经较难理解了，没必要强制加上命名组。而且这种写法在很多其它语言中都不支持
@@ -482,16 +480,16 @@ const best_practices = {
     /**
      * Promise 的 reject 中必须传入 Error 对象，而不是字面量
      */
-    'prefer-promise-reject-errors': 'error',
+    'prefer-promise-reject-errors': 'warn',
     /**
      * 优先使用正则表达式字面量，而不是 RegExp 构造函数
      */
-    'prefer-regex-literals': 'error',
+    'prefer-regex-literals': 'warn',
     /**
      * parseInt 必须传入第二个参数
      * @argument as-needed 如果是十进制数就不需要传，如果是其他进制的则必须传入
      */
-    'radix': ['error', 'as-needed'],
+    'radix': ['warn', 'as-needed'],
     /**
      * async 函数中必须存在 await 语句
      * @reason 在 koa 中经常会出现非异步的中间件
@@ -509,7 +507,7 @@ const best_practices = {
     /**
       * 禁止使用 'strict';
       */
-    'strict': ['error', 'never'],
+    'strict': ['warn', 'never'],
     /**
      * 变量必须在定义的时候赋值
      */
@@ -536,7 +534,7 @@ const best_practices = {
     /**
      * 禁止使用保留字作为变量名
      */
-    'no-shadow-restricted-names': 'error',
+    'no-shadow-restricted-names': 'warn',
     /**
      * 禁止使用未定义的变量
      * @reason 这个需要配置 env 或 globals。
@@ -555,36 +553,36 @@ const best_practices = {
      * 已定义的变量必须使用
      * @argument caughtErrors catch(e) 错误对象 e 也必须使用，否则必须省略
      */
-    'no-unused-vars': ['error', { caughtErrors: 'all' }],
+    'no-unused-vars': ['warn', { caughtErrors: 'all' }],
     /**
      * 变量必须先定义后使用
      */
-    'no-use-before-define': 'error',
+    'no-use-before-define': 'warn',
     /**
      * 派生类 constructor 中必须有 super
      */
-    'constructor-super': 'error',
+    'constructor-super': 'warn',
     /**
      * 禁止对已定义的 class 重新赋值
      */
-    'no-class-assign': 'error',
+    'no-class-assign': 'warn',
     /**
      * 禁止对使用 const 定义的常量重新赋值
      */
-    'no-const-assign': 'error',
+    'no-const-assign': 'warn',
     /**
      * 禁止重复定义类的成员
      */
-    'no-dupe-class-members': 'error',
+    'no-dupe-class-members': 'warn',
     /**
      * 禁止重复导入模块
      * @argument includeExports 不允许 import 后又 export 出去，使用 export ... from 代替
      */
-    'no-duplicate-imports': ['error', { includeExports: true }],
+    'no-duplicate-imports': ['warn', { includeExports: true }],
     /**
      * 禁止使用 new 来生成 Symbol
      */
-    'no-new-symbol': 'error',
+    'no-new-symbol': 'warn',
     /**
      * 禁止导出指定的变量名
      */
@@ -596,37 +594,37 @@ const best_practices = {
     /**
      * 禁止在 super 被调用之前使用 this 或 super
      */
-    'no-this-before-super': 'error',
+    'no-this-before-super': 'warn',
     /**
      * 禁止出现没必要的计算键名
      * @argument enforceForClassMembers 对类成员也要求
      */
-    'no-useless-computed-key': ['error', { enforceForClassMembers: true }],
+    'no-useless-computed-key': ['warn', { enforceForClassMembers: true }],
     /**
      * 禁止出现没必要的 constructor
      */
-    'no-useless-constructor': 'error',
+    'no-useless-constructor': 'warn',
     /**
      * 禁止解构赋值时出现同样名字的的重命名，比如 let { foo: foo } = bar;
      */
-    'no-useless-rename': 'error',
+    'no-useless-rename': 'warn',
     /**
      * 禁止使用 var
      */
-    'no-var': 'error',
+    'no-var': 'warn',
     /**
      * 是否必须使用 a = {b} 而不是 a = {b: b}
      * @argument consistent-as-needed 视情况而定，如果用简写的多就用简写，反之用旧写法，但如果可能的话尽量用简写
      */
-    'object-shorthand': ['error', 'consistent-as-needed'],
+    'object-shorthand': ['warn', 'consistent-as-needed'],
     /**
      * 倾向于使用箭头方法而不是 function
      */
-    'prefer-arrow-callback': 'error',
+    'prefer-arrow-callback': 'warn',
     /**
      * 申明后不再被修改的变量必须使用 const 来申明
      */
-    'prefer-const': 'error',
+    'prefer-const': 'warn',
     /**
      * 必须使用解构表达式赋值
      * @reason 这个在某些情况下反而会导致代码可读性下降
@@ -636,15 +634,15 @@ const best_practices = {
      * 必须使用数字字面量来生成其他进制的数字而不是使用 parseInt
      * 如使用 0b11111011 而不是 parseInt('11111011', 2)
      */
-    'prefer-numeric-literals': 'error',
+    'prefer-numeric-literals': 'warn',
     /**
      * 必须使用 ...args 而不是 arguments
      */
-    'prefer-rest-params': 'error',
+    'prefer-rest-params': 'warn',
     /**
      * 必须使用 ... 而不是 apply，比如 foo(...args)
      */
-    'prefer-spread': 'error',
+    'prefer-spread': 'warn',
     /**
      * 必须使用模版字符串而不是字符串连接
      */
@@ -657,15 +655,15 @@ const best_practices = {
     /**
      * 创建 Symbol 时必须传入参数
      */
-    'symbol-description': 'error',
+    'symbol-description': 'warn',
     /**
      * 如果一个方法表达式赋值给了一个变量，如果这个方法有名字，则要求方法名必须与变量名相同
      */
-    'func-name-matching': 'error',
+    'func-name-matching': 'warn',
     /**
      * 如果JS引擎无法推断出方法声明表达式的方法名，则必须指定方法名
      */
-    'func-names': ['error', 'as-needed'],
+    'func-names': ['warn', 'as-needed'],
     /**
      * 禁用的标识符名称
      */
@@ -673,7 +671,7 @@ const best_practices = {
     /**
      * 不允许使用 new Array()
      */
-    'no-array-constructor': 'error',
+    'no-array-constructor': 'warn',
     /**
      * 不允许使用位运算符
      */
@@ -685,7 +683,7 @@ const best_practices = {
     /**
      * 不允许在 else 块里面嵌套只有一个分支的 if 语句，这个因使用 else if 代替
      */
-    'no-lonely-if': 'error',
+    'no-lonely-if': 'warn',
     /**
      * 不允许混用运算符，因为优先级的问题很容易误解。对混用运算符的地方必须加上括号
      * @reason 这个会与 no-extra-parens 规则相冲突
@@ -706,7 +704,7 @@ const best_practices = {
     /**
      * 不允许使用 new Object() 创建对象，使用对象字面量代替
      */
-    'no-new-object': 'error',
+    'no-new-object': 'warn',
     /**
      * 不允许使用 ++ -- 运算符
      */
@@ -715,7 +713,7 @@ const best_practices = {
      * 语法限制
      */
     'no-restricted-syntax': [
-        'error',
+        'warn',
         {   // 禁用 for in
             'selector': 'ForInStatement',
             'message': 'ForInStatement are not allowed, Use ForOfStatement instead.'
@@ -735,7 +733,7 @@ const best_practices = {
     /**
      * 不允许出现没有必要的三元表达式
      */
-    'no-unneeded-ternary': 'error',
+    'no-unneeded-ternary': 'warn',
     /**
      * 在一个作用域范围内的所有变量只能使用一个 var let const 声明
      */
@@ -743,16 +741,15 @@ const best_practices = {
     /**
      * 指数运算使用 ** 而不是 Math.pow
      */
-    'prefer-exponentiation-operator': 'error',
+    'prefer-exponentiation-operator': 'warn',
     /**
      * 对象融合，尽量使用 ... 而不是 Object.assign
      */
-    'prefer-object-spread': 'error'
+    'prefer-object-spread': 'warn'
 };
 
 /**
  * 代码风格
- * 注意：该范围下的规则的错误等级需全部设置为 warn
  */
 const style_restricts = {
     /**
@@ -760,7 +757,7 @@ const style_restricts = {
      * @argument ignoreEOLComments 是否忽略结尾注释
      * @argument exceptions.Property 是否忽略键值对
      */
-    'no-multi-spaces': ['error', { ignoreEOLComments: true, exceptions: { Property: false } }],
+    'no-multi-spaces': ['warn', { ignoreEOLComments: true, exceptions: { Property: false } }],
     /**
      * 不允许存在多于的括号
      */
