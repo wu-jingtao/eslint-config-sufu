@@ -4,14 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "查找新JS规则",
+            "label": "检查规则更新",
             "type": "shell",
-            "command": "npm run find_new_js_rule"
-        },
-        {
-            "label": "查找新TS规则",
-            "type": "shell",
-            "command": "npm run find_new_ts_rule"
+            "command": "npm run check_rule_update"
         }
     ]
 }

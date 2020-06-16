@@ -397,7 +397,7 @@ const ts_tules = {
     /**
      * 禁止非空断言 ! 与 == 挨在一块
      */
-    'no-confusing-non-null-assertion': 'warn',
+    '@typescript-eslint/no-confusing-non-null-assertion': 'warn',
     /**
      * 禁止 delete 时传入的 key 是动态的
      * @reason delete 关键字已被禁用
