@@ -1,6 +1,6 @@
 /.github
 /.vscode
 /tools
-.eslintrc.json
+.eslintrc.js
 .gitattributes
 tsconfig.json

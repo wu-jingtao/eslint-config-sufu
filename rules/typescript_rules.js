@@ -260,16 +260,19 @@ const duplicated_rules = {
         },
         {
             selector: 'memberLike',
+            format: ['camelCase'],
             modifiers: ['private', 'protected'],
             leadingUnderscore: 'require'
         },
         {
             selector: 'memberLike',
+            format: ['camelCase'],
             modifiers: ['public'],
             leadingUnderscore: 'forbid'
         },
         {   // 泛型参数只能使用一个大写字母
             selector: 'typeParameter',
+            format: ['PascalCase'],
             custom: {
                 regex: '^[A-Z]$',
                 match: true

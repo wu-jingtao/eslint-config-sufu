@@ -19,9 +19,9 @@
 ```js
 {
     "extends": [
-        'sufu',
-        // 'sufu/typescript',
-        // 'sufu/react'
+        "sufu",
+        // "sufu/typescript",
+        // "sufu/react"
     ],
     "rules": {
         //自定义规则

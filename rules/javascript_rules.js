@@ -1015,11 +1015,12 @@ const style_restricts = {
      */
     'no-mixed-spaces-and-tabs': 'warn',
     /**
-     * 最多不允许超过两个空行
+     * 最多不允许超过多少个空行
+     * @argument max 最多不可超过两个空行
      * @argument maxBOF 文件开头不能有空行
      * @argument maxEOF 文件结尾可有一个空行
      */
-    'no-multiple-empty-lines': ['warn', { maxEOF: 1, maxBOF: 0 }],
+    'no-multiple-empty-lines': ['warn', { max: 2, maxEOF: 1, maxBOF: 0 }],
     /**
      * 不允许使用 tab
      */
