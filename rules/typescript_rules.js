@@ -142,7 +142,7 @@ const duplicated_rules = {
      * 类成员之间必须换行，单行除外
      */
     'lines-between-class-members': 'off',
-    '@typescript-eslint/lines-between-class-members': 'warn',
+    '@typescript-eslint/lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
     /**
      * 不允许使用 new Array()
      */
@@ -160,9 +160,9 @@ const duplicated_rules = {
     'no-empty-function': 'off',
     '@typescript-eslint/no-empty-function': ['warn', { allow: ['arrowFunctions', 'protected-constructors', 'private-constructors'] }],
     /**
-     * 禁止解构赋值中出现空 {} 或 []
+     * 不允许存在多于的括号
      */
-    'no-empty-pattern': 'off',
+    'no-extra-parens': 'off',
     '@typescript-eslint/no-extra-parens': 'warn',
     /**
      * 不允许存在多于的分号
@@ -218,10 +218,10 @@ const duplicated_rules = {
     'no-return-await': 'off',
     '@typescript-eslint/return-await': 'warn',
     /**
-     * 不允许存在多于的分号
+     * 所有表达式后面都必有分号
      */
-    'no-extra-semi': 'off',
-    '@typescript-eslint/semi': 'warn',
+    'semi': 'off',
+    '@typescript-eslint/semi': ['warn', 'always', { omitLastInOneLineBlock: true }],
     /**
      * 方法参数括号前后是否允许有空格
      */
@@ -600,8 +600,9 @@ const ts_tules = {
     '@typescript-eslint/strict-boolean-expressions': 'off',
     /**
      * 使用联合类型作为 switch 的对象时，必须包含每一个类型的 case
+     * @reason 很多时候都要求必须把 default 分支写出来
      */
-    '@typescript-eslint/switch-exhaustiveness-check': 'warn',
+    '@typescript-eslint/switch-exhaustiveness-check': 'off',
     /**
      * 禁止使用三斜杠导入文件
      * @reason 三斜杠是已废弃的语法，但在类型声明文件中还是可以使用的
@@ -621,8 +622,9 @@ const ts_tules = {
     '@typescript-eslint/unbound-method': 'off',
     /**
      * 函数重载时，若能通过联合类型将两个函数的类型声明合为一个，则使用联合类型而不是两个函数声明
+     * @reason 有时候分开可以更好的编写文档注释
      */
-    '@typescript-eslint/unified-signatures': 'warn'
+    '@typescript-eslint/unified-signatures': 'off'
 };
 
 module.exports = {

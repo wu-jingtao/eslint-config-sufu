@@ -376,8 +376,9 @@ const best_practices = {
     'no-octal-escape': 'warn',
     /**
      * 禁止对函数的参数重新赋值
+     * @reason 单独定义一个变量反而会使性能更差
      */
-    'no-param-reassign': 'warn',
+    'no-param-reassign': 'off',
     /**
      * 禁止使用 __proto__
      * @reason __proto__ 是已废弃的语法
@@ -400,9 +401,9 @@ const best_practices = {
     ],
     /**
      * 禁止在 return 语句里赋值
-     * @argument always 被括号包裹了的也不允许
+     * @reason 有些时候在箭头函数中会用到，使得代码各家简洁
      */
-    'no-return-assign': ['warn', 'always'],
+    'no-return-assign': 'off',
     /**
      * 禁止在 return 语句里使用 await
      */
@@ -661,9 +662,10 @@ const best_practices = {
      */
     'func-name-matching': 'warn',
     /**
-     * 如果JS引擎无法推断出方法声明表达式的方法名，则必须指定方法名
+     * 给每一个使用 function 关键字生成的方法都赋一个名字
+     * @reason 给每个回调函数一个名字实在是太麻烦了
      */
-    'func-names': ['warn', 'as-needed'],
+    'func-names': 'off',
     /**
      * 禁用的标识符名称
      */
@@ -910,7 +912,7 @@ const style_restricts = {
     /**
      * 标识符最长20个字符
      */
-    'id-length': ['warn', { max: 20 }],
+    'id-length': ['warn', { max: 20, min: 1 }],
     /**
      * 用正则表达式限制标识符命名规则
      */
@@ -947,11 +949,11 @@ const style_restricts = {
     /**
      * 块注释的前面必须有空行
      */
-    'lines-around-comment': 'warn',
+    'lines-around-comment': 'off',
     /**
      * 类成员之间必须换行，单行除外
      */
-    'lines-between-class-members': 'warn',
+    'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
     /**
      * 代码块嵌套最深不可超过6层
      */
@@ -1003,9 +1005,9 @@ const style_restricts = {
     'new-parens': 'warn',
     /**
      * 要求链式方法的每个调用必须换行
-     * @argument ignoreChainWithDepth 5个一下忽略
+     * @argument ignoreChainWithDepth 6 个一下忽略
      */
-    'newline-per-chained-call': ['warn', { ignoreChainWithDepth: 5 }],
+    'newline-per-chained-call': ['warn', { ignoreChainWithDepth: 6 }],
     /**
      * 不允许在代码末尾放置单行注释
      */
@@ -1150,5 +1152,18 @@ module.exports = {
         ...possible_errors,
         ...best_practices,
         ...style_restricts
-    }
+    },
+    overrides: [
+        {   // 单元测试中需要排除的规则
+            files: ['*.test.*'],
+            rules: {
+                /**
+                 * mocha 中经常需要用到 function 回调
+                 */
+                'prefer-arrow-callback': 'off',
+                'max-lines-per-function': 'off',
+                'newline-per-chained-call': 'off'
+            }
+        }
+    ]
 };
