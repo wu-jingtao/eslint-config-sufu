@@ -248,15 +248,9 @@ const duplicated_rules = {
         'warn',
         {
             selector: 'default',
-            format: ['camelCase'],
-            leadingUnderscore: 'allow',
-            trailingUnderscore: 'forbid'
-        },
-        {
-            selector: 'variable',
             format: ['camelCase', 'UPPER_CASE'],
             leadingUnderscore: 'allow',
-            trailingUnderscore: 'allow'
+            trailingUnderscore: 'forbid'
         },
         {
             selector: 'typeLike',
@@ -264,13 +258,13 @@ const duplicated_rules = {
         },
         {
             selector: 'memberLike',
-            format: ['camelCase'],
+            format: ['camelCase', 'UPPER_CASE'],
             modifiers: ['private', 'protected'],
             leadingUnderscore: 'require'
         },
         {
             selector: 'memberLike',
-            format: ['camelCase'],
+            format: ['camelCase', 'UPPER_CASE'],
             modifiers: ['public'],
             leadingUnderscore: 'forbid'
         },

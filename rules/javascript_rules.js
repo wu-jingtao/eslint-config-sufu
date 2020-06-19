@@ -1001,8 +1001,9 @@ const style_restricts = {
     'multiline-ternary': 'off',
     /**
      * 要求 new 后面的方法名都必须首字母大写，所有首字母大写的方法名都必须使用 new 调用
+     * @argument capIsNew 要求所有大写字母的方法都必须用过 new 调用
      */
-    'new-cap': 'warn',
+    'new-cap': ['warn', { capIsNew: false }],
     /**
      * 要求当构造函数的参数为0时，在 new 的时候也不能省略圆括号
      */
