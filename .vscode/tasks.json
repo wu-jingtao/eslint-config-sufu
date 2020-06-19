@@ -7,6 +7,11 @@
             "label": "检查规则更新",
             "type": "shell",
             "command": "npm run check_rule_update"
+        },   
+        {
+            "label": "Lint",
+            "type": "shell",
+            "command": "npm run lint"
         }
     ]
 }

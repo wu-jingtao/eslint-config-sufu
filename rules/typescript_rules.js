@@ -193,6 +193,7 @@ const duplicated_rules = {
      */
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { caughtErrors: 'all' }],
+    '@typescript-eslint/no-unused-vars-experimental': 'off',
     /**
      * 变量必须先定义后使用
      */
@@ -243,22 +244,23 @@ const duplicated_rules = {
      * 限制各种变量或类型的命名规则
      */
     'camelcase': 'off',
-    '@typescript-eslint/naming-convention': ['warn',
+    '@typescript-eslint/naming-convention': [
+        'warn',
         {
             selector: 'default',
             format: ['camelCase'],
             leadingUnderscore: 'allow',
-            trailingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid'
         },
         {
             selector: 'variable',
             format: ['camelCase', 'UPPER_CASE'],
             leadingUnderscore: 'allow',
-            trailingUnderscore: 'allow',
+            trailingUnderscore: 'allow'
         },
         {
             selector: 'typeLike',
-            format: ['PascalCase'],
+            format: ['PascalCase']
         },
         {
             selector: 'memberLike',
@@ -280,12 +282,7 @@ const duplicated_rules = {
                 match: true
             }
         }
-    ],
-    /**
-     * 禁止已定义的变量未使用
-     */
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars-experimental': ['warn', { ignoreArgsIfArgsAfterAreUsed: true }]
+    ]
 };
 
 /**
@@ -373,9 +370,9 @@ const ts_tules = {
             'protected-instance-field',
             'public-instance-field',
 
-            "private-decorated-field",
-            "protected-decorated-field",
-            "public-decorated-field",
+            'private-decorated-field',
+            'protected-decorated-field',
+            'public-decorated-field',
 
             'signature',
 
@@ -395,9 +392,9 @@ const ts_tules = {
             'protected-instance-method',
             'public-instance-method',
 
-            "private-decorated-method",
-            "protected-decorated-method",
-            "public-decorated-method"
+            'private-decorated-method',
+            'protected-decorated-method',
+            'public-decorated-method'
         ]
     }],
     /**

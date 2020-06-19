@@ -221,8 +221,8 @@ const best_practices = {
      */
     'default-case-last': 'warn',
     /**
-    * 有默认值的参数必须放在函数参数的末尾
-    */
+     * 有默认值的参数必须放在函数参数的末尾
+     */
     'default-param-last': 'warn',
     /**
      * 必须使用 === 或 !==，禁止使用 == 或 !=
@@ -392,11 +392,12 @@ const best_practices = {
     /**
      * 禁止使用指定的对象属性
      */
-    'no-restricted-properties': ['warn',
+    'no-restricted-properties': [
+        'warn',
         {
             // 禁用 ES5 时代使用 prototype 生成类的方法，改用 class 代替
-            'property': 'prototype',
-            'message': 'Directly manipulate prototype is an outdated coding style, Please use class instead.'
+            property: 'prototype',
+            message: 'Directly manipulate prototype is an outdated coding style, Please use class instead.'
         }
     ],
     /**
@@ -508,8 +509,8 @@ const best_practices = {
      */
     'vars-on-top': 'off',
     /**
-      * 禁止使用 'strict';
-      */
+     * 禁止使用 'strict';
+     */
     'strict': ['warn', 'never'],
     /**
      * 变量必须在定义的时候赋值
@@ -720,15 +721,15 @@ const best_practices = {
     'no-restricted-syntax': [
         'warn',
         {   // 禁用 for in
-            'selector': 'ForInStatement',
-            'message': 'ForInStatement are not allowed, Use ForOfStatement instead.'
+            selector: 'ForInStatement',
+            message: 'ForInStatement are not allowed, Use ForOfStatement instead.'
         },
         {   // 禁用 yield 关键字。生成器函数现已被 async 函数取代了
-            'selector': 'YieldExpression'
+            selector: 'YieldExpression'
         },
         {
             // 禁用 delete 关键字
-            'selector': 'UnaryExpression[operator="delete"]'
+            selector: 'UnaryExpression[operator="delete"]'
         }
     ],
     /**

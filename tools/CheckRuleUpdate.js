@@ -53,18 +53,21 @@ for (const item of custom_javascript_rules_set) {
 console.log('\n\ntypescript 新增的规则:');
 for (const item of usable_typescript_rules_set) {
     if (!custom_typescript_rules_set.ts_rules.has(item))
+        // eslint-disable-next-line
         console.warn(item, '：', `https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/${item.substring(19)}.md/`);
 }
 
 console.log('\n\ntypescript 被弃用的规则:');
 for (const item of custom_typescript_rules_set.ts_rules) {
     if (deprecated_typescript_rules_set.has(item))
+        // eslint-disable-next-line
         console.warn(item, '：', `https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/${item.substring(19)}.md/`);
 }
 
 console.log('\n\ntypescript 不存在的规则:');
 for (const item of custom_typescript_rules_set.ts_rules) {
     if (!usable_typescript_rules_set.has(item) && !deprecated_typescript_rules_set.has(item))
+        // eslint-disable-next-line
         console.warn(item, '：', `https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/${item.substring(19)}.md/`);
 }
 
