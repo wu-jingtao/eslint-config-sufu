@@ -171,10 +171,10 @@ const duplicated_rules = {
     '@typescript-eslint/no-extra-semi': 'warn',
     /**
      * 禁止在类(包括类字面量)之外的地方使用 this
-     * @reason 在类以外的方法中使用 this 会造成代码难以维护
+     * @reason 有时会把正确的代码也标记成错误，这个通过 TypeScript 检查其实更好
      */
     'no-invalid-this': 'off',
-    '@typescript-eslint/no-invalid-this': 'warn',
+    '@typescript-eslint/no-invalid-this': 'off',
     /**
      * 禁止使用 magic numbers
      */
@@ -182,9 +182,11 @@ const duplicated_rules = {
     '@typescript-eslint/no-magic-numbers': 'off',
     /**
      * 禁止无用的表达式
+     * @argument allowShortCircuit 允许短路表达式
+     * @argument allowTernary 允许三元表达式
      */
     'no-unused-expressions': 'off',
-    '@typescript-eslint/no-unused-expressions': 'warn',
+    '@typescript-eslint/no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
     /**
      * 已定义的变量必须使用
      * @argument caughtErrors catch(e) 错误对象 e 也必须使用，否则必须省略
@@ -304,9 +306,10 @@ const ts_tules = {
      */
     '@typescript-eslint/await-thenable': 'warn',
     /**
-     * 禁止使用 // @ts-ignore // @ts-nocheck // @ts-check
+     * 禁止使用 // @ts-ignore // @ts-nocheck // @ts-check // @ts-expect-error
+     * @reason 有些时候需要写一些违反规则的代码，这时使用 @ts-expect-error 比使用 as any 要好
      */
-    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/ban-ts-comment': 'off',
     /**
      * 禁止使用 // tslint:<rule-flag>
      */
@@ -362,31 +365,39 @@ const ts_tules = {
             'protected-static-field',
             'public-static-field',
 
-            'private-static-method',
-            'protected-static-method',
-            'public-static-method',
-
             'private-abstract-field',
             'protected-abstract-field',
             'public-abstract-field',
-
-            'private-abstract-method',
-            'protected-abstract-method',
-            'public-abstract-method',
-
-            'signature',
 
             'private-instance-field',
             'protected-instance-field',
             'public-instance-field',
 
+            "private-decorated-field",
+            "protected-decorated-field",
+            "public-decorated-field",
+
+            'signature',
+
             'private-constructor',
             'protected-constructor',
             'public-constructor',
 
+            'private-static-method',
+            'protected-static-method',
+            'public-static-method',
+
+            'private-abstract-method',
+            'protected-abstract-method',
+            'public-abstract-method',
+
             'private-instance-method',
             'protected-instance-method',
             'public-instance-method',
+
+            "private-decorated-method",
+            "protected-decorated-method",
+            "public-decorated-method"
         ]
     }],
     /**
@@ -437,17 +448,18 @@ const ts_tules = {
     '@typescript-eslint/no-inferrable-types': 'off',
     /**
      * 禁止使用无意义的 void 类型
-     * @reason void 只能用在函数的返回值中
+     * @reason 当函数返回值为联合类型时可能会用到
      */
-    '@typescript-eslint/no-invalid-void-type': ['warn', { allowInGenericTypeArguments: true }],
+    '@typescript-eslint/no-invalid-void-type': 'off',
     /**
      * 禁止在接口中定义 constructor，或在类中定义 new
      */
     '@typescript-eslint/no-misused-new': 'warn',
     /**
      * 避免错误的使用 Promise
+     * @argument checksVoidReturn 禁止要求返回 void 却返回 Promise<void> 的情况
      */
-    '@typescript-eslint/no-misused-promises': 'warn',
+    '@typescript-eslint/no-misused-promises': ['warn', { checksVoidReturn: false }],
     /**
      * 禁止使用 namespace 来定义命名空间
      * @reason 使用 es6 引入模块，才是更标准的方式。
@@ -547,6 +559,7 @@ const ts_tules = {
     '@typescript-eslint/prefer-namespace-keyword': 'warn',
     /**
      * 使用 ?? 替代 ||
+     * @reason ?? 不支持 void 类型，用起来还没有 || 方便
      */
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     /**

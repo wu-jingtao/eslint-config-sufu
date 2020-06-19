@@ -12,4 +12,7 @@ for (let item of Object.keys(alloy_react.rules)) {
     }
 }
 
-module.exports = alloy_react;
+module.exports = {
+    plugins: ['react'],
+    rules: alloy_react.rules
+};

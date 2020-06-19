@@ -322,9 +322,9 @@ const best_practices = {
     'no-implied-eval': 'warn',
     /**
      * 禁止在类(包括类字面量)之外的地方使用 this
-     * @reason 在类以外的方法中使用 this 会造成代码难以维护
+     * @reason 有时会把正确的代码也标记成错误，这个通过 TypeScript 检查其实更好
      */
-    'no-invalid-this': 'warn',
+    'no-invalid-this': 'off',
     /**
      * 禁止使用 __iterator__
      * @reason __iterator__ 是一个已废弃的属性，使用 [Symbol.iterator] 替代它
@@ -434,8 +434,10 @@ const best_practices = {
     'no-unmodified-loop-condition': 'off',
     /**
      * 禁止无用的表达式
+     * @argument allowShortCircuit 允许短路表达式
+     * @argument allowTernary 允许三元表达式
      */
-    'no-unused-expressions': 'warn',
+    'no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
     /**
      * 禁止出现没用到的 label
      * @reason 已禁用 label
@@ -620,8 +622,9 @@ const best_practices = {
     'object-shorthand': ['warn', 'consistent-as-needed'],
     /**
      * 倾向于使用箭头方法而不是 function
+     * @reason 很多自动化工具中会用到
      */
-    'prefer-arrow-callback': 'warn',
+    'prefer-arrow-callback': 'off',
     /**
      * 申明后不再被修改的变量必须使用 const 来申明
      */
@@ -910,9 +913,9 @@ const style_restricts = {
      */
     'function-paren-newline': 'off',
     /**
-     * 标识符最长20个字符
+     * 标识符最长50个字符
      */
-    'id-length': ['warn', { max: 20, min: 1 }],
+    'id-length': ['warn', { max: 50, min: 1 }],
     /**
      * 用正则表达式限制标识符命名规则
      */
@@ -1157,10 +1160,6 @@ module.exports = {
         {   // 单元测试中需要排除的规则
             files: ['*.test.*'],
             rules: {
-                /**
-                 * mocha 中经常需要用到 function 回调
-                 */
-                'prefer-arrow-callback': 'off',
                 'max-lines-per-function': 'off',
                 'newline-per-chained-call': 'off'
             }
