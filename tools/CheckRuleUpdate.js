@@ -72,7 +72,11 @@ for (const item of custom_typescript_rules_set.ts_rules) {
 }
 
 console.log('\n\ntypescript_rules.js 文件中没有被 off 掉的 eslint 规则:');
-for (const item of custom_typescript_rules_set.closed_eslint_rules) {
-    if (custom_typescript_rules[item] !== 'off')
+for (const key of custom_typescript_rules_set.closed_eslint_rules) {
+    const item = custom_typescript_rules[key];
+    if (Array.isArray(item)) {
+        if (item[0] !== 'off')
+            console.log(item);
+    } else if (item !== 'off')
         console.log(item);
 }

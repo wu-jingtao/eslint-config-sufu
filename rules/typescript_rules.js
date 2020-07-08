@@ -176,6 +176,11 @@ const duplicated_rules = {
     'no-invalid-this': 'off',
     '@typescript-eslint/no-invalid-this': 'off',
     /**
+     * 禁止输入的数字字面量超出JavaScript可接受的最大精度
+     */
+    'no-loss-of-precision': 'off',
+    '@typescript-eslint/no-loss-of-precision': 'warn',
+    /**
      * 禁止使用 magic numbers
      */
     'no-magic-numbers': 'off',
@@ -543,6 +548,10 @@ const ts_tules = {
      * 使用 includes 而不是 indexOf
      */
     '@typescript-eslint/prefer-includes': 'warn',
+    /**
+     * 对枚举成员赋值的时候使用字面量值而不是变量值，这样可以避免运行时结果不一致。比如赋值时两个变量值相等。
+     */
+    '@typescript-eslint/prefer-literal-enum-member': 'warn',
     /**
      * 禁止使用 module 来定义命名空间
      * @reason module 已成为 js 的关键字

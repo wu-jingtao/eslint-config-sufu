@@ -120,6 +120,10 @@ const possible_errors = {
      */
     'no-obj-calls': 'warn',
     /**
+     * 禁止在 new Promise(executor) 的 executor 方法中出现返回值，return 空除外
+     */
+    'no-promise-executor-return': 'warn',
+    /**
      * 禁止使用 hasOwnProperty, isPrototypeOf 或 propertyIsEnumerable
      * @reason 直接操作 Prototype 已经是过时的做法了，在 ES6 以后很难再用到了
      */
@@ -150,6 +154,10 @@ const possible_errors = {
      * 禁止在 return, throw, break 或 continue 之后还有代码
      */
     'no-unreachable': 'warn',
+    /**
+     * 不允许出现只循环一次的循环
+     */
+    'no-unreachable-loop': 'warn',
     /**
      * 禁止在 finally 中出现 return, throw, break 或 continue
      * @reason finally 中的语句会在 try 之前执行
@@ -671,10 +679,6 @@ const best_practices = {
      */
     'func-names': 'off',
     /**
-     * 禁用的标识符名称
-     */
-    'id-blacklist': 'off',
-    /**
      * 不允许使用 new Array()
      */
     'no-array-constructor': 'warn',
@@ -913,6 +917,10 @@ const style_restricts = {
      * 方法参数之间必须有换行
      */
     'function-paren-newline': 'off',
+    /**
+     * 被禁用的标识符名称
+     */
+    'id-denylist': 'off',
     /**
      * 标识符最长50个字符
      */
