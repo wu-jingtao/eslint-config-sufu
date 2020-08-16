@@ -9,6 +9,11 @@
             "command": "npm run check_rule_update"
         },   
         {
+            "label": "测试Lint",
+            "type": "shell",
+            "command": "npm run test_lint"
+        },   
+        {
             "label": "Lint",
             "type": "shell",
             "command": "npm run lint"

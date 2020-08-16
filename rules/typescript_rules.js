@@ -397,9 +397,10 @@ const ts_tules = {
         ]
     }],
     /**
-     * 接口中的方法必须用函数的方式定义
+     * 接口中的函数必须用属性的方式定义
+     * @reason 因为当函数可能为空时，无法用函数签名方式表达
      */
-    '@typescript-eslint/method-signature-style': ['warn', 'method'],
+    '@typescript-eslint/method-signature-style': 'warn',
     /**
      * 禁止使用 Object 对象上的 toString 方法，因为它只会返回 '[object Object]'
      */
@@ -535,7 +536,11 @@ const ts_tules = {
      * 使用 as const 替代 as 'bar'
      * @reason as const 是新语法，不是很常见
      */
-    '@typescript-eslint/prefer-as-const': 'warn',
+    '@typescript-eslint/prefer-as-const': 'warn',    
+    /**
+     * 要求枚举中的每一个成员都必须显式指定它的值
+     */
+    '@typescript-eslint/prefer-enum-initializers': 'off',
     /**
      * 使用 for 循环遍历数组时，如果索引仅用于获取成员，则必须使用 for of 循环替代 for 循环
      */
