@@ -438,7 +438,12 @@ const ts_tules = {
      * 禁止对 array 使用 for in 循环
      * @reason for in 已被禁用了
      */
-    '@typescript-eslint/no-for-in-array': 'off',
+    '@typescript-eslint/no-for-in-array': 'off',    
+    /**
+     * 要求异常捕捉语句参数必须指明类型为 any 或 unknown。例如：catch(e: unknown) 
+     * @reason 带来的好处与对编码造成的麻烦相比完全不能匹配
+     */
+    '@typescript-eslint/no-implicit-any-catch': 'off',
     /**
      * 禁止给一个初始化时直接赋值为 number, string 的变量显式的声明类型
      */
