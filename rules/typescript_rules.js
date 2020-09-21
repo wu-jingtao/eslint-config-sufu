@@ -198,7 +198,6 @@ const duplicated_rules = {
      */
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { caughtErrors: 'all' }],
-    '@typescript-eslint/no-unused-vars-experimental': 'off',
     /**
      * 变量必须先定义后使用
      */
@@ -245,6 +244,23 @@ const duplicated_rules = {
      */
     'no-throw-literal': 'off',
     '@typescript-eslint/no-throw-literal': 'warn',
+    /**
+     * 禁止在循环内的闭包函数中出现循环体条件语句中使用 var 定义的变量
+     */
+    'no-loop-func': 'off',
+    '@typescript-eslint/no-loop-func': 'warn',
+    /**
+     * 禁止重复定义变量
+     * @reason 已禁用 var
+     */
+    'no-redeclare': 'off',
+    '@typescript-eslint/no-redeclare': 'off',
+    /**
+     * 禁止变量名与上层作用域内的已定义的变量重复
+     * @reason 很多时候函数的形参和传参是同名的
+     */
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
     /**
      * 限制各种变量或类型的命名规则
      */
@@ -305,7 +321,12 @@ const ts_tules = {
      * 禁止使用 // @ts-ignore // @ts-nocheck // @ts-check // @ts-expect-error
      * @reason 有些时候需要写一些违反规则的代码，这时使用 @ts-expect-error 比使用 as any 要好
      */
-    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-ts-comment': ['warn', {
+        'ts-expect-error': true,
+        'ts-ignore': false,
+        'ts-nocheck': false,
+        'ts-check': false
+    }],
     /**
      * 禁止使用 // tslint:<rule-flag>
      */
@@ -334,6 +355,10 @@ const ts_tules = {
      * @reason interface 可以 implement, extend 和 merge
      */
     '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
+    /**
+     * 要求当某个 import 只用作类型声明的时候，必须使用 'import type *** from'
+     */
+    '@typescript-eslint/consistent-type-imports': 'warn',
     /**
      * 必须指明函数的返回值类型。当在被赋值时如果变量有明确的类型则可以不要
      */
@@ -438,7 +463,7 @@ const ts_tules = {
      * 禁止对 array 使用 for in 循环
      * @reason for in 已被禁用了
      */
-    '@typescript-eslint/no-for-in-array': 'off',    
+    '@typescript-eslint/no-for-in-array': 'off',
     /**
      * 要求异常捕捉语句参数必须指明类型为 any 或 unknown。例如：catch(e: unknown) 
      * @reason 带来的好处与对编码造成的麻烦相比完全不能匹配
@@ -541,7 +566,7 @@ const ts_tules = {
      * 使用 as const 替代 as 'bar'
      * @reason as const 是新语法，不是很常见
      */
-    '@typescript-eslint/prefer-as-const': 'warn',    
+    '@typescript-eslint/prefer-as-const': 'warn',
     /**
      * 要求枚举中的每一个成员都必须显式指定它的值
      */
