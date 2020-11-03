@@ -588,7 +588,6 @@ const best_practices = {
     'no-dupe-class-members': 'warn',
     /**
      * 禁止重复导入模块
-     * @argument includeExports 不允许 import 后又 export 出去，使用 export ... from 代替
      */
     'no-duplicate-imports': ['warn', { includeExports: true }],
     /**

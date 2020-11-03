@@ -98,6 +98,21 @@ const closed_rules = {
  */
 const duplicated_rules = {
     /**
+     * 运算符前后必须要有空格
+     */
+    'space-infix-ops': 'off',
+    '@typescript-eslint/space-infix-ops': 'warn',
+    /**
+     * 禁止重复导入模块
+     */
+    'no-duplicate-imports': 'off',
+    '@typescript-eslint/no-duplicate-imports': ['warn', { includeExports: true }],
+    /**
+     * 不允许数组或对象的最后出现多于的逗号
+     */
+    'comma-dangle': 'warn',
+    '@typescript-eslint/comma-dangle': 'warn',
+    /**
      * 规范大括号在 if else try cache 等关键字之间放置的位置
      */
     'brace-style': 'off',
@@ -340,6 +355,12 @@ const ts_tules = {
      */
     '@typescript-eslint/class-literal-property-style': ['warn', 'fields'],
     /**
+     * 禁止声明一下这两种类型，使用 typescript 中自带的 Record 来替代
+     *      interface Foo {[key: string]: unknown;}
+     *      type Foo = {[key: string]: unknown;}
+     */
+    '@typescript-eslint/consistent-indexed-object-style': 'warn',
+    /**
      * 类型断言必须使用 as Type，禁止使用 <Type>，禁止对对象字面量进行类型断言（断言成 any 是允许的）
      * @reason <Type> 容易被理解为 jsx
      */
@@ -541,6 +562,10 @@ const ts_tules = {
      * 禁止无用的类型断言
      */
     '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+    /**
+     * 禁止没有必要的泛型类型约束
+     */
+    '@typescript-eslint/no-unnecessary-type-constraint': 'warn',
     /**
      * 禁止将变量或属性的类型设置为 any
      */
