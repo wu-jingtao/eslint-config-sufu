@@ -76,7 +76,7 @@ for (const key of custom_typescript_rules_set.closed_eslint_rules) {
     const item = custom_typescript_rules[key];
     if (Array.isArray(item)) {
         if (item[0] !== 'off')
-            console.log(item);
+            console.log(key);
     } else if (item !== 'off')
-        console.log(item);
+        console.log(key);
 }

@@ -110,7 +110,7 @@ const duplicated_rules = {
     /**
      * 不允许数组或对象的最后出现多于的逗号
      */
-    'comma-dangle': 'warn',
+    'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': 'warn',
     /**
      * 规范大括号在 if else try cache 等关键字之间放置的位置
