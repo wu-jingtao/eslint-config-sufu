@@ -337,10 +337,10 @@ const ts_tules = {
      * @reason 有些时候需要写一些违反规则的代码，这时使用 @ts-expect-error 比使用 as any 要好
      */
     '@typescript-eslint/ban-ts-comment': ['warn', {
-        'ts-expect-error': true,
-        'ts-ignore': false,
-        'ts-nocheck': false,
-        'ts-check': false
+        'ts-expect-error': false,
+        'ts-ignore': true,
+        'ts-nocheck': true,
+        'ts-check': true
     }],
     /**
      * 禁止使用 // tslint:<rule-flag>
