@@ -456,6 +456,11 @@ const ts_tules = {
      */
     '@typescript-eslint/no-confusing-non-null-assertion': 'warn',
     /**
+     * 禁止将返回值类型为 void 的方法的返回值用作赋值或作为返回值
+     * @reason 在 strict 模式下，这条规则是否开启对代码质量并不会产生太大的影响
+     */
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    /**
      * 禁止 delete 时传入的 key 是动态的
      * @reason delete 关键字已被禁用
      */

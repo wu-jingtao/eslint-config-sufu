@@ -374,6 +374,10 @@ const best_practices = {
      */
     'no-new-wrappers': 'warn',
     /**
+     * 禁止在字符串中出现 \8 或 \9 转义
+     */
+    'no-nonoctal-decimal-escape': 'warn',
+    /**
      * 禁止使用 0 开头的数字表示八进制数
      * @reason 这个现在已经是属于一种语法错误了
      */
