@@ -168,6 +168,11 @@ const possible_errors = {
      */
     'no-unsafe-negation': 'warn',
     /**
+     * 禁止在值不允许为 undefined 的上下文中使用可选链式调用
+     * @argument disallowArithmeticOperators 禁止在算数操作中使用可选链式调用
+     */
+    'no-unsafe-optional-chaining': ['warn', { disallowArithmeticOperators: true }],
+    /**
      * 禁止正则表达式中出现无用的回溯引用
      * @reason 某些回溯引用语法上没问题，但是会永远匹配到空字符串
      */

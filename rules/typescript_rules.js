@@ -90,7 +90,11 @@ const closed_rules = {
     /**
      * 禁止在 in 或 instanceof 操作符的左侧变量前使用感叹号
      */
-    'no-unsafe-negation': 'off'
+    'no-unsafe-negation': 'off',
+    /**
+     * 禁止在值不允许为 undefined 的上下文中使用可选链式调用
+     */
+    'no-unsafe-optional-chaining': 'off'
 };
 
 /**
@@ -592,6 +596,10 @@ const ts_tules = {
      * @reason no-require-imports 规则已经约束了 require
      */
     '@typescript-eslint/no-var-requires': 'off',
+    /**
+     * 当 `as` 与 `!` 起到的作用一样时使用 `!` 来代替 `as`
+     */
+    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
     /**
      * 使用 as const 替代 as 'bar'
      * @reason as const 是新语法，不是很常见
