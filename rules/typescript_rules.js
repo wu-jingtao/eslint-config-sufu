@@ -281,6 +281,11 @@ const duplicated_rules = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'off',
     /**
+     * 要求对象大括号前后有空格
+     */
+    'object-curly-spacing': 'off',
+    '@typescript-eslint/object-curly-spacing': ['warn', 'always'],
+    /**
      * 限制各种变量或类型的命名规则
      */
     'camelcase': 'off',
@@ -491,9 +496,8 @@ const ts_tules = {
     '@typescript-eslint/no-floating-promises': 'warn',
     /**
      * 禁止对 array 使用 for in 循环
-     * @reason for in 已被禁用了
      */
-    '@typescript-eslint/no-for-in-array': 'off',
+    '@typescript-eslint/no-for-in-array': 'warn',
     /**
      * 要求异常捕捉语句参数必须指明类型为 any 或 unknown。例如：catch(e: unknown) 
      * @reason 带来的好处与对编码造成的麻烦相比完全不能匹配
@@ -680,6 +684,10 @@ const ts_tules = {
      * 模版字符串中的变量类型必须是字符串
      */
     '@typescript-eslint/restrict-template-expressions': 'off',
+    /**
+     * 强制 union 或 intersection 类型的成员按字母顺序排序
+     */
+    '@typescript-eslint/sort-type-union-intersection-members': 'off',
     /**
      * 条件判断必须传入布尔值
      */
