@@ -208,7 +208,6 @@ const best_practices = {
     'array-callback-return': 'warn',
     /**
      * 将 var 定义的变量视为块作用域，禁止在块外使用
-     * @reason 已禁用 var
      */
     'block-scoped-var': 'off',
     /**
@@ -304,9 +303,8 @@ const best_practices = {
     'no-extra-bind': 'warn',
     /**
      * 禁止出现没必要的 label
-     * @reason 已禁用 label
      */
-    'no-extra-label': 'off',
+    'no-extra-label': 'warn',
     /**
      * switch 的 case 内必须有 break, return 或 throw，空的 case 除外
      */
@@ -403,7 +401,6 @@ const best_practices = {
     'no-proto': 'warn',
     /**
      * 禁止重复定义变量
-     * @reason 已禁用 var
      */
     'no-redeclare': 'off',
     /**
@@ -419,7 +416,7 @@ const best_practices = {
     ],
     /**
      * 禁止在 return 语句里赋值
-     * @reason 有些时候在箭头函数中会用到，使得代码各家简洁
+     * @reason 有些时候在箭头函数中会用到，使得代码更加简洁
      */
     'no-return-assign': 'off',
     /**
@@ -458,9 +455,8 @@ const best_practices = {
     'no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
     /**
      * 禁止出现没用到的 label
-     * @reason 已禁用 label
      */
-    'no-unused-labels': 'off',
+    'no-unused-labels': 'warn',
     /**
      * 禁止出现没必要的 call 或 apply
      */
@@ -535,14 +531,12 @@ const best_practices = {
     'init-declarations': 'off',
     /**
      * 禁止对一个变量使用 delete
-     * @reason 已禁用 delete
      */
-    'no-delete-var': 'off',
+    'no-delete-var': 'warn',
     /**
      * 禁止 label 名称与已定义的变量重复
-     * @reason 已禁用 label
      */
-    'no-label-var': 'off',
+    'no-label-var': 'warn',
     /**
      * 禁止使用指定的全局变量
      */
@@ -670,9 +664,8 @@ const best_practices = {
     'prefer-template': 'off',
     /**
      * generator 函数内必须有 yield
-     * @reason 已禁用 yield
      */
-    'require-yield': 'off',
+    'require-yield': 'warn',
     /**
      * 创建 Symbol 时必须传入参数
      */
@@ -826,9 +819,8 @@ const style_restricts = {
     'arrow-spacing': 'warn',
     /**
      * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
-     * @reason 已禁用 yield
      */
-    'generator-star-spacing': 'off',
+    'generator-star-spacing': 'warn',
     /**
      * 要求 => 符号的后面必须要有括号包裹
      * @reason 这个会与 no-extra-parens 相冲突
@@ -851,9 +843,8 @@ const style_restricts = {
     'template-curly-spacing': 'warn',
     /**
      * yield 与 * 号之间必须有空格
-     * @reason 已禁用 yield
      */
-    'yield-star-spacing': 'off',
+    'yield-star-spacing': 'warn',
     /**
      * 数组两个方括号前后是否必须有换行
      * @argument consistent 风格保持一致，要么都有，要么都没有

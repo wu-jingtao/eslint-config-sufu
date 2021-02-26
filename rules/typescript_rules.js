@@ -270,7 +270,6 @@ const duplicated_rules = {
     '@typescript-eslint/no-loop-func': 'warn',
     /**
      * 禁止重复定义变量
-     * @reason 已禁用 var
      */
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'off',
@@ -386,9 +385,10 @@ const ts_tules = {
      */
     '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
     /**
-     * 要求当某个 import 只用作类型声明的时候，必须使用 'import type *** from'
+     * 要求当某个 import 只用作类型声明的时候，必须使用 'import *** from' 而不是 'import type *** from'
+     * @reason typescript 会自动删除这些只用作类型声明的 import，这种写法显得有点多余
      */
-    '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'no-type-imports' }],
     /**
      * 必须指明函数的返回值类型。当在被赋值时如果变量有明确的类型则可以不要
      */
