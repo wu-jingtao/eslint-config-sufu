@@ -1,21 +1,21 @@
-# 创建release时发布到npm
+# 创建 release 时发布到 npm
 name: publish to npm
 
 on:
-    release:
-        types: [published]
+  release:
+    types: [published]
 
 jobs:
-    publish:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@master
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: '14.x'
-                  registry-url: https://registry.npmjs.org/
-            - run: npm i
-            - run: npm run lint
-            - run: npm publish
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org/
+          token: ${{ secrets.NPM_TOKEN }}
+      - run: npm ci
+      - run: npm run check_rule_update
+      - run: npm run lint
+      - run: npm publish

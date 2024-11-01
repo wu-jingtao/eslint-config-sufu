@@ -1,21 +1,65 @@
 {
     "compilerOptions": {
+        /**
+         * 类型检查 (这些交由 eslint 处理)
+         */
         "allowUnreachableCode": true,
-        "module": "commonjs",
-        "target": "ESNext",
-        "preserveConstEnums": false,
-        "experimentalDecorators": false,
-        "noEmitOnError": true,
+        "allowUnusedLabels": true,
+        "noFallthroughCasesInSwitch": false,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+
+        /**
+         * 类型检查 (这些交由 typescript 处理)
+         */
         "strict": true,
-        "strictPropertyInitialization": false,
-        "skipLibCheck": true,
-        "resolveJsonModule": true,
-        "forceConsistentCasingInFileNames": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+
+        /**
+         * 模块导入
+         */
+        "allowImportingTsExtensions": false,
+        "allowUmdGlobalAccess": true,
+        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "declaration": false,
-        "removeComments": true,
-        "jsx": "react",
-        "lib": ["esnext", "dom", "dom.iterable"]
-    },
-    "exclude": ["node_modules", "bin"]
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "importHelpers": true,                                  // 开启后必须安装 tslib 库
+
+        /**
+         * 启用编译缓存
+         */
+        "incremental": true,
+        "tsBuildInfoFile": ".cache/.tsbuildinfo",               // 缓存路径
+
+        /**
+         * 编译系统
+         */
+        "noEmitOnError": true,
+        "noErrorTruncation": true,
+        "skipLibCheck": true,
+        "pretty": true,
+        "stripInternal": true,
+
+         /**
+         * 编译输出
+         */
+        "target": "esNext",                                     // 目标 JS 版本
+        "module": "CommonJS",                                   // 模块系统
+        "declaration": true,                                    // 生成`.d.ts`文件
+        "removeComments": true,                                 // 删除注释
+        "inlineSourceMap": false,                               // 添加 sourceMap
+        "inlineSources": false,                                 // 将源代码也添加到 sourceMap 中，需配合 inlineSourceMap 一起使用
+        "jsx": "react",                                         // 需要 React 时开启
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable",
+            "WebWorker",
+        ],
+    }
 }
