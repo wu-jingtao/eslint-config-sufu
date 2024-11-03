@@ -222,8 +222,11 @@ const possible_problems = {
     'no-unused-private-class-members': 'warn',
     /**
      * 不允许出现未使用的变量
+     * @param args 不对参数进行检查
+     * @param caughtErrors 不对 catch 语句参数进行检查
+     * @reason 有时候把所有参数都写出来反而能让代码更加清晰
      */
-    'no-unused-vars': 'warn',
+    'no-unused-vars': ['warn', { args: 'none', caughtErrors: 'none' }],
     /**
      * 变量必须先定义后使用
      */
@@ -287,8 +290,9 @@ const suggestions = {
     'class-methods-use-this': 'warn',
     /**
      * 禁止从句复杂度超过 20（例如使用 if else 判断超过 20 次）
+     * @reason 有些情况确实需要超过限制
      */
-    'complexity': 'warn',
+    'complexity': 'off',
     /**
      * 禁止函数在不同分支返回不同类型的值
      * @reason 缺少 TypeScript 的支持，类型判断是不准确的
@@ -366,8 +370,9 @@ const suggestions = {
     'id-match': 'off',
     /**
      * 变量必须在定义的时候赋值
+     * @reason 这样写起来不仅麻烦，还会降低性能。对于 ts 而言有类型保护，关了也没事，对于 js 而言即便打开也无法避免出错
      */
-    'init-declarations': 'warn',
+    'init-declarations': 'off',
     /**
      * 要求或禁止使用逻辑赋值运算符（||= &&= ??=）
      * @reason 是否使用自由把控，不做要求
@@ -831,7 +836,7 @@ const suggestions = {
     /**
      * 必须使用模版字符串而不是字符串连接
      */
-    'prefer-template': 'warn',
+    'prefer-template': 'off',
     /**
      * parseInt 必须传入第二个参数
      * @param as-needed 如果是十进制数就不需要传，如果是其他进制的则必须传入

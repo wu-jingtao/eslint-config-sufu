@@ -53,9 +53,10 @@ const replaced_rules = {
     '@typescript-eslint/dot-notation': 'warn',
     /**
      * 变量必须在定义的时候赋值
+     * @reason 这样写起来不仅麻烦，还会降低性能。对于 ts 而言有类型保护，关了也没事，对于 js 而言即便打开也无法避免出错
      */
     'init-declarations': 'off',
-    '@typescript-eslint/init-declarations': 'warn',
+    '@typescript-eslint/init-declarations': 'off',
     /**
      * 方法参数最多不可以超过 8 个
      */
@@ -116,7 +117,7 @@ const replaced_rules = {
      * @reason 很多时候函数的形参和传参是同名的
      */
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': 'warn',
+    '@typescript-eslint/no-shadow': 'off',
     /**
      * 禁止无用的表达式
      * @param allowShortCircuit 允许短路表达式
@@ -126,9 +127,12 @@ const replaced_rules = {
     '@typescript-eslint/no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
     /**
      * 不允许出现未使用的变量
+     * @param args 不对参数进行检查
+     * @param caughtErrors 不对 catch 语句参数进行检查
+     * @reason 有时候把所有参数都写出来反而能让代码更加清晰
      */
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': ['warn', { args: 'none', caughtErrors: 'none' }],
     /**
      * 变量必须先定义后使用
      */
@@ -260,7 +264,7 @@ const typescript_rules = {
     /**
      * 必须指明函数的返回值类型，当在被赋值时如果变量有明确的类型则可以不要
      */
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
     /**
      * 必须设置类的成员的可访问性
      */
@@ -380,8 +384,9 @@ const typescript_rules = {
     '@typescript-eslint/no-empty-object-type': 'warn',
     /**
      * 禁止使用 any，推荐将使用 any 的地方全部换成 unknown
+     * @reason 禁用 any 对正常编写影响很大
      */
-    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-explicit-any': 'off',
     /**
      * 禁止多余的 non-null 断言
      */
@@ -440,8 +445,9 @@ const typescript_rules = {
     '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
     /**
      * 禁止使用 non-null 断言（感叹号）
+     * @reason 这个真的需要用到
      */
-    '@typescript-eslint/no-non-null-assertion': 'warn',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     /**
      * 不允许类型联合表达式或类型交集表达式中出现没有意义的类型
      */
@@ -497,16 +503,19 @@ const typescript_rules = {
     '@typescript-eslint/no-unnecessary-type-parameters': 'warn',
     /**
      * 禁止使用 any 类型的参数去调用函数
+     * @reason typescript 库中都有许多类型的值是 any，如果开启对正常的编写影响很大
      */
-    '@typescript-eslint/no-unsafe-argument': 'warn',
+    '@typescript-eslint/no-unsafe-argument': 'off',
     /**
      * 禁止将 any 类型的值赋值到变量或属性
+     * @reason typescript 库中都有许多类型的值是 any，如果开启对正常的编写影响很大
      */
-    '@typescript-eslint/no-unsafe-assignment': 'warn',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
     /**
      * 禁止调用 any 类型的变量上的方法
+     * @reason typescript 库中都有许多类型的值是 any，如果开启对正常的编写影响很大
      */
-    '@typescript-eslint/no-unsafe-call': 'warn',
+    '@typescript-eslint/no-unsafe-call': 'off',
     /**
      * 不允许不安全的类型融合
      */
@@ -517,16 +526,19 @@ const typescript_rules = {
     '@typescript-eslint/no-unsafe-enum-comparison': 'warn',
     /**
      * 不允许 Function 这个类型，使用 () => void 或 (...args: never) => unknown 代替
+     * @reason 有些时候需要使用 Function 这个类型
      */
-    '@typescript-eslint/no-unsafe-function-type': 'warn',
+    '@typescript-eslint/no-unsafe-function-type': 'off',
     /**
      * 禁止访问 any 类型变量中的属性
+     * @reason 对正常的编写影响很大
      */
-    '@typescript-eslint/no-unsafe-member-access': 'warn',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
     /**
      * 禁止函数的返回值的类型是 any
+     * @reason 对正常的编写影响很大
      */
-    '@typescript-eslint/no-unsafe-return': 'warn',
+    '@typescript-eslint/no-unsafe-return': 'off',
     /**
      * 禁止把减号放到字符串前面
      */
@@ -626,9 +638,9 @@ const typescript_rules = {
      */
     '@typescript-eslint/restrict-plus-operands': 'warn',
     /**
-     * 模版字符串中的变量类型必须是字符串
+     * 要求在做字符串连接时，变量类型不能是 Object，因为 Object.prototype.toString() 总是输出 "[object Object]"，这是没有意义的
      */
-    '@typescript-eslint/restrict-template-expressions': 'warn',
+    '@typescript-eslint/restrict-template-expressions': ['warn', { allowArray: true }],
     /**
      * 条件判断必须传入布尔值
      */
@@ -668,8 +680,7 @@ module.exports = {
     languageOptions: {
         parser: tseslint.parser,
         parserOptions: {
-            // 自动读取 tsconfig.json
-            projectService: true,
+            project: './tsconfig.json',
         }
     },
     plugins: {

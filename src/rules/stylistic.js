@@ -79,7 +79,7 @@ const rules = {
     /**
      * 方法参数之间有换行，那方法的括号也必须换行
      */
-    'function-paren-newline': 'warn',
+    'function-paren-newline': ['warn', 'multiline-arguments'],
     /**
      * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
      */
