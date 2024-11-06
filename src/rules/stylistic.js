@@ -220,7 +220,7 @@ const rules = {
      * 三元表达式 ? : 之间必须换行
      * @param never 不允许换行
      */
-    'multiline-ternary': ['warn', 'never'],
+    'multiline-ternary': ['warn', 'always-multiline'],
     /**
      * 要求当构造函数的参数为 0 时，在 new 的时候也不能省略圆括号
      */

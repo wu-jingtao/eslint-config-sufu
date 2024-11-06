@@ -1,9 +1,9 @@
 const requireDir = require('require-dir');
 const log = require('log-formatter').default;
 
-const log_prompt = log.noDatetime.bold.text;
-const log_title = log.noDatetime.text.location;
-const log_rule = log.noDatetime.warn.text.magenta.text.text.yellow.underline;
+const log_prompt = log.bold;
+const log_title = log.square.newline;
+const log_rule = log.magenta.text.text.yellow.underline;
 
 /**
  * 检查规则更新
@@ -80,22 +80,22 @@ check_list.forEach(type => {
 
     var temp = [...valid_set].filter(name => !custom.has(name));
     if (temp.length > 0) {
-        log_title('\n', `${type} 新增的规则`);
-        temp.forEach(name => log_rule(name, '：', rule.url(name)));
+        log_title(`${type} 新增的规则`);
+        temp.forEach(name => log_rule(name, ':', rule.url(name)));
         exit_code = 1;
     }
 
     var temp = [...deprecated_set].filter(name => custom.has(name));
     if (temp.length > 0) {
-        log_title('\n', `${type} 被弃用的规则`);
-        temp.forEach(name => log_rule(name, '：', rule.url(name)));
+        log_title(`${type} 被弃用的规则`);
+        temp.forEach(name => log_rule(name, ':', rule.url(name)));
         exit_code = 1;
     }
 
     var temp = [...custom].filter(name => !valid_set.has(name) && !deprecated_set.has(name));
     if (temp.length > 0) {
-        log_title('\n', `${type} 不存在的规则`);
-        temp.forEach(name => log_rule(name, '：', rule.url(name)));
+        log_title(`${type} 不存在的规则`);
+        temp.forEach(name => log_rule(name, ':', rule.url(name)));
         exit_code = 1;
     }
 });

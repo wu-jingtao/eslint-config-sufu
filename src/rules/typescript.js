@@ -235,8 +235,9 @@ const typescript_rules = {
     '@typescript-eslint/class-literal-property-style': 'warn',
     /**
      * 强制要求泛型类型参数要写在构造函数上
+     * @reason 为了代码整洁，并不是所有地方都要写在构造函数上
      */
-    '@typescript-eslint/consistent-generic-constructors': 'warn',
+    '@typescript-eslint/consistent-generic-constructors': 'off',
     /**
      * 禁止声明一下这两种类型，使用 typescript 中自带的 Record 来替代
      * interface Foo {[key: string]: unknown;}
@@ -271,8 +272,9 @@ const typescript_rules = {
     '@typescript-eslint/explicit-member-accessibility': ['warn', { accessibility: 'no-public' }],
     /**
      * 对于被 export 的方法和类函数，必须要有参数类型和返回值类型
+     * @reason 有时候方法的参数或返回值确实需要 any 类型
      */
-    '@typescript-eslint/explicit-module-boundary-types': 'warn',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     /**
      * 指定类成员的排序规则
      */
@@ -287,14 +289,10 @@ const typescript_rules = {
             'protected-static-field',
             'public-static-field',
 
-            '#private-static-get',
-            '#private-static-set',
-            'private-static-get',
-            'private-static-set',
-            'protected-static-get',
-            'protected-static-set',
-            'public-static-get',
-            'public-static-set',
+            '#private-static-accessor',
+            'private-static-accessor',
+            'protected-static-accessor',
+            'public-static-accessor',
 
             'static-initialization',
 
@@ -307,10 +305,8 @@ const typescript_rules = {
             'protected-abstract-field',
             'public-abstract-field',
 
-            'protected-abstract-get',
-            'protected-abstract-set',
-            'public-abstract-get',
-            'public-abstract-set',
+            'protected-abstract-accessor',
+            'public-abstract-accessor',
 
             'protected-abstract-method',
             'public-abstract-method',
@@ -321,14 +317,10 @@ const typescript_rules = {
             'protected-instance-field',
             'public-instance-field',
 
-            '#private-instance-get',
-            '#private-instance-set',
-            'private-instance-get',
-            'private-instance-set',
-            'protected-instance-get',
-            'protected-instance-set',
-            'public-instance-get',
-            'public-instance-set',
+            '#private-instance-accessor',
+            'private-instance-accessor',
+            'protected-instance-accessor',
+            'public-instance-accessor',
 
             'signature',
 
@@ -638,7 +630,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/restrict-plus-operands': 'warn',
     /**
-     * 要求在做字符串连接时，变量类型不能是 Object，因为 Object.prototype.toString() 总是输出 "[object Object]"，这是没有意义的
+     * 要求在做字符串连接时，变量类型不能是 Object，因为 Object.prototype.toString() 总是输出 '[object Object]'，这是没有意义的
      */
     '@typescript-eslint/restrict-template-expressions': ['warn', { allowArray: true }],
     /**
@@ -680,7 +672,8 @@ module.exports = {
     languageOptions: {
         parser: tseslint.parser,
         parserOptions: {
-            project: './tsconfig.json',
+            // 自动读取 tsconfig.json
+            projectService: true,
         }
     },
     plugins: {

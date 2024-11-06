@@ -122,9 +122,9 @@ const rules = {
      */
     'no-types': 'warn',
     /**
-     * 除了内置类型，禁止其他的全局变量类型作为类型参数（在 ts 文件中无效）
+     * 除了内置类型，禁止其他的全局变量类型作为类型参数
      */
-    'no-undefined-types': 'warn',
+    'no-undefined-types': 'off',
     /**
      * 要求文档注释的每一行开头都要使用星号
      */
@@ -166,9 +166,9 @@ const rules = {
      */
     'require-param-name': 'warn',
     /**
-     * 要求所有 @param 后面都要有参数类型（在 ts 文件中无效）
+     * 要求所有 @param 后面都要有参数类型
      */
-    'require-param-type': 'warn',
+    'require-param-type': 'off',
     /**
      * 要求当所有 @typedef 和 @namespace 标签的类型为对象时，它们都必须具有 @property 标签
      */
@@ -182,13 +182,13 @@ const rules = {
      */
     'require-property-name': 'warn',
     /**
-     * 要求所有 @property 后面都要有属性类型（在 ts 文件中无效）
+     * 要求所有 @property 后面都要有属性类型
      */
-    'require-property-type': 'warn',
+    'require-property-type': 'off',
     /**
      * 必须为返回值添加注释
      */
-    'require-returns': 'warn',
+    'require-returns': 'off',
     /**
      * 如果文档注释中有 @returns，那方法体中必须有 return 关键字
      */
@@ -198,9 +198,9 @@ const rules = {
      */
     'require-returns-description': 'warn',
     /**
-     * 要求所有 @returns 后面都要有属性类型（在 ts 文件中无效）
+     * 要求所有 @returns 后面都要有属性类型
      */
-    'require-returns-type': 'warn',
+    'require-returns-type': 'off',
     /**
      * 要求为所有泛型参数使用 @template 添加文档注释
      */

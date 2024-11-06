@@ -559,9 +559,9 @@ const suggestions = {
      */
     'no-multi-str': 'off',
     /**
-     * 不允许使用 if(!条件)
+     * 不允许使用 if(!条件) 或 if(!==)
      */
-    'no-negated-condition': 'warn',
+    'no-negated-condition': 'off',
     /**
      * 不允许三元表达式嵌套（例如 var foo = bar ? baz : qux === quxx ? bing : bam）
      */
@@ -663,7 +663,7 @@ const suggestions = {
     /**
      * 禁止在 return 语句里赋值
      */
-    'no-return-assign': 'warn',
+    'no-return-assign': 'off',
     /**
      * 禁止出现 location.href = 'javascript:void(0)';
      */
