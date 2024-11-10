@@ -286,8 +286,9 @@ const suggestions = {
     'capitalized-comments': 'off',
     /**
      * 在类的非静态方法中，必须存在对 this 的引用
+     * @returns 在处理继承问题时，有时候只需要方法返回一个简单的值
      */
-    'class-methods-use-this': 'warn',
+    'class-methods-use-this': 'off',
     /**
      * 禁止从句复杂度超过 20（例如使用 if else 判断超过 20 次）
      * @reason 有些情况确实需要超过限制
@@ -844,8 +845,9 @@ const suggestions = {
     'radix': ['warn', 'as-needed'],
     /**
      * async 函数中必须存在 await 语句
+     * @reason 有时候为了使类方法的返回值保持统一，需要用到不带 await 的 async 函数
      */
-    'require-await': 'warn',
+    'require-await': 'off',
     /**
      * 正则表达式中必须要加上 u 或 v 标志
      */

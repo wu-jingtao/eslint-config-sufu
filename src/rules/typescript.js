@@ -32,9 +32,10 @@ const closed_rules = {
 const replaced_rules = {
     /**
      * 在类的非静态方法中，必须存在对 this 的引用
+     * @returns 在处理继承问题时，有时候只需要方法返回一个简单的值
      */
     'class-methods-use-this': 'off',
-    '@typescript-eslint/class-methods-use-this': 'warn',
+    '@typescript-eslint/class-methods-use-this': 'off',
     /**
      * 禁止函数在不同分支返回不同类型的值
      * @reason 文档推荐使用 tsconfig 的 noImplicitReturns 功能
@@ -161,9 +162,10 @@ const replaced_rules = {
     '@typescript-eslint/prefer-promise-reject-errors': 'warn',
     /**
      * async 函数中必须存在 await 语句
+     * @reason 有时候为了使类方法的返回值保持统一，需要用到不带 await 的 async 函数
      */
     'require-await': 'off',
-    '@typescript-eslint/require-await': 'warn',
+    '@typescript-eslint/require-await': 'off',
     /**
      * 禁止在 return 语句里使用 await
      * @note no-return-await 在 eslint 中已被弃用了
@@ -251,9 +253,9 @@ const typescript_rules = {
     '@typescript-eslint/consistent-type-assertions': 'warn',
     /**
      * 优先使用 interface 而不是 type
-     * @reason interface 可以 implement, extend 和 merge
+     * @reason 各有用武之地
      */
-    '@typescript-eslint/consistent-type-definitions': 'warn',
+    '@typescript-eslint/consistent-type-definitions': 'off',
     /**
      * 当 export 一个类型的时候，必须在类型前面加上 type 关键字
      */
@@ -405,8 +407,9 @@ const typescript_rules = {
     '@typescript-eslint/no-inferrable-types': 'off',
     /**
      * 禁止在函数返回值和泛型参数之外使用 void 作为类型
+     * @reason 有时候不知道为什么，在返回值类型中不包含 void，函数就必须得写一个 return 关键字
      */
-    '@typescript-eslint/no-invalid-void-type': 'warn',
+    '@typescript-eslint/no-invalid-void-type': 'off',
     /**
      * 禁止出现没有意义的 void 关键字
      */
@@ -418,7 +421,7 @@ const typescript_rules = {
     /**
      * 避免错误的使用 Promise
      */
-    '@typescript-eslint/no-misused-promises': 'warn',
+    '@typescript-eslint/no-misused-promises': ['warn', { checksVoidReturn: false }],
     /**
      * 不允许 enum 的值类型同时有数值类型和字符串类型
      */
@@ -619,8 +622,9 @@ const typescript_rules = {
     '@typescript-eslint/prefer-string-starts-ends-with': 'warn',
     /**
      * 要求任何返回 Promise 类型的方法，必须被标记上 async
+     * @reason 只要定义的有方法的返回值类型就可以了
      */
-    '@typescript-eslint/promise-function-async': 'warn',
+    '@typescript-eslint/promise-function-async': 'off',
     /**
      * 使用 Array#sort 和 Array#toSorted 时必须传入比较函数
      */
@@ -662,8 +666,9 @@ const typescript_rules = {
     '@typescript-eslint/unified-signatures': 'off',
     /**
      * 强制给 Promise.catch(err => {}) 里的 err 加上 unknown 类型
+     * @reason 只要 tsconfig 打开了 strict，默认就是 unknown
      */
-    '@typescript-eslint/use-unknown-in-catch-callback-variable': 'warn',
+    '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
 };
 
 module.exports = {

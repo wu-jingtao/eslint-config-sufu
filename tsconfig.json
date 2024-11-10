@@ -15,8 +15,8 @@
         "strict": true,
         "exactOptionalPropertyTypes": true,
         "noImplicitOverride": true,
-        "noImplicitReturns": true,
-        "noPropertyAccessFromIndexSignature": true,
+        "noImplicitReturns": false,                             // 要求每条分支都必须有一个 return 关键字
+        "noPropertyAccessFromIndexSignature": false,            // 禁止使用 obj.property 的方式去访问 obj['property']
         "noUncheckedIndexedAccess": true,
 
         /**

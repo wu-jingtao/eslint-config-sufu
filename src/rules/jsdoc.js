@@ -132,7 +132,7 @@ const rules = {
     /**
      * 要求所有带有文档注释的方法有一段描述
      */
-    'require-description': 'warn',
+    'require-description': ['warn', { checkConstructors: false }],
     /**
      * 要求文档注释必须是一个完整的句子
      */
