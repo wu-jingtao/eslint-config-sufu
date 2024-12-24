@@ -711,8 +711,9 @@ const suggestions = {
      * 禁止无用的表达式
      * @param allowShortCircuit 允许短路表达式
      * @param allowTernary 允许三元表达式
+     * @param allowTaggedTemplates 允许带 tag 的模板字符串
      */
-    'no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
+    'no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }],
     /**
      * 禁止出现没用到的 label
      */

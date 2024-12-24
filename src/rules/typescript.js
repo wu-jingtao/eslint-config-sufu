@@ -535,6 +535,11 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-unsafe-return': 'off',
     /**
+     * 禁止使用类型断言来缩小类型
+     * @reason 对正常的编写影响很大
+     */
+    '@typescript-eslint/no-unsafe-type-assertion': 'off',
+    /**
      * 禁止把减号放到字符串前面
      */
     '@typescript-eslint/no-unsafe-unary-minus': 'warn',
@@ -625,6 +630,10 @@ const typescript_rules = {
      * @reason 只要定义的有方法的返回值类型就可以了
      */
     '@typescript-eslint/promise-function-async': 'off',
+    /**
+     * 要求 getter 与 setter 的类型必须相同
+     */
+    '@typescript-eslint/related-getter-setter-pairs': 'warn',
     /**
      * 使用 Array#sort 和 Array#toSorted 时必须传入比较函数
      */
