@@ -229,8 +229,9 @@ const possible_problems = {
     'no-unused-vars': ['warn', { args: 'none', caughtErrors: 'none' }],
     /**
      * 变量必须先定义后使用
+     * @reason 在回调函数中，有时候会引用到外部后定义的变量
      */
-    'no-use-before-define': 'warn',
+    'no-use-before-define': 'off',
     /**
      * 不允许出现赋了值之后没用一次就又被再次赋值
      */
@@ -329,9 +330,9 @@ const suggestions = {
      */
     'dot-notation': 'warn',
     /**
-     * 必须使用 === 或 !==，禁止使用 == 或 !=
+     * 必须使用 === 或 !==，禁止使用 == 或 !=，null 除外
      */
-    'eqeqeq': 'warn',
+    'eqeqeq': ['warn', 'always', { null: 'ignore' }],
     /**
      * 如果一个方法表达式赋值给了一个变量，如果这个方法有名字，则要求方法名必须与变量名相同
      */
@@ -356,7 +357,7 @@ const suggestions = {
      */
     'guard-for-in': 'warn',
     /**
-     * 哪些名称不能用作标识符（例如 ["error", "data", "err", "e", "cb", "callback"]）
+     * 哪些名称不能用作标识符（例如 ['error', 'data', 'err', 'e', 'cb', 'callback']）
      * @reason 没有自定义的必要
      */
     'id-denylist': 'off',
@@ -469,8 +470,9 @@ const suggestions = {
     'no-empty-static-block': 'warn',
     /**
      * 禁止使用 foo == null，必须使用 foo === null
+     * @reason 这个跟 eqeqeq: ['warn', 'always', {'null': 'ignore'}] 相冲突
      */
-    'no-eq-null': 'warn',
+    'no-eq-null': 'off',
     /**
      * 禁止使用 eval
      */
@@ -541,9 +543,9 @@ const suggestions = {
      */
     'no-lonely-if': 'warn',
     /**
-     * 禁止在循环内的闭包函数中出现循环体条件语句中使用 var 定义的变量
+     * 在一个循环语句中，禁止方法声明包含不安全的引用
      */
-    'no-loop-func': 'warn',
+    'no-loop-func': 'off',
     /**
      * 禁止使用 magic numbers（例如 seconds = hours * 60 * 60）
      * @reason 要求太严格了，对正常的代码编写会造成很大影响
@@ -639,14 +641,7 @@ const suggestions = {
     /**
      * 禁止使用指定的对象属性
      */
-    'no-restricted-properties': [
-        'warn',
-        {
-            // 禁用 ES5 时代使用 prototype 生成类的方法，改用 class 代替
-            property: 'prototype',
-            message: 'Directly manipulate prototype is an outdated coding style, Please use class instead.'
-        }
-    ],
+    'no-restricted-properties': 'off',
     /**
      * 语法限制
      */
@@ -771,8 +766,9 @@ const suggestions = {
     /**
      * 是否必须使用 a = {b} 而不是 a = {b: b}
      * @param consistent-as-needed 视情况而定，如果用简写的多就用简写，反之用旧写法，但如果可能的话尽量用简写
+     * @reason 自由把控，不做要求
      */
-    'object-shorthand': ['warn', 'consistent-as-needed'],
+    'object-shorthand': 'off',
     /**
      * 在一个作用域范围内的所有变量只能使用一个 var let const 声明
      * @reason 这个已经是一个过时的要求，用于 ES6 以前的代码

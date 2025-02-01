@@ -91,10 +91,10 @@ const replaced_rules = {
     'no-invalid-this': 'off',
     '@typescript-eslint/no-invalid-this': 'off',
     /**
-     * 禁止在循环内的闭包函数中出现循环体条件语句中使用 var 定义的变量
+     * 在一个循环语句中，禁止方法声明包含不安全的引用
      */
     'no-loop-func': 'off',
-    '@typescript-eslint/no-loop-func': 'warn',
+    '@typescript-eslint/no-loop-func': 'off',
     /**
      * 禁止使用 magic numbers（例如 seconds = hours * 60 * 60）
      * @reason 要求太严格了，对正常的代码编写会造成很大影响
@@ -136,9 +136,10 @@ const replaced_rules = {
     '@typescript-eslint/no-unused-vars': ['warn', { args: 'none', caughtErrors: 'none' }],
     /**
      * 变量必须先定义后使用
+     * @reason 在回调函数中，有时候会引用到外部后定义的变量
      */
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': 'warn',
+    '@typescript-eslint/no-use-before-define': 'off',
     /**
      * 禁止出现没必要的 constructor
      */
@@ -197,11 +198,7 @@ const replaced_rules = {
         },
         {   // 泛型参数只能使用一个大写字母
             selector: 'typeParameter',
-            format: ['PascalCase'],
-            custom: {
-                regex: '^[A-Z]$',
-                match: true
-            }
+            format: ['PascalCase']
         }
     ],
 };
@@ -423,6 +420,10 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-misused-promises': ['warn', { checksVoidReturn: false }],
     /**
+     * 当扩展运算符可能导致意外行为时，不允许使用它。
+     */
+    '@typescript-eslint/no-misused-spread': 'warn',
+    /**
      * 不允许 enum 的值类型同时有数值类型和字符串类型
      */
     '@typescript-eslint/no-mixed-enums': 'warn',
@@ -466,8 +467,9 @@ const typescript_rules = {
     '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
     /**
      * 条件表达式禁止是永远为真（或永远为假）的
+     * @param allowConstantLoopConditions 是否允许 while (true)
      */
-    '@typescript-eslint/no-unnecessary-condition': 'warn',
+    '@typescript-eslint/no-unnecessary-condition': ['warn', { allowConstantLoopConditions: true }],
     /**
      * 不允许没必要的构造函数参数赋值
      */
@@ -495,7 +497,7 @@ const typescript_rules = {
     /**
      * 禁止没有必要的泛型类型参数
      */
-    '@typescript-eslint/no-unnecessary-type-parameters': 'warn',
+    '@typescript-eslint/no-unnecessary-type-parameters': 'off',
     /**
      * 禁止使用 any 类型的参数去调用函数
      * @reason typescript 库中都有许多类型的值是 any，如果开启对正常的编写影响很大

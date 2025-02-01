@@ -20,11 +20,11 @@ const rules = {
     'array-element-newline': 'off',
     /**
      * 是否允许箭头函数省略参数列表括号
-     * @param always 必须加上
+     * @param always 必须加上，默认
      * @param as-needed 当箭头方法只包含一个参数的时候则需要省略括号
      * @param requireForBlockBody 函数体是否必须加上大括号
      */
-    'arrow-parens': ['warn', 'as-needed'],
+    'arrow-parens': 'warn',
     /**
      * 在箭头方法 => 的前后需要有空格
      */
@@ -201,9 +201,9 @@ const rules = {
      */
     'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
     /**
-     * 每行的最大长度不可以超过 160
+     * 每行的最大长度不可以超过 200
      */
-    'max-len': ['warn', { code: 160 }],
+    'max-len': ['warn', { code: 200 }],
     /**
      * 每行不可以超过 3 条表达式
      */
