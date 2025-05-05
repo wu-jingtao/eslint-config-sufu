@@ -196,7 +196,7 @@ const replaced_rules = {
             modifiers: ['public'],
             leadingUnderscore: 'forbid'
         },
-        {   // 泛型参数只能使用一个大写字母
+        {   // 泛型参数要每个单词首字母大写
             selector: 'typeParameter',
             format: ['PascalCase']
         }

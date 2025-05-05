@@ -269,7 +269,7 @@ const suggestions = {
     /**
      * 箭头方法如果只包含一条 return 表达式的时候则需要省略大括号和 return 关键字
      */
-    'arrow-body-style': 'warn',
+    'arrow-body-style': 'off',
     /**
      * 将 var 定义的变量视为块作用域，禁止在块外使用
      * @reason 限制了 var 的灵活性，如果你觉得不规范，那建议直接禁用 var
@@ -540,8 +540,9 @@ const suggestions = {
     'no-lone-blocks': 'warn',
     /**
      * 不允许在 else 块里面嵌套只有一个分支的 if 语句，这个因使用 else if 代替
+     * @reason 有时候 else if 语句的可读性更差
      */
-    'no-lonely-if': 'warn',
+    'no-lonely-if': 'off',
     /**
      * 在一个循环语句中，禁止方法声明包含不安全的引用
      */

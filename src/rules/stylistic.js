@@ -75,15 +75,15 @@ const rules = {
      * 方法调用的参数前后必须有换行
      * @param consistent 如果有参数使用了换行则所有的参数都必须换行
      */
-    'function-call-argument-newline': ['warn', 'consistent'],
+    'function-call-argument-newline': 'off',
     /**
      * 方法参数之间有换行，那方法的括号也必须换行
      */
-    'function-paren-newline': ['warn', 'multiline-arguments'],
+    'function-paren-newline': 'off',
     /**
      * 生成器方法的 * 号必须和方法名挨在一起，和 function 关键字之间用空格隔开
      */
-    'generator-star-spacing': 'warn',
+    'generator-star-spacing': ['warn', { before: false, after: true }],
     /**
      * 不允许隐式返回箭头函数的箭头后面换行
      */
