@@ -24,6 +24,7 @@ const closed_rules = {
     'no-undef': 'off',
     'no-unreachable': 'off',
     'no-unsafe-negation': 'off',
+    'no-unassigned-vars': 'warn',
 };
 
 /**
@@ -495,6 +496,10 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-unnecessary-type-constraint': 'warn',
     /**
+     * 禁止没有必要的泛型类型约束
+     */
+    '@typescript-eslint/no-unnecessary-type-conversion': 'warn',
+    /**
      * 禁止没有必要的泛型类型参数
      */
     '@typescript-eslint/no-unnecessary-type-parameters': 'off',
@@ -655,7 +660,7 @@ const typescript_rules = {
     /**
      * 使用联合类型作为 switch 的对象时，必须包含每一个类型的 case
      */
-    '@typescript-eslint/switch-exhaustiveness-check': 'warn',
+    '@typescript-eslint/switch-exhaustiveness-check': ['warn', { considerDefaultExhaustiveForUnions: true }],
     /**
      * 禁止使用三斜杠导入文件
      * @reason 三斜杠是已废弃的语法，但在类型声明文件中还是可以使用的

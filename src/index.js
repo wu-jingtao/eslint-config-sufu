@@ -7,19 +7,20 @@ const typescript = require('./rules/typescript');
 module.exports = {
     'js': [
         base,
-        stylistic,
+        stylistic.js,
         jsdoc,
         javascript
     ],
     'ts': [
         base,
-        stylistic,
+        stylistic.ts,
         jsdoc,
         typescript
     ],
     'js-ts': [
         base,
-        stylistic,
+        stylistic.js,
+        stylistic.ts,
         jsdoc,
         javascript,
         typescript

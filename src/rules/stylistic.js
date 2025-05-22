@@ -1,3 +1,4 @@
+const tseslint = require('typescript-eslint');
 const stylistic = require('@stylistic/eslint-plugin');
 
 /**
@@ -201,9 +202,9 @@ const rules = {
      */
     'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
     /**
-     * 每行的最大长度不可以超过 200
+     * 每行的最大长度不可以超过 120
      */
-    'max-len': ['warn', { code: 200 }],
+    'max-len': ['warn', { code: 120 }],
     /**
      * 每行不可以超过 3 条表达式
      */
@@ -402,11 +403,26 @@ const rules = {
     'yield-star-spacing': 'warn'
 };
 
-module.exports = {
-    name: 'eslint-config-sufu/stylistic',
-    files: ['**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}'],
+const js = {
+    name: 'eslint-config-sufu/stylistic-js',
+    files: ['**/*.{js,mjs,cjs,jsx}'],
     plugins: {
         '@stylistic': stylistic
     },
     rules: Object.fromEntries(Object.entries(rules).map(([name, value]) => [`@stylistic/${name}`, value]))
 };
+
+const ts = {
+    ...js,
+    name: 'eslint-config-sufu/stylistic-ts',
+    files: ['**/*.{ts,mts,cts,tsx}'],
+    languageOptions: {
+        parser: tseslint.parser,
+        parserOptions: {
+            // 自动读取 tsconfig.json
+            projectService: true,
+        }
+    },
+};
+
+module.exports = { js, ts };

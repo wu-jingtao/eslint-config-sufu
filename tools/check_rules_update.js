@@ -17,7 +17,8 @@ const log_rule = log.magenta.text.text.yellow.underline;
      */
     const rules = {
         javascript: {
-            items: globSync(path.resolve('node_modules/eslint/lib/rules/*.js'), { nodir: true, absolute: true })
+            items: globSync(path.resolve('node_modules/eslint/lib/rules/*.js'),
+                { nodir: true, absolute: true })
                 .map((item) => [
                     path.basename(item, '.js'),         // 规则名称
                     require(item).meta
@@ -30,7 +31,8 @@ const log_rule = log.magenta.text.text.yellow.underline;
             url: (name) => `https://eslint.org/docs/latest/rules/${name}`
         },
         typescript: {
-            items: globSync('node_modules/@typescript-eslint/eslint-plugin/dist/rules/*.js', { nodir: true, absolute: true })
+            items: globSync('node_modules/@typescript-eslint/eslint-plugin/dist/rules/*.js',
+                { nodir: true, absolute: true })
                 .map((item) => [
                     path.basename(item, '.js'),
                     require(item).default?.meta
@@ -43,7 +45,8 @@ const log_rule = log.magenta.text.text.yellow.underline;
             url: (name) => `https://typescript-eslint.io/rules/${name}`
         },
         stylistic: {
-            items: (await Promise.all(globSync('node_modules/@stylistic/eslint-plugin/dist/rules/*.js', { nodir: true, absolute: true })
+            items: (await Promise.all(globSync('node_modules/@stylistic/eslint-plugin/dist/rules/*.js',
+                { nodir: true, absolute: true })
                 .map(async (item) => [
                     path.basename(item, '.js'),
                     (await import(item)).default?.meta
@@ -56,7 +59,8 @@ const log_rule = log.magenta.text.text.yellow.underline;
             url: (name) => `https://eslint.style/rules/default/${name}`
         },
         jsdoc: {
-            items: globSync('node_modules/eslint-plugin-jsdoc/dist/rules/*.cjs', { nodir: true, absolute: true })
+            items: globSync('node_modules/eslint-plugin-jsdoc/dist/rules/*.cjs',
+                { nodir: true, absolute: true })
                 .map((item) => [
                     path.basename(item, '.cjs').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase(),
                     require(item).meta
@@ -76,9 +80,12 @@ const log_rule = log.magenta.text.text.yellow.underline;
     const customs = {
         javascript: new Set(Object.keys(require('../src/rules/javascript').rules)),
         typescript: new Set(Object.keys(require('../src/rules/typescript').rules)
-            .filter((item) => item.startsWith('@typescript-eslint')).map((item) => item.split('/').at(-1))),
-        stylistic: new Set(Object.keys(require('../src/rules/stylistic').rules).map((item) => item.split('/').at(-1))),
-        jsdoc: new Set(Object.keys(require('../src/rules/jsdoc').rules).map((item) => item.split('/').at(-1))),
+            .filter((item) => item.startsWith('@typescript-eslint'))
+            .map((item) => item.split('/').at(-1))),
+        stylistic: new Set(Object.keys(require('../src/rules/stylistic').js.rules)
+            .map((item) => item.split('/').at(-1))),
+        jsdoc: new Set(Object.keys(require('../src/rules/jsdoc').rules)
+            .map((item) => item.split('/').at(-1))),
     };
 
     /**

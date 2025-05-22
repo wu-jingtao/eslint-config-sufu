@@ -181,6 +181,10 @@ const possible_problems = {
      */
     'no-this-before-super': 'warn',
     /**
+     * 不允许变量在未赋值之前被读取
+     */
+    'no-unassigned-vars': 'warn',
+    /**
      * 禁止使用未定义的变量
      * @reason 这个需要配置 globals。
      */
