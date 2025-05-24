@@ -202,9 +202,10 @@ const rules = {
      */
     'lines-between-class-members': ['warn', 'always', { exceptAfterSingleLine: true }],
     /**
-     * 每行的最大长度不可以超过 120
+     * 每行的最大长度不可以超过多少
+     * @reason 有些时候强制换行反而会使得代码可读性变差，例如：很长的 import 语句
      */
-    'max-len': ['warn', { code: 120 }],
+    'max-len': 'off',
     /**
      * 每行不可以超过 3 条表达式
      */

@@ -1,6 +1,6 @@
 {
     "name": "eslint-config-sufu",
-    "version": "3.0.8",
+    "version": "3.0.9",
     "description": "一套我自己用着觉得舒服的 eslint 规则",
     "keywords": [
         "eslint",
