@@ -360,8 +360,9 @@ const typescript_rules = {
     '@typescript-eslint/no-deprecated': 'warn',
     /**
      * 禁止 enum 中的成员使用相同的值进行初始化
+     * @reason 设置为 error 是因为 typescript 并不会限制 enum 成员之间的值相同
      */
-    '@typescript-eslint/no-duplicate-enum-values': 'warn',
+    '@typescript-eslint/no-duplicate-enum-values': 'error',
     /**
      * 禁止联合类型表达式中存在重复的成分
      */
