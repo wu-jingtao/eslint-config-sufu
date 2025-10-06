@@ -90,8 +90,9 @@ const possible_problems = {
     /**
      * 禁止重复导入模块
      * @param includeExports 对 export 也进行检查
+     * @param allowSeparateTypeImports 对于 import type 不考虑在内
      */
-    'no-duplicate-imports': ['warn', { includeExports: true }],
+    'no-duplicate-imports': ['warn', { includeExports: true, allowSeparateTypeImports: true }],
     /**
      * 禁止在正则表达式中使用空的字符集 []
      */
@@ -840,6 +841,11 @@ const suggestions = {
      * 必须使用模版字符串而不是字符串连接
      */
     'prefer-template': 'off',
+    /**
+     * 在 catch 块中，新抛出的异常必须通过 cause 带上旧的错误信息
+     * @example throw new Error("Failed", { cause: error })
+     */
+    'preserve-caught-error': 'warn',
     /**
      * parseInt 必须传入第二个参数
      * @param as-needed 如果是十进制数就不需要传，如果是其他进制的则必须传入

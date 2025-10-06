@@ -44,10 +44,17 @@ const log_rule = log.magenta.text.text.yellow.underline;
         },
         stylistic: {
             items: (await Promise.all(globSync('node_modules/@stylistic/eslint-plugin/dist/rules/*.js', { nodir: true, absolute: true })
-                .map(async (item) => [
-                    path.basename(item, '.js'),
-                    (await import(item)).default?.meta
-                ])))
+                .map(async (item) => {
+                    const name = path.basename(item, '.js');
+                    const obj = await import(item);
+
+                    for (const item of Object.keys(obj)) {
+                        const meta = obj[item]?.meta;
+                        if (meta) { return [name, meta] }
+                    }
+
+                    return [name, undefined];
+                })))
                 .filter((item) => item[1])
                 .map((item) => [
                     item[0],

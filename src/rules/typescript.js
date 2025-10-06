@@ -355,7 +355,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-confusing-void-expression': 'warn',
     /**
-     * 禁止使用在 jsdoc 中已经被标记为 @deprecated 的方法
+     * 禁止使用在 jsdoc 中已经被标记为 `@deprecated` 的方法
      */
     '@typescript-eslint/no-deprecated': 'warn',
     /**
@@ -667,11 +667,6 @@ const typescript_rules = {
      * @reason 三斜杠是已废弃的语法，但在类型声明文件中还是可以使用的
      */
     '@typescript-eslint/triple-slash-reference': 'warn',
-    /**
-     * 要求把所有地方都标上类型信息
-     * @reason 官方不建议开启
-     */
-    '@typescript-eslint/typedef': 'off',
     /**
      * 确保没有绑定 this 的方法，在期待的范围内被调用
      */

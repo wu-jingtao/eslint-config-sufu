@@ -154,10 +154,6 @@ const rules = {
      */
     'jsx-pascal-case': 'warn',
     /**
-     * 不允许多个空格在 JSX 标签属性之间
-     */
-    'jsx-props-no-multi-spaces': 'warn',
-    /**
      * JSX 标签里面特性的值必须使用双引号包裹
      */
     'jsx-quotes': 'warn',
