@@ -58,7 +58,7 @@ const log_rule = log.magenta.text.text.yellow.underline;
                 .filter((item) => item[1])
                 .map((item) => [
                     item[0],
-                    item[1].deprecated
+                    item[1].deprecated || item[1].docs.experimental
                 ]),
             url: (name) => `https://eslint.style/rules/default/${name}`
         },

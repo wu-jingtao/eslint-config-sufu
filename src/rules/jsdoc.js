@@ -5,7 +5,7 @@ const jsdoc = require('eslint-plugin-jsdoc');
  */
 const rules = {
     /**
-     * 检查 `@access` 标签是否使用了以下的值 "package", "private", "protected", "public"
+     * 检查 `@access` 标签的值是否属于允许的范围 ("package", "private", "protected", "public")
      */
     'check-access': 'warn',
     /**
@@ -13,7 +13,7 @@ const rules = {
      */
     'check-alignment': 'warn',
     /**
-     * 检查 `@example` 的格式是否符合要求
+     * 检查 `@example` 标签中的示例代码格式是否符合规范
      * @reason eslint9 必须要自定义 processor 才能支持
      */
     'check-examples': 'off',
@@ -42,11 +42,11 @@ const rules = {
      */
     'check-tag-names': 'warn',
     /**
-     * 确保 `@template` T （泛型参数名称）被用对了地方
+     * 检查 `@template` 声明的泛型参数名称是否唯一且被正确使用
      */
     'check-template-names': 'warn',
     /**
-     * 检查参数类型是否正确
+     * 检查 JSDoc 中类型表达式的合法性（如 {string|number}）
      */
     'check-types': 'warn',
     /**
@@ -70,15 +70,17 @@ const rules = {
      */
     'implements-on-classes': 'warn',
     /**
-     * 检查文档注释中的 import() 语句，是否指向了一个不存在与 dependencies 与 devDependencies 的库
+     * 检查 JSDoc 中的 import() 类型引用是否声明在 dependencies 或 devDependencies 中
      */
     'imports-as-dependencies': 'warn',
     /**
      * 检查那些没有提供什么有效信息的文档注释（例如只是简单重复变量名）
+     * @reason 这个只针对英文文档有用
      */
     'informative-docs': 'off',
     /**
      * 强制文档注释块前面必须有 1 个空行
+     * @reason 已交由 stylistic 处理
      */
     'lines-before-block': 'off',
     /**
@@ -122,7 +124,7 @@ const rules = {
      */
     'no-restricted-syntax': 'off',
     /**
-     * 确保文档注释中不会出现变量类型等内容（在 ts 文件中有效）
+     * 在 TypeScript 文件中，禁止在 JSDoc 中声明类型信息（避免与 TS 类型重复）
      */
     'no-types': 'warn',
     /**
@@ -194,7 +196,11 @@ const rules = {
      */
     'require-property-type': 'off',
     /**
-     * 必须为返回值添加注释
+     * 对于会抛出异常的异步函数，需要添加一个（非标准）的 `@rejects` 标签
+     */
+    'require-rejects': 'off',
+    /**
+     * 要求对具有返回值的函数添加 @returns 注释
      */
     'require-returns': 'off',
     /**
@@ -241,6 +247,22 @@ const rules = {
      * 要求 < & ` 必须转义成 html 或 markdown 形式
      */
     'text-escaping': 'off',
+    /**
+     * 在 JSDoc 中，偏好使用属性风格的函数类型签名（而非调用签名）
+     */
+    'ts-method-signature-style': 'warn',
+    /**
+     * 警告不要使用空对象类型
+     */
+    'ts-no-empty-object-type': 'warn',
+    /**
+     * 检测不必要的模板表达式
+     */
+    'ts-no-unnecessary-template-expression': 'warn',
+    /**
+     * 优先使用函数类型而不是调用签名
+     */
+    'ts-prefer-function-type': 'warn',
     /**
      * 检查参数类型的写法是否正确
      */

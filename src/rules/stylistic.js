@@ -6,8 +6,8 @@ const stylistic = require('@stylistic/eslint-plugin');
  */
 const rules = {
     /**
-     * 数组两个方括号前后是否必须有换行
-     * @param consistent 风格保持一致，要么都有，要么都没有
+     * 控制数组方括号与数组元素之间是否需要换行
+     * @param consistent 风格保持一致：要么都有换行，要么都没有
      */
     'array-bracket-newline': ['warn', 'consistent'],
     /**
@@ -86,7 +86,7 @@ const rules = {
      */
     'generator-star-spacing': ['warn', { before: false, after: true }],
     /**
-     * 不允许隐式返回箭头函数的箭头后面换行
+     * 禁止在隐式返回的箭头函数中，将返回值放在新的一行
      */
     'implicit-arrow-linebreak': 'warn',
     /**
@@ -138,11 +138,11 @@ const rules = {
      */
     'jsx-indent-props': 'warn',
     /**
-     * 规定 JSX 标签每行最多有 10 个属性
+     * 限制 JSX 标签在单行时允许的最大属性数量
      */
     'jsx-max-props-per-line': ['warn', { maximum: 10 }],
     /**
-     * 禁止空行出现在 JSX 标签或表达式后面
+     * 禁止 JSX 标签或表达式内部出现多余的换行
      */
     'jsx-newline': ['warn', { prevent: true }],
     /**
@@ -301,7 +301,7 @@ const rules = {
      */
     'one-var-declaration-per-line': 'off',
     /**
-     * 当运算符附近需要换行时，运算符需放在就行的末尾
+     * 当表达式需要换行时，运算符应位于上一行的末尾
      */
     'operator-linebreak': 'warn',
     /**
@@ -354,7 +354,7 @@ const rules = {
      */
     'space-infix-ops': 'warn',
     /**
-     * 一元运算符前后必须要有空格
+     * 控制一元运算符与操作数之间是否需要空格
      */
     'space-unary-ops': 'warn',
     /**

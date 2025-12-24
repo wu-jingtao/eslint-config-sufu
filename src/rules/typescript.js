@@ -24,7 +24,7 @@ const closed_rules = {
     'no-undef': 'off',
     'no-unreachable': 'off',
     'no-unsafe-negation': 'off',
-    'no-unassigned-vars': 'warn',
+    'no-unassigned-vars': 'off',
 };
 
 /**
@@ -38,7 +38,7 @@ const replaced_rules = {
     'class-methods-use-this': 'off',
     '@typescript-eslint/class-methods-use-this': 'off',
     /**
-     * 禁止函数在不同分支返回不同类型的值
+     * 要求函数在所有代码路径中要么始终返回值，要么始终不返回值
      * @reason 文档推荐使用 tsconfig 的 noImplicitReturns 功能
      */
     'consistent-return': 'off',
@@ -49,7 +49,7 @@ const replaced_rules = {
     'default-param-last': 'off',
     '@typescript-eslint/default-param-last': 'warn',
     /**
-     * 禁止使用 foo['bar']，必须写成 foo.bar
+     * 在属性名是合法标识符时，强制使用点语法（foo.bar）而不是方括号
      */
     'dot-notation': 'off',
     '@typescript-eslint/dot-notation': 'warn',
@@ -115,7 +115,7 @@ const replaced_rules = {
     'no-restricted-imports': 'off',
     '@typescript-eslint/no-restricted-imports': 'off',
     /**
-     * 禁止变量名与上层作用域内的已定义的变量重复
+     * 禁止在内部作用域中声明与外层作用域同名的变量（变量遮蔽）
      * @reason 很多时候函数的形参和传参是同名的
      */
     'no-shadow': 'off',
@@ -127,6 +127,11 @@ const replaced_rules = {
      */
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-expressions': ['warn', { allowShortCircuit: true, allowTernary: true }],
+    /**
+     * 不允许出现未使用的私有类成员
+     */
+    'no-unused-private-class-members': 'off',
+    '@typescript-eslint/no-unused-private-class-members': 'warn',
     /**
      * 不允许出现未使用的变量
      * @param args 不对参数进行检查
@@ -239,7 +244,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/consistent-generic-constructors': 'off',
     /**
-     * 禁止声明一下这两种类型，使用 typescript 中自带的 Record 来替代
+     * 禁止声明以下这两种类型，使用 typescript 中自带的 Record 来替代
      * interface Foo {[key: string]: unknown;}
      * type Foo = {[key: string]: unknown;}
      */
@@ -263,11 +268,11 @@ const typescript_rules = {
      */
     '@typescript-eslint/consistent-type-imports': ['warn', { fixStyle: 'inline-type-imports' }],
     /**
-     * 必须指明函数的返回值类型，当在被赋值时如果变量有明确的类型则可以不要
+     * 要求函数显式声明返回值类型（函数表达式、回调等可由上下文推断）
      */
     '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
     /**
-     * 必须设置类的成员的可访问性
+     * 类成员必须显式声明访问修饰符（public 除外）
      */
     '@typescript-eslint/explicit-member-accessibility': ['warn', { accessibility: 'no-public' }],
     /**
@@ -277,63 +282,9 @@ const typescript_rules = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     /**
      * 指定类成员的排序规则
+     * @reason 太死板了，很多时候需要灵活布局
      */
-    '@typescript-eslint/member-ordering': ['warn', {
-        default: [
-            // interface 调用签名
-            'call-signature',
-
-            // 静态成员
-            '#private-static-field',
-            'private-static-field',
-            'protected-static-field',
-            'public-static-field',
-
-            '#private-static-accessor',
-            'private-static-accessor',
-            'protected-static-accessor',
-            'public-static-accessor',
-
-            'static-initialization',
-
-            '#private-static-method',
-            'private-static-method',
-            'protected-static-method',
-            'public-static-method',
-
-            // 抽象成员
-            'protected-abstract-field',
-            'public-abstract-field',
-
-            'protected-abstract-accessor',
-            'public-abstract-accessor',
-
-            'protected-abstract-method',
-            'public-abstract-method',
-
-            // 实例成员
-            '#private-instance-field',
-            'private-instance-field',
-            'protected-instance-field',
-            'public-instance-field',
-
-            '#private-instance-accessor',
-            'private-instance-accessor',
-            'protected-instance-accessor',
-            'public-instance-accessor',
-
-            'signature',
-
-            'private-constructor',
-            'protected-constructor',
-            'public-constructor',
-
-            '#private-instance-method',
-            'private-instance-method',
-            'protected-instance-method',
-            'public-instance-method',
-        ],
-    }],
+    '@typescript-eslint/member-ordering': 'off',
     /**
      * interface 和 type 中的函数必须用属性的方式定义
      */
@@ -385,7 +336,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-extra-non-null-assertion': 'warn',
     /**
-     * 禁止定义只有静态方法的类，这种情况推荐使用 esModule 来代替
+     * 禁止定义只有静态成员的类，推荐使用普通函数或对象字面量
      */
     '@typescript-eslint/no-extraneous-class': 'warn',
     /**
@@ -497,7 +448,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-unnecessary-type-constraint': 'warn',
     /**
-     * 禁止没有必要的泛型类型约束
+     * 禁止没有必要的类型转换
      */
     '@typescript-eslint/no-unnecessary-type-conversion': 'warn',
     /**
@@ -552,6 +503,10 @@ const typescript_rules = {
      */
     '@typescript-eslint/no-unsafe-unary-minus': 'warn',
     /**
+     * 禁止为不可能为 undefined 的类型提供一个默认值
+     */
+    '@typescript-eslint/no-useless-default-assignment': 'warn',
+    /**
      * 禁止 export 一个空对象
      */
     '@typescript-eslint/no-useless-empty-export': 'warn',
@@ -596,8 +551,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/prefer-literal-enum-member': 'warn',
     /**
-     * 禁止使用 module 来定义命名空间
-     * @reason module 已成为 js 的关键字
+     * 禁止使用 module 定义命名空间，统一使用 namespace
      */
     '@typescript-eslint/prefer-namespace-keyword': 'warn',
     /**

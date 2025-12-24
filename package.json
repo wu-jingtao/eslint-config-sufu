@@ -1,6 +1,6 @@
 {
     "name": "eslint-config-sufu",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "description": "一套我自己用着觉得舒服的 eslint 规则",
     "keywords": [
         "eslint",
@@ -30,16 +30,16 @@
         "typescript": ">=5.6"
     },
     "devDependencies": {
-        "@types/node": "^24.6.2",
-        "@types/react": "^19.2.0",
-        "glob": "^11.0.3",
+        "@types/node": "^25.0.3",
+        "@types/react": "^19.2.7",
+        "glob": "^13.0.0",
         "log-formatter": "^2.0.8",
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "@stylistic/eslint-plugin": "^5.4.0",
-        "eslint": "^9.37.0",
-        "eslint-plugin-jsdoc": "^60.8.2",
-        "typescript-eslint": "^8.45.0"
+        "@stylistic/eslint-plugin": "^5.6.1",
+        "eslint": "^9.39.2",
+        "eslint-plugin-jsdoc": "^61.5.0",
+        "typescript-eslint": "^8.50.1"
     }
 }

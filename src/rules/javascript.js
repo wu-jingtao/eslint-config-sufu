@@ -7,7 +7,7 @@
  */
 const possible_problems = {
     /**
-     * 数组的方法除了 forEach 之外，回调函数必须有返回值
+     * 除 forEach 外的数组迭代方法中，回调函数必须有返回值
      */
     'array-callback-return': 'warn',
     /**
@@ -40,7 +40,7 @@ const possible_problems = {
      */
     'no-compare-neg-zero': 'warn',
     /**
-     * 禁止在条件测试表达式中使用赋值语句，除非这个赋值语句被括号包起来了
+     * 禁止在条件表达式中使用赋值操作（除非显式使用括号）
      */
     'no-cond-assign': 'warn',
     /**
@@ -48,7 +48,7 @@ const possible_problems = {
      */
     'no-const-assign': 'warn',
     /**
-     * 禁止出现输出永远不变的二元表达式（例如一个判断表达式永远输出 true 或 false）
+     * 禁止出现结果在编译期就可以确定的二元表达式（例如一个判断表达式永远输出 true 或 false）
      */
     'no-constant-binary-expression': 'warn',
     /**
@@ -118,7 +118,7 @@ const possible_problems = {
      */
     'no-import-assign': 'warn',
     /**
-     * 禁止在 if 代码块内出现函数声明
+     * 禁止在块级作用域中出现函数声明
      */
     'no-inner-declarations': 'warn',
     /**
@@ -152,8 +152,8 @@ const possible_problems = {
      */
     'no-promise-executor-return': 'warn',
     /**
-     * 禁止使用 hasOwnProperty, isPrototypeOf 或 propertyIsEnumerable
-     * @reason 直接操作 Prototype 已经是过时的做法了，在 ES6 以后很难再用到了
+     * 禁止直接调用对象自身的 hasOwnProperty 等原型方法
+     * @reason 对象可能没有原型，应使用 Object.prototype.xxx.call
      */
     'no-prototype-builtins': 'warn',
     /**
@@ -248,7 +248,7 @@ const possible_problems = {
     'no-useless-backreference': 'warn',
     /**
      * 禁止将 await 或 yield 的结果做为运算符的后面项
-     * @reason 这样会导致不符合预期的结果
+     * @reason 防止异步操作中基于旧状态进行非原子更新（竞态条件）
      */
     'require-atomic-updates': 'warn',
     /**
@@ -301,7 +301,7 @@ const suggestions = {
      */
     'complexity': 'off',
     /**
-     * 禁止函数在不同分支返回不同类型的值
+     * 要求函数在所有代码路径中要么始终返回值，要么始终不返回值
      * @reason 缺少 TypeScript 的支持，类型判断是不准确的
      */
     'consistent-return': 'off',
@@ -331,7 +331,7 @@ const suggestions = {
      */
     'default-param-last': 'warn',
     /**
-     * 禁止使用 foo['bar']，必须写成 foo.bar
+     * 在属性名是合法标识符时，强制使用点语法（foo.bar）而不是方括号
      */
     'dot-notation': 'warn',
     /**
@@ -339,7 +339,7 @@ const suggestions = {
      */
     'eqeqeq': ['warn', 'always', { null: 'ignore' }],
     /**
-     * 如果一个方法表达式赋值给了一个变量，如果这个方法有名字，则要求方法名必须与变量名相同
+     * 当命名函数表达式被赋值给变量时，要求函数名与变量名一致
      */
     'func-name-matching': 'warn',
     /**
@@ -576,8 +576,7 @@ const suggestions = {
      */
     'no-nested-ternary': 'off',
     /**
-     * 禁止直接 new 一个类而不赋值
-     * @reason new 应该作为创建一个类的实例的方法，所以不能不赋值
+     * 禁止直接调用构造函数（new Foo()）而不使用其返回值
      */
     'no-new': 'warn',
     /**
@@ -675,7 +674,7 @@ const suggestions = {
      */
     'no-sequences': 'warn',
     /**
-     * 禁止变量名与上层作用域内的已定义的变量重复
+     * 禁止在内部作用域中声明与外层作用域同名的变量（变量遮蔽）
      * @reason 很多时候函数的形参和传参是同名的
      */
     'no-shadow': 'off',
