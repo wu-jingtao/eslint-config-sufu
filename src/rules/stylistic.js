@@ -87,8 +87,9 @@ const rules = {
     'generator-star-spacing': ['warn', { before: false, after: true }],
     /**
      * 禁止在隐式返回的箭头函数中，将返回值放在新的一行
+     * @reason 对于多条件表达式，该规则强制将所有条件判断都放在同一行
      */
-    'implicit-arrow-linebreak': 'warn',
+    'implicit-arrow-linebreak': 'off',
     /**
      * 要求使用 4 个空格作为缩进
      */
@@ -161,10 +162,6 @@ const rules = {
      * 对于没有 children 的 JSX 标签，必须采用自闭合形式
      */
     'jsx-self-closing-comp': 'warn',
-    /**
-     * 对于 JSX 标签里面的属性，按照字母表的顺序排序
-     */
-    'jsx-sort-props': 'off',
     /**
      * 禁止 JSX 标签，开关括号前后出现多于的空格
      */

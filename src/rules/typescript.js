@@ -613,6 +613,10 @@ const typescript_rules = {
      */
     '@typescript-eslint/strict-boolean-expressions': 'off',
     /**
+     * 禁止将 “有返回值的函数” 赋值给 “期望返回 void 的函数类型”（比如将 () => number 赋值给 () => void）
+     */
+    '@typescript-eslint/strict-void-return': 'warn',
+    /**
      * 使用联合类型作为 switch 的对象时，必须包含每一个类型的 case
      */
     '@typescript-eslint/switch-exhaustiveness-check': ['warn', { considerDefaultExhaustiveForUnions: true }],
