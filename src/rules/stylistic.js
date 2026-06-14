@@ -209,13 +209,14 @@ const rules = {
     'member-delimiter-style': 'warn',
     /**
      * 块注释每行前面必须要有 * 号，而且要对其
+     * @reason 允许连续的单行注释（注释掉代码时会用到）
      */
-    'multiline-comment-style': 'warn',
+    'multiline-comment-style': 'off',
     /**
      * 三元表达式 ? : 之间必须换行
      * @param never 不允许换行
      */
-    'multiline-ternary': ['warn', 'always-multiline'],
+    'multiline-ternary': 'off',
     /**
      * 要求当构造函数的参数为 0 时，在 new 的时候也不能省略圆括号
      */
@@ -299,8 +300,9 @@ const rules = {
     'one-var-declaration-per-line': 'off',
     /**
      * 当表达式需要换行时，运算符应位于上一行的末尾
+     * @reason 忽略 '|' 是因为，它与 Typescript 联合类型的写法可能会冲突
      */
-    'operator-linebreak': 'warn',
+    'operator-linebreak': ['warn', 'after', { overrides: { '?': 'before', ':': 'before', '|': 'ignore' } }],
     /**
      * 代码块的开头和结尾是否需要有空行
      * @param never 不能有空行

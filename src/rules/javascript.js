@@ -248,9 +248,10 @@ const possible_problems = {
     'no-useless-backreference': 'warn',
     /**
      * 禁止将 await 或 yield 的结果做为运算符的后面项
-     * @reason 防止异步操作中基于旧状态进行非原子更新（竞态条件）
+     * 防止异步操作中基于旧状态进行非原子更新（竞态条件）
+     * @reason 由于 JS 是单线程，竞态条件很容易辨别
      */
-    'require-atomic-updates': 'warn',
+    'require-atomic-updates': 'off',
     /**
      * 必须使用 isNaN(foo) 而不是 foo === NaN
      * @param enforceForIndexOf 对于数组不允许使用 indexOf(NaN) 或 lastIndexOf(NaN)
