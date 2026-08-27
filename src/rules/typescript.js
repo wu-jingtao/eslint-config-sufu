@@ -92,11 +92,6 @@ const replaced_rules = {
     'no-invalid-this': 'off',
     '@typescript-eslint/no-invalid-this': 'off',
     /**
-     * 在一个循环语句中，禁止方法声明包含不安全的引用
-     */
-    'no-loop-func': 'off',
-    '@typescript-eslint/no-loop-func': 'off',
-    /**
      * 禁止使用 magic numbers（例如 seconds = hours * 60 * 60）
      * @reason 要求太严格了，对正常的代码编写会造成很大影响
      */
@@ -108,12 +103,6 @@ const replaced_rules = {
      */
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'off',
-    /**
-     * 禁止导入的模块列表
-     * @reason 没有自定义的必要
-     */
-    'no-restricted-imports': 'off',
-    '@typescript-eslint/no-restricted-imports': 'off',
     /**
      * 禁止在内部作用域中声明与外层作用域同名的变量（变量遮蔽）
      * @reason 很多时候函数的形参和传参是同名的
@@ -164,9 +153,10 @@ const replaced_rules = {
     '@typescript-eslint/prefer-destructuring': 'off',
     /**
      * Promise 的 reject 中必须传入 Error 对象，而不是字面量
+     * @reason 这个与 @typescript-eslint/no-unnecessary-type-assertion 有冲突
      */
     'prefer-promise-reject-errors': 'off',
-    '@typescript-eslint/prefer-promise-reject-errors': 'warn',
+    '@typescript-eslint/prefer-promise-reject-errors': 'off',
     /**
      * async 函数中必须存在 await 语句
      * @reason 有时候为了使类方法的返回值保持统一，需要用到不带 await 的 async 函数

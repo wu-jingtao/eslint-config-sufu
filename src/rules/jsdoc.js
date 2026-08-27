@@ -132,6 +132,10 @@ const rules = {
      */
     'no-undefined-types': 'off',
     /**
+     * 该配置用于将 `@see` 标签中的链接规范化为标准 `{@link}` 格式
+     */
+    'normalize-see-links': 'off',
+    /**
      * 推荐使用 `@import` 标签来代替 import()
      */
     'prefer-import-tag': 'off',

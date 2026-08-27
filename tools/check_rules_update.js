@@ -30,7 +30,7 @@ const log_rule = log.magenta.text.text.yellow.underline;
             url: (name) => `https://eslint.org/docs/latest/rules/${name}`
         },
         typescript: {
-            items: globSync('node_modules/@typescript-eslint/eslint-plugin/dist/rules/*.js', { nodir: true, absolute: true })
+            items: globSync(path.resolve('node_modules/@typescript-eslint/eslint-plugin/dist/rules/*.js'), { nodir: true, absolute: true })
                 .map((item) => [
                     path.basename(item, '.js'),
                     require(item).default?.meta
@@ -63,11 +63,18 @@ const log_rule = log.magenta.text.text.yellow.underline;
             url: (name) => `https://eslint.style/rules/default/${name}`
         },
         jsdoc: {
-            items: globSync('node_modules/eslint-plugin-jsdoc/dist/rules/*.cjs', { nodir: true, absolute: true })
-                .map((item) => [
-                    path.basename(item, '.cjs').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase(),
-                    require(item).meta
-                ])
+            items: (await Promise.all(globSync('node_modules/eslint-plugin-jsdoc/src/rules/*.js', { nodir: true, absolute: true })
+                .map(async (item) => {
+                    const name = path.basename(item, '.js').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                    const obj = await import(item);
+
+                    for (const key of Object.keys(obj)) {
+                        const meta = obj[key]?.meta;
+                        if (meta) { return [name, meta] }
+                    }
+
+                    return [name, undefined];
+                })))
                 .filter((item) => item[1])
                 .map((item) => [
                     item[0],

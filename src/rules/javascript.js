@@ -759,8 +759,9 @@ const suggestions = {
     'no-var': 'off',
     /**
      * 禁止使用 void
+     * @reason 影响了 void promise 的写法
      */
-    'no-void': 'warn',
+    'no-void': 'off',
     /**
      * 禁止注释中出现 TODO 和 FIXME
      */
