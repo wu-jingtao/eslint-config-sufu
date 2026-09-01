@@ -1,4 +1,4 @@
-const sufu = require('./src/index');
+const sufu = require('./dist/index');
 
 module.exports = [
     ...sufu['js-ts'],

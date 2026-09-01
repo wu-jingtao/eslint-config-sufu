@@ -1,11 +1,9 @@
-/**
- * 这里存放一些关于 javascript 语法功能的配置
- */
+import type { Linter } from 'eslint';
 
 /**
  * 潜在问题
  */
-const possible_problems = {
+const possible_problems: Linter.RulesRecord = {
     /**
      * 除 forEach 外的数组迭代方法中，回调函数必须有返回值
      */
@@ -267,7 +265,7 @@ const possible_problems = {
 /**
  * 建议
  */
-const suggestions = {
+const suggestions: Linter.RulesRecord = {
     /**
      * setter 必须有对应的 getter，getter 可以没有对应的 setter
      */
@@ -902,14 +900,17 @@ const suggestions = {
 /**
  * 布局与格式化
  */
-const layout_and_formatting = {
+const layout_and_formatting: Linter.RulesRecord = {
     /**
      * unicode 必须使用大端编码模式
      */
     'unicode-bom': 'off',
 };
 
-module.exports = {
+/**
+ * javascript 配置
+ */
+export const javascript: Linter.Config = {
     name: 'eslint-config-sufu/javascript',
     files: ['**/*.{js,mjs,cjs,jsx}'],
     rules: {

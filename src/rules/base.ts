@@ -1,7 +1,9 @@
+import type { Linter } from 'eslint';
+
 /**
  * eslint 基础配置
  */
-module.exports = {
+export const base: Linter.Config = {
     name: 'eslint-config-sufu/base',
     languageOptions: {
         // ECMAScript 版本

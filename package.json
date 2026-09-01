@@ -17,17 +17,17 @@
     "bugs": {
         "url": "https://github.com/wu-jingtao/eslint-config-sufu/issues"
     },
-    "main": "./src/index.js",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "files": [
-        "src"
+        "dist"
     ],
     "scripts": {
-        "check_rule_update": "node ./tools/check_rules_update.js",
-        "lint": "eslint --max-warnings 0 \"{src,tools}/**/*.js\"",
-        "test_lint": "eslint --max-warnings 0 \"test/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}\""
-    },
-    "peerDependencies": {
-        "typescript": ">=5.6"
+        "compile": "tsc",
+        "lint": "eslint --max-warnings 0 src/**/*.ts",
+        "lint-fix": "npm run lint -- --fix",
+        "check_rule_update": "node ./dist/tools/check_rules_update.js",
+        "lint_test": "eslint --max-warnings 0 \".temp/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}\""
     },
     "devDependencies": {
         "@types/node": "^26.4.0",
@@ -39,7 +39,8 @@
     "dependencies": {
         "@stylistic/eslint-plugin": "^5.10.0",
         "eslint": "^10.9.1",
-        "eslint-plugin-jsdoc": "^64.2.1",
+        "eslint-plugin-jsdoc": "^64.3.2",
+        "tslib": "^2.8.1",
         "typescript-eslint": "^8.68.0"
     }
 }

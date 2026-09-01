@@ -1,9 +1,8 @@
-const jsdoc = require('eslint-plugin-jsdoc');
+import jsdocPlugin from 'eslint-plugin-jsdoc';
+import { addRulePrefix } from '../tools/utilities';
+import type { Linter } from 'eslint';
 
-/**
- * 这里存放一些关于 js文档注释 方面的配置
- */
-const rules = {
+const rules: Linter.RulesRecord = {
     /**
      * 检查 `@access` 标签的值是否属于允许的范围 ("package", "private", "protected", "public")
      */
@@ -131,6 +130,11 @@ const rules = {
      * 除了内置类型，禁止其他的全局变量类型作为类型参数
      */
     'no-undefined-types': 'off',
+    /**
+     * 报告多余的 `@type` 标签，该标签与 TypeScript 自动推断出的类型一致，或是放宽了自动推断的类型范围
+     * @reason 有些时候想指定类型都指定不了
+     */
+    'no-unnecessary-type-assertion': 'off',
     /**
      * 该配置用于将 `@see` 标签中的链接规范化为标准 `{@link}` 格式
      */
@@ -277,11 +281,12 @@ const rules = {
     'valid-types': 'warn'
 };
 
-module.exports = {
+/**
+ * jsdoc 配置
+ */
+export const jsdoc: Linter.Config = {
     name: 'eslint-config-sufu/jsdoc',
     files: ['**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}'],
-    plugins: {
-        jsdoc
-    },
-    rules: Object.fromEntries(Object.entries(rules).map(([name, value]) => [`jsdoc/${name}`, value]))
+    plugins: { jsdoc: jsdocPlugin },
+    rules: addRulePrefix(rules, 'jsdoc/')
 };

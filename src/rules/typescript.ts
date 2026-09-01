@@ -1,14 +1,11 @@
-const tseslint = require('typescript-eslint');
-const js_rules = require('./javascript');
-
-/**
- * 这里存放一些关于 typescript 的配置
- */
+import tsEslint from 'typescript-eslint';
+import { javascript } from './javascript';
+import type { Linter } from 'eslint';
 
 /**
  * 需要被关闭的 eslint 规则，这些规则将交由 typescript 处理
  */
-const closed_rules = {
+const closed_rules: Linter.RulesRecord = {
     'constructor-super': 'off',
     'getter-return': 'off',
     'no-const-assign': 'off',
@@ -30,7 +27,7 @@ const closed_rules = {
 /**
  * 需要被替代的 eslint 规则
  */
-const replaced_rules = {
+const replaced_rules: Linter.RulesRecord = {
     /**
      * 在类的非静态方法中，必须存在对 this 的引用
      * @returns 在处理继承问题时，有时候只需要方法返回一个简单的值
@@ -202,7 +199,7 @@ const replaced_rules = {
 /**
  * typescript-eslint 规则
  */
-const typescript_rules = {
+const typescript_rules: Linter.RulesRecord = {
     /**
      * 重载的函数必须写在一起
      */
@@ -216,7 +213,7 @@ const typescript_rules = {
      */
     '@typescript-eslint/await-thenable': 'warn',
     /**
-     * 禁止使用 // @ts-ignore // @ts-nocheck // @ts-check // @ts-expect-error
+     * 禁止使用 `// @ts-ignore` `// @ts-nocheck` `// @ts-check` `// @ts-expect-error`
      * 除了 // @ts-expect-error: 带有描述
      */
     '@typescript-eslint/ban-ts-comment': 'warn',
@@ -631,21 +628,24 @@ const typescript_rules = {
     '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
 };
 
-module.exports = {
+/**
+ * typescript 配置
+ */
+export const typescript: Linter.Config = {
     name: 'eslint-config-sufu/typescript',
     files: ['**/*.{ts,mts,cts,tsx}'],
     languageOptions: {
-        parser: tseslint.parser,
+        parser: tsEslint.parser,
         parserOptions: {
             // 自动读取 tsconfig.json
             projectService: true,
         }
     },
     plugins: {
-        '@typescript-eslint': tseslint.plugin
+        '@typescript-eslint': tsEslint.plugin
     },
     rules: {
-        ...js_rules.rules,
+        ...javascript.rules,
         ...closed_rules,
         ...replaced_rules,
         ...typescript_rules,

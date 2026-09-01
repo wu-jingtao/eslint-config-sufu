@@ -1,10 +1,9 @@
-const tseslint = require('typescript-eslint');
-const stylistic = require('@stylistic/eslint-plugin');
+import tsEslint from 'typescript-eslint';
+import stylisticPlugin from '@stylistic/eslint-plugin';
+import { addRulePrefix } from '../tools/utilities';
+import type { Linter } from 'eslint';
 
-/**
- * 这里存放一些关于 代码风格 方面的配置
- */
-const rules = {
+const rules: Linter.RulesRecord = {
     /**
      * 控制数组方括号与数组元素之间是否需要换行
      * @param consistent 风格保持一致：要么都有换行，要么都没有
@@ -399,26 +398,30 @@ const rules = {
     'yield-star-spacing': 'warn'
 };
 
-const js = {
+/**
+ * JS 代码风格配置
+ */
+export const styleJs: Linter.Config = {
     name: 'eslint-config-sufu/stylistic-js',
     files: ['**/*.{js,mjs,cjs,jsx}'],
     plugins: {
-        '@stylistic': stylistic
+        '@stylistic': stylisticPlugin
     },
-    rules: Object.fromEntries(Object.entries(rules).map(([name, value]) => [`@stylistic/${name}`, value]))
+    rules: addRulePrefix(rules, '@stylistic/')
 };
 
-const ts = {
-    ...js,
+/**
+ * TS 代码风格配置
+ */
+export const styleTs: Linter.Config = {
+    ...styleJs,
     name: 'eslint-config-sufu/stylistic-ts',
     files: ['**/*.{ts,mts,cts,tsx}'],
     languageOptions: {
-        parser: tseslint.parser,
+        parser: tsEslint.parser,
         parserOptions: {
             // 自动读取 tsconfig.json
             projectService: true,
         }
     },
 };
-
-module.exports = { js, ts };
