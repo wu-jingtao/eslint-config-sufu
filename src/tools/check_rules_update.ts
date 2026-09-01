@@ -7,6 +7,7 @@ import { javascript } from '../rules/javascript';
 import { typescript } from '../rules/typescript';
 import { styleTs } from '../rules/stylistic';
 import { jsdoc } from '../rules/jsdoc';
+import { vueTs } from '../rules/vue';
 
 const printPrompt: (text: string) => void = log.bold;
 const printTitle: (title: string) => void = log.square.newline;
@@ -89,6 +90,19 @@ const printRule: (rule: string, url: string) => void = log.magenta.colon.text.ye
                 ]),
             url: (name: string) => `https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/${name}.md`
         },
+        vue: {
+            items: globSync(path.resolve('node_modules/eslint-plugin-vue/dist/rules/*.js'), { nodir: true, absolute: true })
+                .map((item) => [
+                    path.basename(item, '.js'),
+                    require(item).default?.meta
+                ])
+                .filter((item) => item[1])
+                .map((item) => [
+                    item[0],
+                    item[1].deprecated
+                ]),
+            url: (name: string) => `https://eslint.vuejs.org/rules/${name}.html`
+        },
     } as const;
 
     /**
@@ -103,13 +117,15 @@ const printRule: (rule: string, url: string) => void = log.magenta.colon.text.ye
             .map((item) => item.split('/').at(-1)!)),
         jsdoc: new Set(Object.keys(jsdoc.rules!)
             .map((item) => item.split('/').at(-1)!)),
+        vue: new Set(Object.keys(vueTs.rules!)
+            .map((item) => item.split('/').at(-1)!)),
     };
 
     /**
      * 开始检查
      */
     let exit_code = 0;  // 程序的返回值，如果没有要修改的规则就返回 0 否则返回 1
-    const check_list = ['javascript', 'typescript', 'stylistic', 'jsdoc'] as const;  // 要检查的项目
+    const check_list = ['javascript', 'typescript', 'stylistic', 'jsdoc', 'vue'] as const;  // 要检查的项目
     for (const type of check_list) {
         const rule = rules[type];
         const config = configs[type];

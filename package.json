@@ -1,6 +1,6 @@
 {
     "name": "eslint-config-sufu",
-    "version": "3.1.4",
+    "version": "3.1.5",
     "description": "一套我自己用着觉得舒服的 eslint 规则",
     "keywords": [
         "eslint",
@@ -27,7 +27,7 @@
         "lint": "eslint --max-warnings 0 src/**/*.ts",
         "lint-fix": "npm run lint -- --fix",
         "check_rule_update": "node ./dist/tools/check_rules_update.js",
-        "lint_test": "eslint --max-warnings 0 \".temp/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}\""
+        "lint_test": "eslint --max-warnings 0 \".temp/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,vue}\""
     },
     "devDependencies": {
         "@types/node": "^26.4.0",
@@ -40,6 +40,7 @@
         "@stylistic/eslint-plugin": "^5.10.0",
         "eslint": "^10.9.1",
         "eslint-plugin-jsdoc": "^64.3.2",
+        "eslint-plugin-vue": "^10.10.0",
         "tslib": "^2.8.1",
         "typescript-eslint": "^8.68.0"
     }

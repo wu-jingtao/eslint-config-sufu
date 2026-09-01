@@ -1,16 +1,33 @@
 # eslint-config-sufu
 
-一套我自己用着觉得舒服的 `eslint` 规则。
+一套我个人用着觉得舒服的 `eslint` 规则，参考了 [eslint-config-alloy](https://github.com/AlloyTeam/eslint-config-alloy)，并在此基础上做了定制。
 
-这套规则参考了许多 [eslint-config-alloy](https://github.com/AlloyTeam/eslint-config-alloy) 里的配置，如果你不喜我这个配置，建议你去看看 `eslint-config-alloy` 的。
+不使用 `Prettier`，因为我觉得它的可配置性不够，格式化出来的代码很多时候达不到要求。
 
-不同于 `eslint-config-alloy`，该配置并没有使用 `Prettier` 来格式化代码，因为我觉得 `Prettier` 的可配置性不够，格式化出来的代码很多时候达不到要求。
+## 特性
+
+- 支持 **JavaScript** / **TypeScript** / **Vue** 三种项目类型
+- 基于 `eslint-plugin-jsdoc` 规范注释
+- 基于 `@stylistic/eslint-plugin` 管理代码风格
+- 零配置开箱即用，也可按需组合
+
+## 配置说明
+
+| 配置 | 适用场景 |
+| --- | --- |
+| `sufu['js']` | 纯 JavaScript 项目 |
+| `sufu['ts']` | 纯 TypeScript 项目 |
+| `sufu['js-ts']` | JavaScript + TypeScript 混合项目 |
+| `sufu['vue-js']` | Vue + JavaScript（不能与 `vue-ts` 同时使用） |
+| `sufu['vue-ts']` | Vue + TypeScript（不能与 `vue-js` 同时使用） |
 
 ## 使用方法
 
 ### 1. 安装
 
-`npm install --save-dev eslint-config-sufu`
+```bash
+npm install --save-dev eslint-config-sufu
+```
 
 ### 2. 创建 `eslint.config.js`
 
@@ -18,59 +35,56 @@
 const sufu = require('eslint-config-sufu');
 
 module.exports = [
-    /**
-     * 如果你的项目只有 javascript 那就选 js
-     * 如果你的项目只有 typescript 那就选 ts
-     * 如果你的项目既有 javascript 又有 typescript 那就选 js-ts
-     */
+    // Javascript 选 js，Typescript 选 ts，混合选 js-ts
     ...sufu['js-ts'],
+    // Vue 项目添加 vue-js 或 vue-ts（二选一）
+    ...sufu['vue-js'],
     {
         rules: {
-            /**
-             * 添加自定义规则
-             */
+            // 自定义规则
         }
     }
 ];
 ```
 
-### 3. 在 `package.json` 中添加以下 script
+### 3. 在 `package.json` 中添加 script
 
-> 这里只对 `src` 和 `test` 文件夹进行了检查，实际使用时可以修改
+> 以下只对 `src` 和 `test` 文件夹进行检查，实际使用时可按需修改。
 
 ```json
 {
     "lint-js": "eslint --max-warnings 0 \"{src,test}/**/*.{js,mjs,cjs,jsx}\"",
     "lint-ts": "eslint --max-warnings 0 \"{src,test}/**/*.{ts,mts,cts,tsx}\"",
     "lint-js-ts": "eslint --max-warnings 0 \"{src,test}/**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}\"",
+    "lint-vue": "eslint --max-warnings 0 \"{src,test}/**/*.vue\""
 }
 ```
 
 ## 常见问题
 
-如果遇到类似于以下的报错
+### Parsing error: "parserOptions.project" has been provided...
 
 ```
 Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
 The file was not found in any of the provided project(s): test\index.test.ts
 ```
 
-那大概率是因为你正在 Lint 的文件并没有包含在 `tsconfig.json` 的 `include` 当中。
+通常是因为被 Lint 的文件没有包含在 `tsconfig.json` 的 `include` 中，有两种解决方式：
 
-第一种解决办法就是把你要 Lint 的文件添加到 `include` 当中。
+**方式一：** 将需要 Lint 的文件添加到 `tsconfig.json` 的 `include` 中。
 
-第二种解决办法就是创建一个 `tsconfig.eslint.json` 文件
+**方式二：** 创建 `tsconfig.eslint.json` 并在 `eslint.config.js` 中指定：
 
 ```json
+// tsconfig.eslint.json
 {
     "extends": "./tsconfig.json",
     "include": ["**/*"]
 }
 ```
 
-接着在 `eslint.config.js` 中添加下面这条规则
-
 ```js
+// eslint.config.js
 {
     files: ['**/*.{ts,mts,cts,tsx}'],
     languageOptions: {

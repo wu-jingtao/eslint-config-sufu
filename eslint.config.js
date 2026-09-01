@@ -2,7 +2,9 @@ const sufu = require('./dist/index');
 
 module.exports = [
     ...sufu['js-ts'],
+    ...sufu['vue-ts'],
     {
+        files: ['**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}'],
         rules: {
             /**
              * 添加自定义文档标签
