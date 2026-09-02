@@ -29,6 +29,11 @@ const overrides: Linter.RulesRecord = {
      */
     'singleline-html-element-content-newline': 'off',
     /**
+     * 要求 Props 必须声明默认值
+     * @reason 部分 Props 需要通过 undefined 表示未指定状态，强制设置默认值会改变组件 API 语义
+     */
+    'require-default-prop': 'off',
+    /**
      * 强制每行最多属性数量
      * @reason 限制单行最多 4 个属性、多行每行 1 个属性，在保证可读性的同时减少不必要的换行，平衡代码整洁与密度
      */
@@ -177,9 +182,10 @@ const supplement: Linter.RulesRecord = {
      */
     'prefer-template': 'off',
     /**
-     * 强制单个事件负载
+     * 要求自定义事件使用单一 payload
+     * @reason 多参数事件同样符合 Vue 规范，事件参数结构应根据具体 API 设计决定
      */
-    'prefer-single-event-payload': 'warn',
+    'prefer-single-event-payload': 'off',
     /**
      * 强制静态类名单独放置
      */
@@ -279,9 +285,10 @@ const supplement: Linter.RulesRecord = {
      */
     'no-undef-directives': 'warn',
     /**
-     * 禁止未定义的组件
+     * 禁止使用未注册的组件
+     * @reason 全局注册的组件（如 RouterView、RouterLink）无需在每个文件中显式导入，逐文件导入属于冗余代码
      */
-    'no-undef-components': 'warn',
+    'no-undef-components': 'off',
     /**
      * 禁止在 beforeRouteEnter 中使用 this
      */
@@ -299,7 +306,8 @@ const supplement: Linter.RulesRecord = {
      */
     'no-sparse-arrays': 'warn',
     /**
-     * 禁止 setup 中的 props 响应性丢失
+     * 禁止在 <script setup> 根作用域中读取 props 赋值给 ref
+     * @reason 从 defineProps 解构后用 ref() 初始化本地状态是常见模式（如 inputValue = ref(modelValue)），后续通过 watch 手动同步 prop 变化，不会丢失响应性
      */
     'no-setup-props-reactivity-loss': 'warn',
     /**
@@ -358,9 +366,10 @@ const supplement: Linter.RulesRecord = {
      */
     'no-restricted-block': 'warn',
     /**
-     * 禁止 ref 对象的响应性丢失
+     * 禁止在 <script setup> 根作用域中读取 ref 对象的值
+     * @reason 在对象初始化时读取 ref.value 是一次性赋值初始值的常见模式（如 panelState.index = index.value），后续通过 watch 和 setter 函数更新，不会丢失响应性
      */
-    'no-ref-object-reactivity-loss': 'warn',
+    'no-ref-object-reactivity-loss': 'off',
     /**
      * 禁止组件选项中的拼写错误
      */
@@ -391,9 +400,10 @@ const supplement: Linter.RulesRecord = {
      */
     'no-loss-of-precision': 'warn',
     /**
-     * 禁止模板中的字面量
+     * 禁止在模板中直接使用字面量
+     * @reason 项目中的静态文本属于正常模板内容，无强制国际化需求，启用会产生大量无意义的限制
      */
-    'no-literals-in-template': 'warn',
+    'no-literals-in-template': 'off',
     /**
      * 禁止不规则的空白字符
      */
@@ -441,9 +451,10 @@ const supplement: Linter.RulesRecord = {
      */
     'no-console': 'off',
     /**
-     * 禁止布尔值默认值
+     * 禁止为 Boolean props 设置默认值
+     * @reason 项目中需要区分 undefined 与 false，部分组件通过默认值确保解构后的 Boolean prop 始终为 boolean
      */
-    'no-boolean-default': 'warn',
+    'no-boolean-default': 'off',
     /**
      * 禁止模板中的裸字符串
      * @reason 对于国际化项目可能有用，但对大多数项目过于严格
