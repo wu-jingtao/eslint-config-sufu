@@ -309,7 +309,7 @@ const supplement: Linter.RulesRecord = {
      * 禁止在 <script setup> 根作用域中读取 props 赋值给 ref
      * @reason 从 defineProps 解构后用 ref() 初始化本地状态是常见模式（如 inputValue = ref(modelValue)），后续通过 watch 手动同步 prop 变化，不会丢失响应性
      */
-    'no-setup-props-reactivity-loss': 'warn',
+    'no-setup-props-reactivity-loss': 'off',
     /**
      * 禁止根元素使用 v-if
      */
