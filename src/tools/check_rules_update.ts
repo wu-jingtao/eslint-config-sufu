@@ -111,13 +111,14 @@ const printRule: (rule: string, url: string) => void = log.magenta.colon.text.ye
     const configs = {
         javascript: new Set(Object.keys(javascript.rules!)),
         typescript: new Set(Object.keys(typescript.rules!)
-            .filter((item) => item.startsWith('@typescript-eslint'))
+            .filter((item) => item.startsWith('@typescript-eslint/'))
             .map((item) => item.split('/').at(-1)!)),
         stylistic: new Set(Object.keys(styleTs.rules!)
             .map((item) => item.split('/').at(-1)!)),
         jsdoc: new Set(Object.keys(jsdoc.rules!)
             .map((item) => item.split('/').at(-1)!)),
         vue: new Set(Object.keys(vueTs.rules!)
+            .filter((item) => item.startsWith('vue/'))
             .map((item) => item.split('/').at(-1)!)),
     };
 
