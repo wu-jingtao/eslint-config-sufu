@@ -52,7 +52,7 @@ const overrides: Linter.RulesRecord = {
 /**
  * 补充规则
  */
-const supplement: Linter.RulesRecord = {
+const supplements: Linter.RulesRecord = {
     // 事件处理
     /**
      * 统一 v-on 事件处理器的写法
@@ -674,8 +674,8 @@ const supplement: Linter.RulesRecord = {
 const rules = {
     ...downgradeError(extractRules(vueEslint.configs['flat/recommended'])),
     ...addRulePrefix(overrides, 'vue/'),
-    ...addRulePrefix(supplement, 'vue/'),
-}
+    ...addRulePrefix(supplements, 'vue/'),
+};
 
 /**
  * vue-js 配置
@@ -701,7 +701,7 @@ export const vueTs: Linter.Config = {
     name: 'eslint-config-sufu/vue-ts',
     files: ['**/*.vue'],
     plugins: {
-        vue: vueEslint,
+        'vue': vueEslint,
         '@typescript-eslint': tsEslint.plugin,
     },
     languageOptions: {
