@@ -1,6 +1,8 @@
 import tsEslint from 'typescript-eslint';
 import vueEslint from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
+import { javascript } from './javascript';
+import { typescript } from './typescript';
 import { addRulePrefix, downgradeError, extractRules } from '../tools/utilities';
 import type { Linter } from 'eslint';
 
@@ -286,9 +288,8 @@ const supplement: Linter.RulesRecord = {
     'no-undef-directives': 'warn',
     /**
      * 禁止使用未注册的组件
-     * @reason 全局注册的组件（如 RouterView、RouterLink）无需在每个文件中显式导入，逐文件导入属于冗余代码
      */
-    'no-undef-components': 'off',
+    'no-undef-components': 'warn',
     /**
      * 禁止在 beforeRouteEnter 中使用 this
      */
@@ -297,6 +298,10 @@ const supplement: Linter.RulesRecord = {
      * 禁止模板中的 target="_blank"
      */
     'no-template-target-blank': 'warn',
+    /**
+     * 禁止使用与 Web 原生事件名称相冲突的事件名
+     */
+    'no-shadow-native-events': 'warn',
     /**
      * 禁止静态内联样式
      */
@@ -307,7 +312,7 @@ const supplement: Linter.RulesRecord = {
     'no-sparse-arrays': 'warn',
     /**
      * 禁止在 <script setup> 根作用域中读取 props 赋值给 ref
-     * @reason 从 defineProps 解构后用 ref() 初始化本地状态是常见模式（如 inputValue = ref(modelValue)），后续通过 watch 手动同步 prop 变化，不会丢失响应性
+     * @reason 跟 vue/define-props-destructuring 之间有冲突
      */
     'no-setup-props-reactivity-loss': 'off',
     /**
@@ -664,6 +669,15 @@ const supplement: Linter.RulesRecord = {
 };
 
 /**
+ * vue 规则
+ */
+const rules = {
+    ...downgradeError(extractRules(vueEslint.configs['flat/recommended'])),
+    ...addRulePrefix(overrides, 'vue/'),
+    ...addRulePrefix(supplement, 'vue/'),
+}
+
+/**
  * vue-js 配置
  */
 export const vueJs: Linter.Config = {
@@ -675,9 +689,8 @@ export const vueJs: Linter.Config = {
         sourceType: 'module'
     },
     rules: {
-        ...downgradeError(extractRules(vueEslint.configs['flat/recommended'])),
-        ...addRulePrefix(overrides, 'vue/'),
-        ...addRulePrefix(supplement, 'vue/'),
+        ...javascript.rules,
+        ...rules
     }
 };
 
@@ -685,14 +698,23 @@ export const vueJs: Linter.Config = {
  * vue-ts 配置
  */
 export const vueTs: Linter.Config = {
-    ...vueJs,
     name: 'eslint-config-sufu/vue-ts',
+    files: ['**/*.vue'],
+    plugins: {
+        vue: vueEslint,
+        '@typescript-eslint': tsEslint.plugin,
+    },
     languageOptions: {
-        ...vueJs.languageOptions,
+        parser: vueParser,
+        sourceType: 'module',
         parserOptions: {
             parser: tsEslint.parser,
             projectService: true,           // 自动读取 tsconfig.json
             extraFileExtensions: ['.vue'],  // 让 TS 知道 .vue 文件
         },
+    },
+    rules: {
+        ...typescript.rules,
+        ...rules
     }
 };
