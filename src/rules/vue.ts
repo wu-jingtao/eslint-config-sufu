@@ -1,8 +1,6 @@
 import tsEslint from 'typescript-eslint';
 import vueEslint from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
-import { javascript } from './javascript';
-import { typescript } from './typescript';
 import { addRulePrefix, downgradeError, extractRules } from '../tools/utilities';
 import type { Linter } from 'eslint';
 
@@ -300,8 +298,9 @@ const supplements: Linter.RulesRecord = {
     'no-template-target-blank': 'warn',
     /**
      * 禁止使用与 Web 原生事件名称相冲突的事件名
+     * @reason 组件事件应以自身语义为准，避免为规避原生事件名导致命名冗长或不自然
      */
-    'no-shadow-native-events': 'warn',
+    'no-shadow-native-events': 'off',
     /**
      * 禁止静态内联样式
      */
@@ -669,13 +668,15 @@ const supplements: Linter.RulesRecord = {
 };
 
 /**
- * vue 规则
+ * 将配置对象的作用范围限定为 `.vue` 文件
+ * @param config 配置对象
  */
-const rules = {
-    ...downgradeError(extractRules(vueEslint.configs['flat/recommended'])),
-    ...addRulePrefix(overrides, 'vue/'),
-    ...addRulePrefix(supplements, 'vue/'),
-};
+export function adaptForVue(config: Linter.Config): Linter.Config {
+    return {
+        ...config,
+        files: ['**/*.vue'],
+    };
+}
 
 /**
  * vue-js 配置
@@ -689,8 +690,9 @@ export const vueJs: Linter.Config = {
         sourceType: 'module'
     },
     rules: {
-        ...javascript.rules,
-        ...rules
+        ...downgradeError(extractRules(vueEslint.configs['flat/recommended'])),
+        ...addRulePrefix(overrides, 'vue/'),
+        ...addRulePrefix(supplements, 'vue/'),
     }
 };
 
@@ -698,23 +700,18 @@ export const vueJs: Linter.Config = {
  * vue-ts 配置
  */
 export const vueTs: Linter.Config = {
+    ...vueJs,
     name: 'eslint-config-sufu/vue-ts',
-    files: ['**/*.vue'],
     plugins: {
-        'vue': vueEslint,
+        ...vueJs.plugins,
         '@typescript-eslint': tsEslint.plugin,
     },
     languageOptions: {
-        parser: vueParser,
-        sourceType: 'module',
+        ...vueJs.languageOptions,
         parserOptions: {
             parser: tsEslint.parser,
             projectService: true,           // 自动读取 tsconfig.json
             extraFileExtensions: ['.vue'],  // 让 TS 知道 .vue 文件
         },
     },
-    rules: {
-        ...typescript.rules,
-        ...rules
-    }
 };

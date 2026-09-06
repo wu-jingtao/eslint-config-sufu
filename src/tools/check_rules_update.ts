@@ -118,7 +118,6 @@ const printRule: (rule: string, url: string) => void = log.magenta.colon.text.ye
         jsdoc: new Set(Object.keys(jsdoc.rules!)
             .map((item) => item.split('/').at(-1)!)),
         vue: new Set(Object.keys(vueTs.rules!)
-            .filter((item) => item.startsWith('vue/'))
             .map((item) => item.split('/').at(-1)!)),
     };
 

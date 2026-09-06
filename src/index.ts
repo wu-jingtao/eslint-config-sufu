@@ -3,7 +3,7 @@ import { javascript } from './rules/javascript';
 import { typescript } from './rules/typescript';
 import { styleJs, styleTs } from './rules/stylistic';
 import { jsdoc } from './rules/jsdoc';
-import { vueJs, vueTs } from './rules/vue';
+import { vueJs, vueTs, adaptForVue } from './rules/vue';
 import type { Linter } from 'eslint';
 
 /**
@@ -60,9 +60,15 @@ export = {
         typescript
     ],
     'vue-js': [
+        adaptForVue(styleJs),
+        adaptForVue(jsdoc),
+        adaptForVue(javascript),
         vueJs
     ],
     'vue-ts': [
+        adaptForVue(styleTs),
+        adaptForVue(jsdoc),
+        adaptForVue(typescript),
         vueTs
     ]
 } as EslintSufu;
