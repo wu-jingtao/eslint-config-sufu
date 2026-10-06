@@ -34,6 +34,11 @@ const overrides: Linter.RulesRecord = {
      */
     'require-default-prop': 'off',
     /**
+     * 禁止修改组件的 props
+     * @reason 允许修改 prop 内部的属性值，仅禁止对 prop 本身的重新赋值
+     */
+    'no-mutating-props': ['warn', { shallowOnly: true }],
+    /**
      * 强制每行最多属性数量
      * @reason 限制单行最多 4 个属性、多行每行 1 个属性，在保证可读性的同时减少不必要的换行，平衡代码整洁与密度
      */
@@ -187,9 +192,10 @@ const supplements: Linter.RulesRecord = {
      */
     'prefer-single-event-payload': 'off',
     /**
-     * 强制静态类名单独放置
+     * 要求静态 class 与动态 class 分开声明
+     * @reason 该规则仅约束 class 的组织形式，拆分后反而降低模板简洁性
      */
-    'prefer-separate-static-class': 'warn',
+    'prefer-separate-static-class': 'off',
     /**
      * 强制 prop 类型中布尔值放在前面
      */
@@ -245,8 +251,9 @@ const supplements: Linter.RulesRecord = {
     'no-v-text': 'warn',
     /**
      * 禁止无用的 v-bind 指令
+     * @reason 部分静态资源地址需要通过运行时绑定避免被 Vite 作为静态资源处理
      */
-    'no-useless-v-bind': 'warn',
+    'no-useless-v-bind': 'off',
     /**
      * 禁止无用的 Mustache 语法
      */
@@ -578,9 +585,15 @@ const supplements: Linter.RulesRecord = {
      */
     'define-props-declaration': 'warn',
     /**
-     * 强制 defineMacros 的顺序
+     * 强制 define 宏函数的声明顺序
      */
-    'define-macros-order': 'warn',
+    'define-macros-order': [
+        'warn',
+        {
+            order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots'],
+            defineExposeLast: true
+        }
+    ],
     /**
      * 强制 defineEmits 的声明方式
      */
@@ -713,5 +726,13 @@ export const vueTs: Linter.Config = {
             projectService: true,           // 自动读取 tsconfig.json
             extraFileExtensions: ['.vue'],  // 让 TS 知道 .vue 文件
         },
+    },
+    rules: {
+        ...vueJs.rules,
+        /**
+         * 禁止无意义的默认赋值
+         * @reason 与 defineProps 解构的默认值语法存在冲突，影响 Props 的正常解构
+         */
+        '@typescript-eslint/no-useless-default-assignment': 'off',
     },
 };

@@ -256,6 +256,11 @@ const rules: Linter.RulesRecord = {
      */
     'text-escaping': 'off',
     /**
+     * 检查并限制 TypeScript 风格的 @ts- 注释（如 @ts-ignore、@ts-nocheck 等）
+     * @reason 已经开启了 @typescript-eslint/ban-ts-comment 来处理同类问题，避免重复检查
+     */
+    'ts-ban-ts-comment': 'off',
+    /**
      * 在 JSDoc 中，偏好使用属性风格的函数类型签名（而非调用签名）
      */
     'ts-method-signature-style': 'warn',

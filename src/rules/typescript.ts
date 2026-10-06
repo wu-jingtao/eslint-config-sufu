@@ -331,6 +331,10 @@ const typescript_rules: Linter.RulesRecord = {
      */
     '@typescript-eslint/no-floating-promises': 'warn',
     /**
+     * 禁止因类型操作意外生成空对象类型 `{}`
+     */
+    '@typescript-eslint/no-generated-empty-object-type': 'warn',
+    /**
      * 禁止对 array 使用 for in 循环
      */
     '@typescript-eslint/no-for-in-array': 'warn',
@@ -461,6 +465,10 @@ const typescript_rules: Linter.RulesRecord = {
      * 不允许不安全的类型融合
      */
     '@typescript-eslint/no-unsafe-declaration-merging': 'warn',
+    /**
+     * 禁止将 `number` 类型的值不安全地赋值给枚举类型
+     */
+    '@typescript-eslint/no-unsafe-enum-assignment': 'warn',
     /**
      * 不允许将 enum 值与非 enum 值相比较
      */
