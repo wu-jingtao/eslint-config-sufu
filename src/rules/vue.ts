@@ -232,8 +232,9 @@ const supplements: Linter.RulesRecord = {
     'object-shorthand': 'off',
     /**
      * 强制对象属性的换行
+     * @reason 与 @stylistic/object-property-newline 保持一致
      */
-    'object-property-newline': 'warn',
+    'object-property-newline': ['warn', { allowAllPropertiesOnSameLine: true }],
     /**
      * 强制对象大括号内的空格
      * @reason 与 stylistic 保持一致
@@ -382,6 +383,10 @@ const supplements: Linter.RulesRecord = {
      */
     'no-ref-object-reactivity-loss': 'off',
     /**
+     * 禁止在 <script setup> 中声明与 props 同名的变量
+     */
+    'no-props-shadow': 'warn',
+    /**
      * 禁止组件选项中的拼写错误
      */
     'no-potential-component-option-typo': 'warn',
@@ -449,9 +454,17 @@ const supplements: Linter.RulesRecord = {
      */
     'no-duplicate-attr-inheritance': 'warn',
     /**
+     * 禁止为 defineModel 设置默认值
+     */
+    'no-define-model-default': 'warn',
+    /**
      * 禁止 v-model 上的自定义修饰符
      */
     'no-custom-modifiers-on-v-model': 'warn',
+    /**
+     * 禁止在顶层块之外放置内容
+     */
+    'no-content-outside-block': 'warn',
     /**
      * 禁止常量条件
      */
@@ -668,8 +681,9 @@ const supplements: Linter.RulesRecord = {
     // 数组
     /**
      * 强制数组元素的换行
+     * @reason 与 @stylistic/array-element-newline 保持一致
      */
-    'array-element-newline': 'warn',
+    'array-element-newline': 'off',
     /**
      * 强制数组括号内的空格
      */
